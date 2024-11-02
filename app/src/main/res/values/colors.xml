@@ -2,4 +2,36 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#39c7a5</color>
+    <color name="lightGreen">#e0f2ed</color>
+    <color name="grey">#919191</color>
+    <color name="darkGrey">#616161</color>
+    <color name="lightGrey">#e9e9e9</color>
+
+    <color name="primary_600">#2882E2</color>
+    <color name="off_white">#f7f9f7</color>
+
+    <!-- res/values/colors.xml -->
+        <!-- Màu chính và phụ -->
+        <color name="primary_50">#E8F5E9</color> <!-- Màu nền cho Bottom Navigation -->
+        <color name="primary_400">#66BB6A</color> <!-- Màu icon khi được chọn -->
+        <color name="primary_700">#388E3C</color> <!-- Màu Toolbar -->
+
+        <!-- Màu văn bản -->
+        <color name="text_primary">#333333</color> <!-- Màu văn bản chính -->
+        <color name="text_secondary">#666666</color> <!-- Màu văn bản phụ -->
+
+        <!-- Màu biểu tượng và hiệu ứng -->
+        <color name="icon_inactive">#BDBDBD</color> <!-- Màu icon khi không được chọn -->
+        <color name="warning_color">#FF6B6B</color> <!-- Màu cảnh báo -->
+        <color name="notice_color">#FFC107</color> <!-- Màu thông báo -->
+
+        <!-- Màu nền và đường viền -->
+        <color name="background_off_white">#F7F9F7</color> <!-- Màu nền nhẹ nhàng -->
+        <color name="border_color">#D1D5DB</color> <!-- Màu đường viền -->
+
+        <!-- Màu bổ sung -->
+        <color name="selected_blue">#6A5ACD</color> <!-- Màu khi chọn khung giờ -->
+        <color name="highlight_green">#03C9A9</color> <!-- Màu nhấn khác -->
+
 </resources>

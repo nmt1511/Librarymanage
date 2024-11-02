@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/noti"
+        android:title="Danh Mục"
+        android:icon="@drawable/ic_category"/>
+
+    <item
+        android:id="@+id/history"
+        android:title="Lịch Sử"
+        android:icon="@drawable/ic_pen_tool"/>
+
+    <item
+        android:id="@+id/account"
+        android:title="Cá Nhân"
+        android:icon="@drawable/ic_person"/>
+</menu>
