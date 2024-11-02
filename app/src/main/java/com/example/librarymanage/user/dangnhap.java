@@ -39,7 +39,7 @@ public class dangnhap extends AppCompatActivity {
         txtReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(dangnhap.this, dangnhap.class);
+                Intent intent = new Intent(dangnhap.this, dangki.class);
                 startActivity(intent);
             }
         });
