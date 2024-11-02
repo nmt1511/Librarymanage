@@ -9,7 +9,7 @@ public class DataBook extends SQLiteOpenHelper {
     // Tên cơ sở dữ liệu
     private static final String DATABASE_NAME = "LibraryManagement.db";
     // Phiên bản cơ sở dữ liệu
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DataBook(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -102,7 +102,8 @@ public class DataBook extends SQLiteOpenHelper {
                 "comment TEXT, " +                                  // Nhận xét của người dùng
                 "review_date DATE, " +                              // Ngày đánh giá
                 "FOREIGN KEY (book_id) REFERENCES Books(book_id), " + // Khóa ngoại tới bảng Books
-                "FOREIGN KEY (user_id) REFERENCES User(user_id))");  // Khóa ngoại tới bảng User
+                "FOREIGN KEY (user_id) REFERENCES User(user_id))");// Khóa ngoại tới bảng User
+        insertSampleData(db);
     }
 
     @Override
@@ -119,5 +120,58 @@ public class DataBook extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS FineRecords");
         db.execSQL("DROP TABLE IF EXISTS Reviews");
         onCreate(db);
+    }
+    public void deleteTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            // Xóa tất cả các bảng cần thiết
+            db.execSQL("DROP TABLE IF EXISTS Account");
+            db.execSQL("DROP TABLE IF EXISTS User");
+            db.execSQL("DROP TABLE IF EXISTS Books");
+            db.execSQL("DROP TABLE IF EXISTS Locations");
+            db.execSQL("DROP TABLE IF EXISTS Author");
+            db.execSQL("DROP TABLE IF EXISTS Category");
+            db.execSQL("DROP TABLE IF EXISTS Major");
+            db.execSQL("DROP TABLE IF EXISTS BorrowRecords");
+            db.execSQL("DROP TABLE IF EXISTS FineRecords");
+            db.execSQL("DROP TABLE IF EXISTS Reviews");
+            // Nếu cần, có thể xóa thêm các bảng khác
+        } catch (Exception e) {
+            // Xử lý lỗi (nếu có)
+            e.printStackTrace();
+        } finally {
+            db.close(); // Đảm bảo đóng kết nối
+        }
+    }
+    private void insertSampleData(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO Account (username, password, role, user_id) VALUES ('user1', 'password1', 'reader', 1);");
+        db.execSQL("INSERT INTO Account (username, password, role, user_id) VALUES ('admin', 'admin123', 'admin', 2);");
+
+        db.execSQL("INSERT INTO User (name, gender, phone, email, student_code, major_id) VALUES ('Nguyen Van A', 'Male', '0123456789', 'a@example.com', 'SV001', 1);");
+        db.execSQL("INSERT INTO User (name, gender, phone, email, student_code, major_id) VALUES ('Tran Thi B', 'Female', '0987654321', 'b@example.com', 'SV002', 2);");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, major_id, published_year, description, image) VALUES ('Book Title 1', 1, 1, 1, 1, 2020, 'Description of Book Title 1', 'image1.jpg');");
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, major_id, published_year, description, image) VALUES ('Book Title 2', 2, 2, 2, 2, 2021, 'Description of Book Title 2', 'image2.jpg');");
+
+        db.execSQL("INSERT INTO Locations (name) VALUES ('Library A');");
+        db.execSQL("INSERT INTO Locations (name) VALUES ('Library B');");
+
+        db.execSQL("INSERT INTO Author (name) VALUES ('Author 1');");
+        db.execSQL("INSERT INTO Author (name) VALUES ('Author 2');");
+
+        db.execSQL("INSERT INTO Category (name) VALUES ('Fiction');");
+        db.execSQL("INSERT INTO Category (name) VALUES ('Non-Fiction');");
+
+        db.execSQL("INSERT INTO Major (name) VALUES ('Computer Science');");
+        db.execSQL("INSERT INTO Major (name) VALUES ('Literature');");
+
+        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (1, 1, '2024-11-01', '2024-11-15', NULL, 'Borrowed');");
+        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (2, 2, '2024-11-02', '2024-11-16', NULL, 'Borrowed');");
+
+        db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (1, 5.0, 0);");
+        db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (2, 2.5, 1);");
+
+        db.execSQL("INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) VALUES (1, 1, 5, 'Great book!', '2024-11-01');");
+        db.execSQL("INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) VALUES (2, 2, 4, 'Interesting read.', '2024-11-02');");
     }
 }

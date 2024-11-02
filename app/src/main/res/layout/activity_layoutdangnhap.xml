@@ -39,7 +39,7 @@
 
     <!-- Password Input -->
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/edt_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -54,13 +54,13 @@
         app:layout_constraintTop_toBottomOf="@id/ivBanner" />
 
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/edt_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/etUsername"
+        app:layout_constraintTop_toBottomOf="@id/edt_username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="32dp"
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remember me?"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintTop_toBottomOf="@id/edt_password"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"/>
@@ -87,12 +87,12 @@
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rcmsignout"
+        app:layout_constraintTop_toBottomOf="@id/txtsignup"
         app:backgroundTint="@color/green" />
 
     <!-- Sign Out TextView -->
     <TextView
-        android:id="@+id/rcmsignout"
+        android:id="@+id/txtsignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/signout"

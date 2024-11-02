@@ -1,50 +1,107 @@
 package com.example.librarymanage.user;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.librarymanage.MainActivity;
 import com.example.librarymanage.R;
+import com.example.librarymanage.data.DataBook;
 
 public class dangnhap extends AppCompatActivity {
 
-    EditText etUsername, etPassword;
-    CheckBox cbRememberMe;
+    private SQLiteDatabase db;
+    EditText edtUser, edtPass;
     Button btnLogin;
+    TextView txtReg;
+    DataBook dbBook;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layoutdangnhap);
-
-        // Initialize views
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        cbRememberMe = findViewById(R.id.cbRememberMe);
+        //Khởi tạo CSDL
+        dbBook = new DataBook(this);
+        dbBook.getWritableDatabase();
+        init();
+        initListener();
+        txtReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(dangnhap.this, dangnhap.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void init(){
+        edtUser = findViewById(R.id.edt_username);
+        edtPass = findViewById(R.id.edt_password);
         btnLogin = findViewById(R.id.btnLogin);
+        txtReg = findViewById(R.id.txtsignup);
+    }
+    private int isUser(String user, String pass){
+        try{
+            DataBook helper = new DataBook(this);
+            db = helper.getReadableDatabase();
+            Cursor cursor = db.rawQuery("select * from Account where username=? and password=?", new String[]{user,pass});
+            if(cursor.moveToFirst()){
+                return cursor.getInt(0);
+            }
+        }catch (Exception ex){
+            Toast.makeText(this, "Lỗi hệ thống ", Toast.LENGTH_LONG).show();
+        }
+        return -1;
+    }
 
-        // Set login button click listener
+
+    private void initListener(){
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                if (username.equals("admin") && password.equals("1234")) {
-                    Toast.makeText(dangnhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    // Chuyển sang MainActivity sau khi đăng ký
-                    Intent intent = new Intent(dangnhap.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(dangnhap.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-                }
+            public void onClick(View view) {
+                String username = edtUser.getText().toString();
+                String pass = edtPass.getText().toString();
+                if(username.equals("")|| pass.equals(""))
+                    Toast.makeText(dangnhap.this,"Cần điền đầy đủ thông tin!",Toast.LENGTH_SHORT).show();
+                else{
+                    int userId = isUser(username,pass);
+                    int customerId = 1;
+                    if(userId != -1) {
+                        Cursor cursor = db.rawQuery(
+                                "SELECT user_id FROM Account WHERE user_id = ?",
+                                new String[]{String.valueOf(userId)}
+                        );
 
+                        if (cursor.moveToFirst()) {
+                            customerId = cursor.getInt(0);
+                        }
+                        cursor.close();
+                        //Lưu user_id vào SharedPreferences
+                        SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt("userId",userId);
+//                        editor.putInt("customerId",customerId);
+                        editor.apply();
+
+                        Toast.makeText(getApplication(), "Mật khẩu hợp lệ", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(dangnhap.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        Toast.makeText(getApplication(), "Mật khẩu không hợp lệ", Toast.LENGTH_LONG).show();
+                        edtUser.requestFocus();
+                    }
+                }
             }
         });
     }
