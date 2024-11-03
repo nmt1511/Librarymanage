@@ -1,66 +1,89 @@
 package com.example.librarymanage.menubottom;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.librarymanage.R;
+import com.example.librarymanage.data.DataBook;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DanhMucFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class DanhMucFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private ListView categoryListView;
+    private DataBook dataHelper;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DanhMucFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DanhMucFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DanhMucFragment newInstance(String param1, String param2) {
-        DanhMucFragment fragment = new DanhMucFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_danh_muc, container, false);
+        View view = inflater.inflate(R.layout.fragment_danh_muc, container, false);
+
+        // Initialize UI components and database helper
+        categoryListView = view.findViewById(R.id.categoryListView);
+        dataHelper = new DataBook(getContext());
+
+        // Retrieve categories and set them to the ListView
+        List<String> categories = getCategoriesFromDatabase();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_list_item_1, categories);
+        categoryListView.setAdapter(adapter);
+
+        // Set item click listener to open books for the selected category
+        categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedCategory = categories.get(position);
+                openBooksByCategory(selectedCategory);
+            }
+        });
+
+        return view;
+    }
+
+    // Method to query and retrieve categories
+    private List<String> getCategoriesFromDatabase() {
+        List<String> categories = new ArrayList<>();
+        SQLiteDatabase db = dataHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT name FROM Category", null);
+        if (cursor.moveToFirst()) {
+            do {
+                String categoryName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                categories.add(categoryName);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return categories;
+    }
+
+    // Method to open BookFragment with selected category
+    private void openBooksByCategory(String categoryName) {
+        // Create an instance of BookFragment and pass the category name
+        BookFragment bookFragment = new BookFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("category_name", categoryName);
+        bookFragment.setArguments(bundle);
+
+        // Replace current fragment with BookFragment
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_layout, bookFragment); // Ensure the container ID is correct
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

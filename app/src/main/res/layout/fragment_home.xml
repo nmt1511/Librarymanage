@@ -110,6 +110,24 @@
             android:textColor="@color/black"
             android:textSize="19dp"
             app:cornerRadius="15dp" />
+        <Button
+            android:id="@+id/btn_info"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white"
+            android:elevation="10dp"
+            android:padding="20dp"
+            android:drawableLeft="@drawable/ic_aboutlibrary"
+            android:stateListAnimator="@null"
+            android:text="Thông Tin"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="19dp"
+            app:cornerRadius="15dp" />
 
     </LinearLayout>
     <TextView
@@ -167,6 +185,14 @@
                 android:text="rất hay và ý nghĩa"
                 android:textColor="@color/black" />
         </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/danhmuc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
     </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -34,4 +34,9 @@
         <color name="selected_blue">#6A5ACD</color> <!-- Màu khi chọn khung giờ -->
         <color name="highlight_green">#03C9A9</color> <!-- Màu nhấn khác -->
 
+        <color name="background_color">#FFFFFF</color> <!-- Màu nền -->
+        <color name="colorPrimary">#6200EE</color> <!-- Màu chính -->
+        <color name="colorAccent">#03DAC5</color> <!-- Màu nhấn -->
+        <color name="textColor">#000000</color> <!-- Màu chữ -->
+
 </resources>

@@ -23,6 +23,11 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".user.dangki"/>
+        <activity android:name=".user.feedback"/>
+        <activity android:name=".menubottom.DanhMucFragment"/>
+        <activity android:name=".BookActivity"/>
+        <activity android:name=".user.UserInfoActivity"/>
+        <activity android:name=".menubottom.BookFragment"/>
 
     </application>
 

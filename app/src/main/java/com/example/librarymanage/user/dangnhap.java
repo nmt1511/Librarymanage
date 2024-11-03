@@ -26,7 +26,6 @@ public class dangnhap extends AppCompatActivity {
     TextView txtReg;
     DataBook dbBook;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +74,7 @@ public class dangnhap extends AppCompatActivity {
                     Toast.makeText(dangnhap.this,"Cần điền đầy đủ thông tin!",Toast.LENGTH_SHORT).show();
                 else{
                     int userId = isUser(username,pass);
-                    int customerId = 1;
+                    int user_id = 1;
                     if(userId != -1) {
                         Cursor cursor = db.rawQuery(
                                 "SELECT user_id FROM Account WHERE user_id = ?",
@@ -83,14 +82,12 @@ public class dangnhap extends AppCompatActivity {
                         );
 
                         if (cursor.moveToFirst()) {
-                            customerId = cursor.getInt(0);
+                            user_id = cursor.getInt(0);
                         }
                         cursor.close();
-                        //Lưu user_id vào SharedPreferences
                         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putInt("userId",userId);
-//                        editor.putInt("customerId",customerId);
+                        editor.putInt("user_id",user_id);
                         editor.apply();
 
                         Toast.makeText(getApplication(), "Mật khẩu hợp lệ", Toast.LENGTH_LONG).show();

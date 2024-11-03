@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.librarymanage.data.DataBook;
+import com.example.librarymanage.menubottom.DanhMucFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbBook = new DataBook(this);
-//        dbBook.deleteTable();
         dbBook.getWritableDatabase();
         // Gán view cho DrawerLayout, Toolbar và BottomNavigationView
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -81,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
             {
                 replaceFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.noti) {
-                replaceFragment(new HomeFragment());
+                replaceFragment(new DanhMucFragment());
             }else if (item.getItemId() == R.id.history) {
-                replaceFragment(new HomeFragment());
+                replaceFragment(new DanhMucFragment());
             }else if (item.getItemId() == R.id.account) {
                 replaceFragment(new HomeFragment());
             }
