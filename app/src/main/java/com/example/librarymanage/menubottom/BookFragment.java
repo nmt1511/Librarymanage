@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.librarymanage.R;
+import com.example.librarymanage.data.BookRepository;
 import com.example.librarymanage.data.DataBook;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class BookFragment extends Fragment {
 
     private ListView bookListView;
     private DataBook dataHelper;
+    private BookRepository bookRepository; // Khai báo lớp BookRepository
 
     @Nullable
     @Override

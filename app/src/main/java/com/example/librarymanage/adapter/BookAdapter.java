@@ -1,4 +1,4 @@
-package com.example.librarymanage;
+package com.example.librarymanage.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.librarymanage.R;
 import com.example.librarymanage.entities.Book;
 
 import java.util.ArrayList;

@@ -144,30 +144,6 @@ public class DataBook extends SQLiteOpenHelper {
 
 
 
-    public Cursor getAllBooks() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM Books"; // Truy vấn tất cả sách
-        return db.rawQuery(query, null);
-    }
-    public String getAuthorName(int authorId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT name FROM Author WHERE author_id = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(authorId)});
-        String authorName = null; // Khởi tạo biến authorName là null
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                int index = cursor.getColumnIndex("name"); // Lấy chỉ số cột
-                if (index != -1) { // Kiểm tra nếu chỉ số cột hợp lệ
-                    authorName = cursor.getString(index); // Lấy tên tác giả
-                }
-            }
-            cursor.close(); // Đảm bảo đóng cursor
-        }
-
-        return authorName; // Trả về tên tác giả hoặc null
-    }
-
-
 
 
     private void insertSampleData(SQLiteDatabase db) {
@@ -259,16 +235,16 @@ public class DataBook extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Category (name) VALUES ('Tạp chí và báo cáo khoa học');");
 
 
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (1, 1, '2024-11-01', '2024-11-15', '2024-11-10', 'Đã Trả');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (2, 2, '2024-11-02', '2024-11-16', '2024-11-12', 'Đã Trả');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (3, 3, '2024-11-03', '2024-11-17', NULL, 'Mượn');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (4, 4, '2024-11-04', '2024-11-18', NULL, 'Mượn');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (5, 5, '2024-11-05', '2024-11-19', '2024-11-15', 'Đã Trả');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (6, 6, '2024-11-06', '2024-11-20', NULL, 'Mượn');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (7, 7, '2024-11-07', '2024-11-21', '2024-11-19', 'Đã Trả');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (8, 8, '2024-11-08', '2024-11-22', NULL, 'Mượn');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (9, 9, '2024-11-09', '2024-11-23', '2024-11-20', 'Đã Trả');");
-        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (10, 10, '2024-11-10', '2024-11-24', NULL, 'Mượn');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (1, 1, '2024-11-01', '2024-11-15', '2024-11-10', 'Đã Trả');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (2, 2, '2024-11-02', '2024-11-16', '2024-11-12', 'Đã Trả');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (3, 3, '2024-11-03', '2024-11-17', NULL, 'Mượn');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (4, 4, '2024-11-04', '2024-11-18', NULL, 'Mượn');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (5, 5, '2024-11-05', '2024-11-19', '2024-11-15', 'Đã Trả');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (6, 6, '2024-11-06', '2024-11-20', NULL, 'Mượn');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (7, 7, '2024-11-07', '2024-11-21', '2024-11-19', 'Đã Trả');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (8, 8, '2024-11-08', '2024-11-22', NULL, 'Mượn');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (9, 9, '2024-11-09', '2024-11-23', '2024-11-20', 'Đã Trả');");
+//        db.execSQL("INSERT INTO BorrowRecords (user_id, book_id, borrow_date, return_date, actual_return_date, status) VALUES (10, 10, '2024-11-10', '2024-11-24', NULL, 'Mượn');");
 
         db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (1, 15.0, 0);");
         db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (2, 15.0, 1);");

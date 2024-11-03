@@ -28,6 +28,8 @@
         <activity android:name=".BookActivity"/>
         <activity android:name=".user.UserInfoActivity"/>
         <activity android:name=".menubottom.BookFragment"/>
+        <activity android:name=".BookDetailActivity"/>
+        <activity android:name=".BorrowActivity"/>
 
     </application>
 

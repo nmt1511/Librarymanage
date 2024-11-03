@@ -9,7 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.librarymanage.data.DataBook;
+import com.example.librarymanage.adapter.BookAdapter;
+import com.example.librarymanage.data.BookRepository;
 import com.example.librarymanage.entities.Book;
 
 import java.util.ArrayList;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 public class BookActivity extends AppCompatActivity {
 
     private ListView listView;
-    private com.example.librarymanage.BookAdapter bookAdapter;
+    private BookAdapter bookAdapter; // Sử dụng BookAdapter đúng cách
     private ArrayList<Book> bookList;
-    private DataBook dataBook; // Khai báo lớp DataBook
+    private BookRepository bookRepository; // Khai báo lớp BookRepository
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +29,32 @@ public class BookActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listViewBooks);
         bookList = new ArrayList<>();
-        dataBook = new DataBook(this); // Khởi tạo lớp DataBook
+        bookRepository = new BookRepository(this); // Khởi tạo lớp BookRepository
 
-        // Lấy dữ liệu sách từ cơ sở dữ liệu
+        // Lấy dữ liệu sách từ BookRepository
         loadBooks();
 
-        bookAdapter = new com.example.librarymanage.BookAdapter(this, bookList);
+        // Khởi tạo BookAdapter
+        bookAdapter = new BookAdapter(this, bookList);
         listView.setAdapter(bookAdapter);
 
+        // Thiết lập sự kiện click cho từng mục trong ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
                 Book selectedBook = bookList.get(position);
                 Toast.makeText(BookActivity.this, "Bạn đã chọn: " + selectedBook.getTitle(), Toast.LENGTH_SHORT).show();
 
-                // Mở chi tiết sách (nếu cần)
+                // Mở chi tiết sách
                 Intent intent = new Intent(BookActivity.this, BookDetailActivity.class);
-                intent.putExtra("bookId", selectedBook.getBookId());
+                intent.putExtra("bookId", selectedBook.getBookId()); // Gửi bookId sang BookDetailActivity
                 startActivity(intent);
             }
         });
     }
 
     private void loadBooks() {
-        Cursor cursor = dataBook.getAllBooks(); // Lấy tất cả sách từ cơ sở dữ liệu
+        Cursor cursor = bookRepository.getAllBooks(); // Gọi phương thức từ BookRepository
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int bookIdIndex = cursor.getColumnIndex("book_id");
@@ -67,6 +70,7 @@ public class BookActivity extends AppCompatActivity {
                     String description = cursor.getString(descriptionIndex);
                     int imageResource = R.drawable.ic_open_book; // Hình ảnh mặc định
 
+                    // Thêm sách vào danh sách
                     bookList.add(new Book(bookId, title, String.valueOf(authorId), description, imageResource));
                 } else {
                     // Xử lý trường hợp không tìm thấy cột
@@ -80,10 +84,8 @@ public class BookActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onDestroy() {
-        dataBook.close(); // Đóng cơ sở dữ liệu khi không còn sử dụng
         super.onDestroy();
     }
 }
