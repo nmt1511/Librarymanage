@@ -3,15 +3,10 @@ package com.example.librarymanage;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import android.annotation.SuppressLint;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -83,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.noti) {
                 replaceFragment(new DanhMucFragment());
             }else if (item.getItemId() == R.id.history) {
-                replaceFragment(new DanhMucFragment());
+                replaceFragment(new LichSuFragment());
             }else if (item.getItemId() == R.id.account) {
                 replaceFragment(new HomeFragment());
             }

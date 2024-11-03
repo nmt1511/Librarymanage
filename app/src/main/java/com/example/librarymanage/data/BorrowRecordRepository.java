@@ -2,8 +2,13 @@ package com.example.librarymanage.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
+
+import com.example.librarymanage.entities.BorrowRecord;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BorrowRecordRepository {
 
@@ -26,8 +31,30 @@ public class BorrowRecordRepository {
         long result = db.insert("BorrowRecords", null, values);
         db.close();
         return result != -1; // Trả về true nếu insert thành công
-
     }
+    public List<BorrowRecord> getBorrowHistoryByUserId(int userId) {
+        List<BorrowRecord> borrowRecords = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM BorrowRecords WHERE user_id = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("record_id"));
+                int bookId = cursor.getInt(cursor.getColumnIndexOrThrow("book_id"));
+                String borrowDate = cursor.getString(cursor.getColumnIndexOrThrow("borrow_date"));
+                String returnDate = cursor.getString(cursor.getColumnIndexOrThrow("return_date"));
+                String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
+
+                borrowRecords.add(new BorrowRecord(id, userId, bookId, borrowDate, returnDate, status));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return borrowRecords;
+    }
+
+
+
     public void close() {
         dbHelper.close();
     }
