@@ -51,7 +51,9 @@ public class DataBook extends SQLiteOpenHelper {
                 "major_id INTEGER, " +                              // ID ngành học liên quan đến sách
                 "published_year YEAR, " +                           // Năm xuất bản của sách
                 "description TEXT, " +                              // Mô tả sách
-                "image VARCHAR, " +                                 // Đường dẫn hình ảnh của sách
+                "image VARCHAR, " +
+                "add_date DATE, " +
+                // Đường dẫn hình ảnh của sách
                 "FOREIGN KEY (location_id) REFERENCES Locations(location_id), " +  // Khóa ngoại tới bảng Locations
                 "FOREIGN KEY (author_id) REFERENCES Author(author_id), " +         // Khóa ngoại tới bảng Author
                 "FOREIGN KEY (category_id) REFERENCES Category(category_id), " +   // Khóa ngoại tới bảng Category
@@ -163,46 +165,85 @@ public class DataBook extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO User (name, gender, phone, email, student_code) VALUES ('Vũ Nga', 'Female', '0987654330', 'j@example.com', '212480123654');");
         db.execSQL("INSERT INTO User (name, gender, phone, email, student_code) VALUES ('Nguyễn Văn Linh', 'Male', '0987654331', 'k@example.com', '212480456789');");
 
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Dấu chân người lính', 1, 1, 6, 1986, 'Tiểu thuyết về cuộc sống của những người lính trong chiến tranh.', 'image1.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Sống chết mặc bay', 1, 2, 6, 1945, 'Tác phẩm nổi tiếng phản ánh đời sống và tâm tư của con người.', 'image2.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Chí Phèo', 1, 3, 6, 1941, 'Một trong những tác phẩm tiêu biểu của Nam Cao.', 'image3.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Hương rừng', 1, 4, 6, 1990, 'Tác phẩm miêu tả vẻ đẹp của thiên nhiên và con người.', 'image4.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Vang bóng một thời', 1, 5, 6, 1940, 'Tác phẩm nổi tiếng về văn hóa và xã hội Việt Nam.', 'image5.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Tâm sự với người lạ', 1, 6, 6, 1991, 'Tác phẩm nổi bật của Lỗ Tấn.', 'image6.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Trăm năm cô đơn', 1, 7, 6, 1967, 'Tiểu thuyết nổi tiếng của Gabriel Garcia Marquez.', 'image7.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Norwegian Wood', 1, 8, 6, 1987, 'Tác phẩm nổi bật của Haruki Murakami.', 'image8.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('The Old Man and the Sea', 1, 9, 6, 1952, 'Một trong những tác phẩm nổi tiếng nhất của Ernest Hemingway.', 'image9.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('1984', 1, 10, 6, 1949, 'Tiểu thuyết phản ánh xã hội toàn trị của George Orwell.', 'image10.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Tự nhiên miền Tây', 1, 11, 7, 2020, 'Khám phá thiên nhiên và sinh thái miền Tây.', 'image2.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Lịch sử khoa học và công nghệ', 1, 12, 7, 2018, 'Nghiên cứu về sự phát triển khoa học và công nghệ.', 'image3.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Khoa học về thời gian', 1, 13, 7, 2019, 'Tìm hiểu về khái niệm thời gian trong khoa học.', 'image4.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Sự phát triển của vũ trụ', 1, 14, 7, 2021, 'Khám phá nguồn gốc và sự phát triển của vũ trụ.', 'image5.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Lịch sử sinh học', 1, 15, 7, 2022, 'Nghiên cứu sự phát triển của sự sống trên trái đất.', 'image6.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('English Grammar in Use', 1, 16, 5, 2015, 'Cuốn sách ngữ pháp tiếng Anh phổ biến.', 'image7.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('The Elements of Style', 1, 17, 5, 2000, 'Hướng dẫn viết tiếng Anh hiệu quả.', 'image8.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Fluent English', 1, 18, 5, 2016, 'Kỹ năng giao tiếp tiếng Anh lưu loát.', 'image9.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Word Power Made Easy', 1, 19, 5, 2018, 'Tăng cường vốn từ vựng tiếng Anh.', 'image10.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('The Catcher in the Rye', 1, 20, 5, 1951, 'Tiểu thuyết nổi tiếng về tuổi trẻ.', 'image11.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Từ điển tiếng Việt', 1, 21, 4, 2007, 'Từ điển cơ bản cho tiếng Việt.', 'image12.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Từ điển Anh-Việt', 1, 22, 4, 2010, 'Từ điển cần thiết cho việc học tiếng Anh.', 'image13.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Ngữ pháp tiếng Việt', 1, 23, 4, 2015, 'Tài liệu tham khảo về ngữ pháp tiếng Việt.', 'image14.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Từ điển y học', 1, 24, 4, 2016, 'Từ điển về y học và sức khỏe.', 'image15.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Sách giáo khoa lịch sử', 1, 25, 4, 2020, 'Sách giáo khoa dành cho học sinh.', 'image16.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Nghiên cứu về văn hóa dân gian', 1, 26, 3, 2017, 'Phân tích văn hóa dân gian Việt Nam.', 'image17.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Phân tích văn học', 1, 27, 3, 2019, 'Phương pháp phân tích tác phẩm văn học.', 'image18.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Sách nghiên cứu về tâm lý học', 1, 28, 3, 2018, 'Khám phá các khía cạnh của tâm lý học.', 'image19.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Nghiên cứu xã hội học', 1, 29, 3, 2021, 'Nghiên cứu về xã hội và con người.', 'image20.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Lịch sử tư tưởng chính trị', 1, 30, 3, 2022, 'Tổng quan về tư tưởng chính trị qua các thời kỳ.', 'image21.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Đắc Nhân Tâm', 1, 31, 8, 1936, 'Hướng dẫn phát triển kỹ năng giao tiếp.', 'image22.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Người bán hàng vĩ đại nhất thế giới', 1, 32, 8, 1968, 'Câu chuyện truyền cảm hứng về bán hàng.', 'image23.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('7 thói quen của bạn trẻ thành đạt', 1, 33, 8, 1989, 'Những thói quen giúp bạn thành công.', 'image24.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Sống như một vị vua', 1, 34, 8, 2014, 'Hướng dẫn sống tốt và thành công.', 'image25.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Thay đổi thói quen', 1, 35, 8, 2012, 'Cách thay đổi thói quen để sống tốt hơn.', 'image26.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Lịch sử Việt Nam', 1, 36, 9, 2002, 'Khái quát lịch sử Việt Nam qua các thời kỳ.', 'image27.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Sự hình thành và phát triển của văn hóa Việt Nam', 1, 37, 9, 2010, 'Nghiên cứu văn hóa Việt Nam.', 'image28.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Văn hóa Việt Nam qua các thời kỳ', 1, 38, 9, 2015, 'Tìm hiểu văn hóa qua các thời kỳ.', 'image29.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Lịch sử thế giới', 1, 39, 9, 2018, 'Khái quát lịch sử thế giới.', 'image30.jpg');");
-        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image) VALUES ('Văn hóa và xã hội Việt Nam', 1, 40, 9, 2020, 'Nghiên cứu văn hóa và xã hội Việt Nam hiện đại.', 'image31.jpg');");
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Dấu chân người lính', 1, 1, 6, 1986, 'Tiểu thuyết về cuộc sống của những người lính trong chiến tranh.', 'image1.jpg', '2024-01-15');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Sống chết mặc bay', 1, 2, 6, 1945, 'Tác phẩm nổi tiếng phản ánh đời sống và tâm tư của con người.', 'image2.jpg', '2024-02-20');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Chí Phèo', 1, 3, 6, 1941, 'Một trong những tác phẩm tiêu biểu của Nam Cao.', 'image3.jpg', '2024-03-10');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Hương rừng', 1, 4, 6, 1990, 'Tác phẩm miêu tả vẻ đẹp của thiên nhiên và con người.', 'image4.jpg', '2024-04-05');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Vang bóng một thời', 1, 5, 6, 1940, 'Tác phẩm nổi tiếng về văn hóa và xã hội Việt Nam.', 'image5.jpg', '2024-05-15');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Tâm sự với người lạ', 1, 6, 6, 1991, 'Tác phẩm nổi bật của Lỗ Tấn.', 'image6.jpg', '2024-06-25');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Trăm năm cô đơn', 1, 7, 6, 1967, 'Tiểu thuyết nổi tiếng của Gabriel Garcia Marquez.', 'image7.jpg', '2024-07-30');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Norwegian Wood', 1, 8, 6, 1987, 'Tác phẩm nổi bật của Haruki Murakami.', 'image8.jpg', '2024-08-18');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('The Old Man and the Sea', 1, 9, 6, 1952, 'Một trong những tác phẩm nổi tiếng nhất của Ernest Hemingway.', 'image9.jpg', '2024-09-12');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('1984', 1, 10, 6, 1949, 'Tiểu thuyết phản ánh xã hội toàn trị của George Orwell.', 'image10.jpg', '2024-10-22');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Tự nhiên miền Tây', 1, 11, 7, 2020, 'Khám phá thiên nhiên và sinh thái miền Tây.', 'image2.jpg', '2024-11-05');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Lịch sử khoa học và công nghệ', 1, 12, 7, 2018, 'Nghiên cứu về sự phát triển khoa học và công nghệ.', 'image3.jpg', '2024-01-12');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Khoa học về thời gian', 1, 13, 7, 2019, 'Tìm hiểu về khái niệm thời gian trong khoa học.', 'image4.jpg', '2024-02-18');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Sự phát triển của vũ trụ', 1, 14, 7, 2021, 'Khám phá nguồn gốc và sự phát triển của vũ trụ.', 'image5.jpg', '2024-03-25');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Lịch sử sinh học', 1, 15, 7, 2022, 'Nghiên cứu sự phát triển của sự sống trên trái đất.', 'image6.jpg', '2024-04-14');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('English Grammar in Use', 1, 16, 5, 2015, 'Cuốn sách ngữ pháp tiếng Anh phổ biến.', 'image7.jpg', '2024-05-19');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('The Elements of Style', 1, 17, 5, 2000, 'Hướng dẫn viết tiếng Anh hiệu quả.', 'image8.jpg', '2024-06-22');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Fluent English', 1, 18, 5, 2016, 'Kỹ năng giao tiếp tiếng Anh lưu loát.', 'image9.jpg', '2024-07-15');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Word Power Made Easy', 1, 19, 5, 2018, 'Tăng cường vốn từ vựng tiếng Anh.', 'image10.jpg', '2024-08-10');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('The Catcher in the Rye', 1, 20, 5, 1951, 'Tiểu thuyết nổi tiếng về tuổi trẻ.', 'image11.jpg', '2024-09-05');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Từ điển tiếng Việt', 1, 21, 4, 2007, 'Từ điển cơ bản cho tiếng Việt.', 'image12.jpg', '2024-10-02');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Từ điển Anh-Việt', 1, 22, 4, 2010, 'Từ điển cần thiết cho việc học tiếng Anh.', 'image13.jpg', '2024-11-01');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Ngữ pháp tiếng Việt', 1, 23, 4, 2015, 'Tài liệu tham khảo về ngữ pháp tiếng Việt.', 'image14.jpg', '2024-01-20');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Từ điển y học', 1, 24, 4, 2016, 'Từ điển về y học và sức khỏe.', 'image15.jpg', '2024-02-28');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Sách giáo khoa lịch sử', 1, 25, 4, 2020, 'Sách giáo khoa dành cho học sinh.', 'image16.jpg', '2024-03-30');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Nghiên cứu về văn hóa dân gian', 1, 26, 3, 2017, 'Phân tích văn hóa dân gian Việt Nam.', 'image17.jpg', '2024-04-15');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Phân tích văn học', 1, 27, 3, 2019, 'Phương pháp phân tích tác phẩm văn học.', 'image18.jpg', '2024-05-25');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Sách nghiên cứu về tâm lý học', 1, 28, 3, 2018, 'Khám phá các khía cạnh của tâm lý học.', 'image19.jpg', '2024-06-30');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Nghiên cứu xã hội học', 1, 29, 3, 2021, 'Nghiên cứu về xã hội và con người.', 'image20.jpg', '2024-07-20');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Lịch sử tư tưởng chính trị', 1, 30, 3, 2022, 'Tổng quan về tư tưởng chính trị qua các thời kỳ.', 'image21.jpg', '2024-08-10');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Đắc Nhân Tâm', 1, 31, 8, 1936, 'Hướng dẫn phát triển kỹ năng giao tiếp.', 'image22.jpg', '2024-09-15');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Người bán hàng vĩ đại nhất thế giới', 1, 32, 8, 1968, 'Câu chuyện truyền cảm hứng về bán hàng.', 'image23.jpg', '2024-10-20');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('7 thói quen của bạn trẻ thành đạt', 1, 33, 8, 1989, 'Những thói quen giúp bạn thành công.', 'image24.jpg', '2024-11-25');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Sống như một vị vua', 1, 34, 8, 2014, 'Hướng dẫn sống tốt và thành công.', 'image25.jpg', '2024-01-01');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Thay đổi thói quen', 1, 35, 8, 2012, 'Cách thay đổi thói quen để sống tốt hơn.', 'image26.jpg', '2024-02-10');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Lịch sử Việt Nam', 1, 36, 9, 2002, 'Khái quát lịch sử Việt Nam qua các thời kỳ.', 'image27.jpg', '2024-11-15');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Sự hình thành và phát triển của văn hóa Việt Nam', 1, 37, 9, 2010, 'Nghiên cứu văn hóa Việt Nam.', 'image28.jpg', '2024-11-20');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Văn hóa Việt Nam qua các thời kỳ', 1, 38, 9, 2015, 'Tìm hiểu văn hóa qua các thời kỳ.', 'image29.jpg', '2024-11-05');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Lịch sử thế giới', 1, 39, 9, 2018, 'Khái quát lịch sử thế giới.', 'image30.jpg', '2024-11-30');");
+
+        db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Văn hóa và xã hội Việt Nam', 1, 40, 9, 2020, 'Nghiên cứu văn hóa và xã hội Việt Nam hiện đại.', 'image31.jpg', '2024-11-25');");
 
 
         db.execSQL("INSERT INTO Locations (name) VALUES ('Kệ Sách Văn Học');");

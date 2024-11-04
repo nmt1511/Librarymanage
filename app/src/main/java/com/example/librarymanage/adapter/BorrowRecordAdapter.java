@@ -1,4 +1,3 @@
-// BorrowRecordAdapter.java
 package com.example.librarymanage.adapter;
 
 import android.view.LayoutInflater;
@@ -29,7 +28,7 @@ public class BorrowRecordAdapter extends RecyclerView.Adapter<BorrowRecordAdapte
     @Override
     public void onBindViewHolder(@NonNull BorrowRecordViewHolder holder, int position) {
         BorrowRecord record = borrowRecordList.get(position);
-        holder.tvBookTitle.setText(record.getBookTitle());
+        holder.tvBookTitle.setText(record.getTitle()); // Cập nhật để sử dụng getTitle() thay vì getBookTitle()
         holder.tvBorrowDate.setText(record.getBorrowDate());
         holder.tvReturnDate.setText(record.getReturnDate());
         holder.tvStatus.setText(record.getStatus());

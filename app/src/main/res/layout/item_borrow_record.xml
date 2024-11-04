@@ -1,34 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
 
-    <TextView
-        android:id="@+id/tvBookTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Book Title"
-        android:textStyle="bold"
-        android:textSize="16sp"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="?android:attr/selectableItemBackground">
 
-    <TextView
-        android:id="@+id/tvBorrowDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Borrow Date"/>
+        <!-- Cặp Tiêu đề sách -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
 
-    <TextView
-        android:id="@+id/tvReturnDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return Date"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Tiêu đề sách:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status"/>
-</LinearLayout>
+            <TextView
+                android:id="@+id/tvBookTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Book Title"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_weight="2"/>
+        </LinearLayout>
+
+        <!-- Cặp Ngày mượn -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ngày mượn:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tvBorrowDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Borrow Date"
+                android:layout_weight="2"/>
+        </LinearLayout>
+
+        <!-- Cặp Ngày trả -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ngày trả:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tvReturnDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Return Date"
+                android:layout_weight="2"/>
+        </LinearLayout>
+
+        <!-- Cặp Trạng thái -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Trạng thái:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:layout_weight="2"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

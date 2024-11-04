@@ -1,5 +1,6 @@
 package com.example.librarymanage.menubottom;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.librarymanage.BookActivity;
 import com.example.librarymanage.R;
 import com.example.librarymanage.data.DataBook;
 
@@ -72,18 +74,16 @@ public class DanhMucFragment extends Fragment {
         return categories;
     }
 
-    // Method to open BookFragment with selected category
-    private void openBooksByCategory(String categoryName) {
-        // Create an instance of BookFragment and pass the category name
-        BookFragment bookFragment = new BookFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("category_name", categoryName);
-        bookFragment.setArguments(bundle);
 
-        // Replace current fragment with BookFragment
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_layout, bookFragment); // Ensure the container ID is correct
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void openBooksByCategory(String categoryName) {
+        // Tạo một Intent để mở BookActivity
+        Intent intent = new Intent(getContext(), BookActivity.class);
+
+        // Đưa tên thể loại vào Intent
+        intent.putExtra("category_name", categoryName);
+
+        // Bắt đầu BookActivity
+        startActivity(intent);
     }
+
 }

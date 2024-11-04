@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#39c7a5</color>
+    <color name="green">#81DC85</color>
     <color name="lightGreen">#e0f2ed</color>
     <color name="grey">#919191</color>
     <color name="darkGrey">#616161</color>
@@ -14,7 +14,7 @@
     <!-- res/values/colors.xml -->
         <!-- Màu chính và phụ -->
         <color name="primary_50">#E8F5E9</color> <!-- Màu nền cho Bottom Navigation -->
-        <color name="primary_400">#66BB6A</color> <!-- Màu icon khi được chọn -->
+        <color name="primary_400">#6FCA73</color> <!-- Màu icon khi được chọn -->
         <color name="primary_700">#388E3C</color> <!-- Màu Toolbar -->
 
         <!-- Màu văn bản -->

@@ -31,6 +31,7 @@
         <activity android:name=".BookDetailActivity"/>
         <activity android:name=".BorrowActivity"/>
         <activity android:name=".LichSuFragment"/>
+        <activity android:name=".HomeFragment"/>
 
     </application>
 

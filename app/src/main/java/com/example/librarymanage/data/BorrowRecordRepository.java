@@ -35,23 +35,34 @@ public class BorrowRecordRepository {
     public List<BorrowRecord> getBorrowHistoryByUserId(int userId) {
         List<BorrowRecord> borrowRecords = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM BorrowRecords WHERE user_id = ?", new String[]{String.valueOf(userId)});
+
+        // Sử dụng JOIN để kết hợp thông tin từ BorrowRecords và Books
+        Cursor cursor = db.rawQuery(
+                "SELECT b.title, br.user_id, br.book_id, br.borrow_date, br.return_date, br.status, b.title " +
+                        "FROM BorrowRecords br " +
+                        "JOIN Books b ON br.book_id = b.book_id " +
+                        "WHERE br.user_id = ?",
+                new String[]{String.valueOf(userId)}
+        );
 
         if (cursor.moveToFirst()) {
             do {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow("record_id"));
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("title"));
                 int bookId = cursor.getInt(cursor.getColumnIndexOrThrow("book_id"));
                 String borrowDate = cursor.getString(cursor.getColumnIndexOrThrow("borrow_date"));
                 String returnDate = cursor.getString(cursor.getColumnIndexOrThrow("return_date"));
                 String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow("title")); // Lấy tiêu đề sách
 
-                borrowRecords.add(new BorrowRecord(id, userId, bookId, borrowDate, returnDate, status));
+                // Tạo một đối tượng BorrowRecord với thông tin sách
+                borrowRecords.add(new BorrowRecord(id, userId, bookId, title, borrowDate, returnDate, status));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return borrowRecords;
     }
+
 
 
 

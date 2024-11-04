@@ -4,31 +4,19 @@ public class BorrowRecord {
     private int recordId;
     private int userId;
     private int bookId;
+    private String title; // Thêm trường title
     private String borrowDate;
     private String returnDate;
     private String status;
 
-    private String bookTitle;  // Tiêu đề sách, nếu bạn muốn hiển thị
-
-    // Constructor để khởi tạo các thuộc tính chính
-    public BorrowRecord(int recordId, int userId, int bookId, String borrowDate, String returnDate, String status) {
+    public BorrowRecord(int recordId, int userId, int bookId, String title, String borrowDate, String returnDate, String status) {
         this.recordId = recordId;
         this.userId = userId;
         this.bookId = bookId;
+        this.title = title; // Khởi tạo title
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
         this.status = status;
-    }
-
-    // Constructor khác nếu bạn muốn lưu cả tiêu đề sách
-    public BorrowRecord(int recordId, int userId, int bookId, String borrowDate, String returnDate, String status, String bookTitle) {
-        this.recordId = recordId;
-        this.userId = userId;
-        this.bookId = bookId;
-        this.borrowDate = borrowDate;
-        this.returnDate = returnDate;
-        this.status = status;
-        this.bookTitle = bookTitle;
     }
 
     // Getters và Setters cho các thuộc tính
@@ -80,11 +68,11 @@ public class BorrowRecord {
         this.status = status;
     }
 
-    public String getBookTitle() {
-        return bookTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

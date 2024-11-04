@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class BookRepository {
     private DataBook dataBook;
 
@@ -38,6 +42,25 @@ public class BookRepository {
 
         return authorName; // Trả về tên tác giả hoặc null
     }
+    public Cursor getBooksByCategory(String categoryName) {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        String query = "SELECT * FROM Books WHERE category_id = (SELECT category_id FROM Category WHERE name = ?)";
+        return db.rawQuery(query, new String[]{categoryName});
+    }
+
+    public Cursor getLatestBooksAddedThisMonth(int limit) {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        String currentMonth = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+        String currentYear = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+
+        // Query để lấy 5 sách được thêm trong tháng hiện tại
+        return db.rawQuery("SELECT * FROM Books WHERE strftime('%m', add_date) = ? AND strftime('%Y', add_date) = ? ORDER BY add_date DESC LIMIT ?",
+                new String[]{currentMonth, currentYear, String.valueOf(limit)});
+    }
+
+
+
+
 
     public void close() {
         dataBook.close();

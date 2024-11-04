@@ -17,9 +17,9 @@
 
         <!-- Image nằm bên trái -->
         <ImageView
-            android:id="@+id/imageViewBook"
+            android:id="@+id/bookImage"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_marginEnd="16dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_open_book" />
@@ -33,7 +33,7 @@
 
             <!-- Book Title -->
             <TextView
-                android:id="@+id/textViewTitle"
+                android:id="@+id/bookTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Book Title"
@@ -43,7 +43,7 @@
 
             <!-- Author and Published Year -->
             <TextView
-                android:id="@+id/textViewAuthor"
+                android:id="@+id/bookAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
