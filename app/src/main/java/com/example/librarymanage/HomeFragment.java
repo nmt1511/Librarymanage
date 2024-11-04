@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
 
     private void showGreeting() {
         SharedPreferences preferences = requireActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        int userId = preferences.getInt("userId", -1);
+        int userId = preferences.getInt("user_id", -1);
         String welcome = "";
 
         if (userId != -1) {

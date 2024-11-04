@@ -36,8 +36,8 @@ public class UserInfoActivity extends AppCompatActivity {
 
         // Lấy user_id từ SharedPreferences
         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        int userId = preferences.getInt("userId", -1);
-        Log.d("UserInfoActivity", "userId: " + userId);
+        int userId = preferences.getInt("user_id", -1);
+        Log.d("UserInfoActivity", "user_id: " + userId);
 
         if (userId != -1) {
             displayUserInfo(userId);

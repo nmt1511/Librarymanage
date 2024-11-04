@@ -32,7 +32,7 @@ public class LichSuFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         SharedPreferences prefs = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-        int userId = prefs.getInt("userId", -1);
+        int userId = prefs.getInt("user_id", -1);
 
         if (userId != -1) {
             borrowRecordRepository = new BorrowRecordRepository(getContext());
