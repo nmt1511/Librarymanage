@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@color/background_off_white">
 
-    <!-- CardView để tạo khung thông tin sách sang trọng -->
+    <!-- CardView with shadow and rounded corners for book information -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="8dp">
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,76 +26,92 @@
                 android:id="@+id/bookImage"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:contentDescription="Book Image" />
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:textColor="@color/text_primary"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="12dp"
+                android:text="Title" />
 
             <TextView
                 android:id="@+id/tvAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"
                 android:textSize="18sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="4dp"
+                android:text="Author" />
 
             <TextView
                 android:id="@+id/tvPublishedYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="4dp"
+                android:text="Published Year" />
 
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="Description..." />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Nút Mượn Sách -->
-    <Button
+    <!-- Borrow Book Button -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBorrow"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mượn sách"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        app:cornerRadius="8dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/primary_400" />
 
-    <!-- FrameLayout để hiển thị đánh giá -->
-    <FrameLayout
+    <!-- Reviews Section with border and padding -->
+    <LinearLayout
         android:id="@+id/frameLayoutReviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
+        android:background="@color/lightGrey"
         android:padding="16dp"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
-        <!-- Bạn có thể thêm nội dung đánh giá ở đây -->
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đánh giá:"
+            android:textColor="@color/text_primary"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="start" />
 
-        <!-- Các đánh giá sẽ được thêm ở đây -->
-    </FrameLayout>
+        <!-- Reviews content can be dynamically added here -->
 
-    <!-- Nút Quay Lại -->
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnWriteReview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quay lại"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center" />
+        android:layout_marginTop="8dp"
+        android:text="Viết đánh giá"
+        android:backgroundTint="@color/primary_400"
+        android:textColor="@color/white"
+        app:cornerRadius="8dp" />
+
 </LinearLayout>

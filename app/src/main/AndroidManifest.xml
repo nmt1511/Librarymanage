@@ -27,7 +27,7 @@
         <activity android:name=".menubottom.DanhMucFragment"/>
         <activity android:name=".BookActivity"/>
         <activity android:name=".user.UserInfoActivity"/>
-        <activity android:name=".menubottom.BookFragment"/>
+
         <activity android:name=".BookDetailActivity"/>
         <activity android:name=".BorrowActivity"/>
         <activity android:name=".LichSuFragment"/>
