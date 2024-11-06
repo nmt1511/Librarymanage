@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment {
             DataBook helper = new DataBook(getContext());
             SQLiteDatabase db = helper.getReadableDatabase();
 
-            Cursor c = db.rawQuery("SELECT User.name FROM Account INNER JOIN User ON Account.user_id = User.user_id WHERE Account.user_id = ?", new String[]{String.valueOf(userId)});
+            Cursor c = db.rawQuery("SELECT * from User Where user_id = ?", new String[]{String.valueOf(userId)});
             if (c != null && c.moveToFirst()) {
                 int nameIndex = c.getColumnIndex("name");
                 if (nameIndex != -1) {

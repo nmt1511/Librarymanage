@@ -68,7 +68,7 @@ public class dangki extends AppCompatActivity {
             accountValues.put("username", username);
             accountValues.put("password", password);
             accountValues.put("role", "reader");  // role mặc định là "reader"
-            accountValues.put("user_id", userId);
+
             db.insert("Account", null, accountValues);
 
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();

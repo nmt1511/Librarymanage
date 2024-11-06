@@ -99,7 +99,7 @@ public class BorrowActivity extends AppCompatActivity {
 
     private void borrowBook() {
         // Lấy userId từ SharedPreferences
-        int userId = getSharedPreferences("UserPrefs", MODE_PRIVATE).getInt("userId", -1);
+        int userId = getSharedPreferences("UserPrefs", MODE_PRIVATE).getInt("user_id", -1);
         if (userId == -1) {
             Toast.makeText(this, "Bạn cần đăng nhập để mượn sách!", Toast.LENGTH_SHORT).show();
             return;

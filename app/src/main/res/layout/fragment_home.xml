@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:background="@drawable/rounded_background"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="30dp">
 
             <ImageView
                 android:id="@+id/profileImage"
@@ -48,13 +48,13 @@
 <!--            android:padding="12dp"-->
 <!--            android:layout_margin="16dp" />-->
         <!-- Date -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sat, Jan 15, 2022"
-            android:textSize="14sp"
-            android:textColor="#9BA3C9"
-            android:layout_marginBottom="16dp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Sat, Jan 15, 2022"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textColor="#9BA3C9"-->
+<!--            android:layout_marginBottom="16dp" />-->
 
         <!-- Quick Access Menu -->
         <LinearLayout
