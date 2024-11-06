@@ -52,7 +52,7 @@ public class BookActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
                 Book selectedBook = bookList.get(position);
-                Toast.makeText(BookActivity.this, "Bạn đã chọn: " + selectedBook.getTitle(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(BookActivity.this, "Bạn đã chọn: " + selectedBook.getTitle(), Toast.LENGTH_SHORT).show();
 
                 // Mở chi tiết sách
                 Intent intent = new Intent(BookActivity.this, BookDetailActivity.class);

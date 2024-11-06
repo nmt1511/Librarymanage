@@ -53,7 +53,7 @@ public class dangnhap extends AppCompatActivity {
         try{
             DataBook helper = new DataBook(this);
             db = helper.getReadableDatabase();
-            Cursor cursor = db.rawQuery("select * from Account where username=? and password=?", new String[]{user,pass});
+            Cursor cursor = db.rawQuery("select * from User where username=? and password=?", new String[]{user,pass});
             if(cursor.moveToFirst()){
                 return cursor.getInt(0);
             }
@@ -73,18 +73,8 @@ public class dangnhap extends AppCompatActivity {
                 if(username.equals("")|| pass.equals(""))
                     Toast.makeText(dangnhap.this,"Cần điền đầy đủ thông tin!",Toast.LENGTH_SHORT).show();
                 else{
-                    int userId = isUser(username,pass);
-                    int user_id = 1;
-                    if(userId != -1) {
-                        Cursor cursor = db.rawQuery(
-                                "SELECT user_id FROM Account WHERE user_id = ?",
-                                new String[]{String.valueOf(userId)}
-                        );
-
-                        if (cursor.moveToFirst()) {
-                            user_id = cursor.getInt(0);
-                        }
-                        cursor.close();
+                    int user_id = isUser(username,pass);
+                    if(user_id != -1) {
                         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt("user_id",user_id);

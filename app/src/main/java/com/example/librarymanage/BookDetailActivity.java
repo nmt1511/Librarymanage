@@ -52,7 +52,7 @@ public class BookDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Lấy userId từ SharedPreferences
-                int userId = getSharedPreferences("UserPrefs", MODE_PRIVATE).getInt("userId", -1);
+                int userId = getSharedPreferences("UserPrefs", MODE_PRIVATE).getInt("user_id", -1);
 
                 // Kiểm tra xem userId có hợp lệ không
                 if (userId == -1) {
@@ -63,7 +63,7 @@ public class BookDetailActivity extends AppCompatActivity {
                 // Chuyển đến BorrowActivity và truyền bookId và userId
                 Intent borrowIntent = new Intent(BookDetailActivity.this, BorrowActivity.class);
                 borrowIntent.putExtra("bookId", bookId);
-                borrowIntent.putExtra("userId", userId);
+                borrowIntent.putExtra("user_id", userId);
                 startActivity(borrowIntent);
             }
         });
