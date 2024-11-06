@@ -27,19 +27,20 @@ public class feedback extends AppCompatActivity {
     private RecyclerView feedbackRecyclerView;
     private FeedbackAdapter feedbackAdapter;
     private ArrayList<FeedbackItem> feedbackList;
-    private TextView ratingMessage; // TextView để hiển thị thông điệp đánh giá sao
+    private TextView ratingMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
+        // Khởi tạo các View
         ratingBar = findViewById(R.id.ratingBar);
         feedbackText = findViewById(R.id.feedbackText);
         submitFeedbackButton = findViewById(R.id.submitFeedbackButton);
-        feedbackRecyclerView = findViewById(R.id.feedbackRecyclerView);
-        ratingMessage = findViewById(R.id.ratingMessage); // Khởi tạo TextView thông điệp
+        ratingMessage = findViewById(R.id.ratingMessage);
 
+        // Khởi tạo danh sách và adapter
         feedbackList = new ArrayList<>();
         feedbackAdapter = new FeedbackAdapter(feedbackList);
         feedbackRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,10 +62,11 @@ public class feedback extends AppCompatActivity {
                 } else {
                     message = "Xuất sắc";
                 }
-                ratingMessage.setText(message); // Hiển thị thông điệp
+                ratingMessage.setText(message);
             }
         });
 
+        // Thiết lập sự kiện cho nút gửi đánh giá
         submitFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +92,7 @@ public class feedback extends AppCompatActivity {
         // Xóa nội dung đã nhập
         feedbackText.setText("");
         ratingBar.setRating(0);
-        ratingMessage.setText(""); // Xóa thông điệp đánh giá
+        ratingMessage.setText("");
         Toast.makeText(this, "Cảm ơn bạn đã gửi góp ý!", Toast.LENGTH_SHORT).show();
     }
 
@@ -135,8 +137,8 @@ public class feedback extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull FeedbackViewHolder holder, int position) {
             FeedbackItem feedbackItem = feedbackList.get(position);
-            holder.ratingTextView.setText("Chất lượng sách : " + feedbackItem.getRating());
-            holder.commentTextView.setText("Bình luận : " + feedbackItem.getComment());
+            holder.ratingTextView.setText("Chất lượng: " + feedbackItem.getRating());
+            holder.commentTextView.setText("Bình luận: " + feedbackItem.getComment());
         }
 
         @Override
@@ -145,7 +147,6 @@ public class feedback extends AppCompatActivity {
         }
 
         class FeedbackViewHolder extends RecyclerView.ViewHolder {
-            TextView categoryTextView;
             TextView ratingTextView;
             TextView commentTextView;
 

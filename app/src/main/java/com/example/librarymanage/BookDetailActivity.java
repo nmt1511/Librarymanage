@@ -10,12 +10,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.librarymanage.data.BookRepository;
 import com.example.librarymanage.data.BorrowRecordRepository;
+import com.example.librarymanage.user.feedback;
 
 public class BookDetailActivity extends AppCompatActivity {
 
     private TextView tvTitle, tvAuthor, tvPublishedYear, tvDescription;
     private BookRepository bookRepository; // Khai báo lớp BookRepository
-    private Button btnBack, btnBorrow;
+    private Button btnComment, btnBorrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +27,18 @@ public class BookDetailActivity extends AppCompatActivity {
         tvAuthor = findViewById(R.id.tvAuthor);
         tvPublishedYear = findViewById(R.id.tvPublishedYear);
         tvDescription = findViewById(R.id.tvDescription);
-        btnBack = findViewById(R.id.btnBack);
+        btnComment = findViewById(R.id.btnComment);
         btnBorrow = findViewById(R.id.btnBorrow);
 
         // Nhận bookId từ Intent
         Intent intent = getIntent();
         int bookId = intent.getIntExtra("bookId", -1);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                finish(); // Đóng Activity hiện tại
+            public void onClick(View view) {
+                Intent feedbackIntent = new Intent(BookDetailActivity.this, feedback.class);
+                startActivity(feedbackIntent);
             }
         });
 
