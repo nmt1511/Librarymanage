@@ -52,7 +52,6 @@ public class BookActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
                 Book selectedBook = bookList.get(position);
-//                Toast.makeText(BookActivity.this, "Bạn đã chọn: " + selectedBook.getTitle(), Toast.LENGTH_SHORT).show();
 
                 // Mở chi tiết sách
                 Intent intent = new Intent(BookActivity.this, BookDetailActivity.class);
@@ -91,16 +90,32 @@ public class BookActivity extends AppCompatActivity {
                 int titleIndex = cursor.getColumnIndex("title");
                 int authorIdIndex = cursor.getColumnIndex("author_id");
                 int descriptionIndex = cursor.getColumnIndex("description");
+                int categoryIdIndex = cursor.getColumnIndex("category_id");
+                int locationIdIndex = cursor.getColumnIndex("location_id");
 
-                if (bookIdIndex != -1 && titleIndex != -1 && authorIdIndex != -1 && descriptionIndex != -1) {
+                if (bookIdIndex != -1 && titleIndex != -1 && authorIdIndex != -1 && descriptionIndex != -1 &&
+                        categoryIdIndex != -1 && locationIdIndex != -1) {
+
                     int bookId = cursor.getInt(bookIdIndex);
                     String title = cursor.getString(titleIndex);
                     int authorId = cursor.getInt(authorIdIndex);
                     String description = cursor.getString(descriptionIndex);
-                    int imageResource = R.drawable.ic_open_book;
+                    int categoryId = cursor.getInt(categoryIdIndex);
+                    int locationId = cursor.getInt(locationIdIndex);
+
+                    // Lấy tên tác giả từ BookRepository
+                    String authorName = bookRepository.getAuthorName(authorId);
+
+                    // Lấy tên thể loại từ BookRepository (tạo phương thức getCategoryName)
+                    String categoryName = bookRepository.getCategoryName(categoryId);
+
+                    // Lấy tên vị trí từ BookRepository (tạo phương thức getLocationName)
+                    String locationName = bookRepository.getLocationName(locationId);
+
+                    int imageResource = R.drawable.ic_open_book; // Hoặc thay thế với hình ảnh tương ứng
 
                     // Thêm sách vào danh sách
-                    bookList.add(new Book(bookId, title, String.valueOf(authorId), description, imageResource));
+                    bookList.add(new Book(bookId, title, authorName, description, imageResource, categoryName, locationName));
                 } else {
                     Toast.makeText(this, "Có lỗi xảy ra khi lấy dữ liệu sách", Toast.LENGTH_SHORT).show();
                     break;
@@ -111,6 +126,7 @@ public class BookActivity extends AppCompatActivity {
             Toast.makeText(this, "Không có sách nào trong cơ sở dữ liệu", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     protected void onDestroy() {

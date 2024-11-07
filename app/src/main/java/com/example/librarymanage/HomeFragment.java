@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout btnAbout;
     private LinearLayout btnInfo;
     TextView txtGreeting;
+    private LinearLayout btnsearch;
     SQLiteDatabase db;
     @Nullable
     @Override
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment {
         btnAbout = view.findViewById(R.id.btn_about);
         btnInfo = view.findViewById(R.id.btn_info);
         txtGreeting = view.findViewById(R.id.greetingText);
+        btnsearch = view.findViewById(R.id.btn_search);
         // Kiểm tra thời gian và hiển thị thông điệp chào
         showGreeting();
 
@@ -72,7 +74,12 @@ public class HomeFragment extends Fragment {
                 openBookActivity();
             }
         });
-
+        btnsearch.setOnClickListener(new View.OnClickListener() {
+        @Override
+            public void onClick(View v){
+            openbtn_search();
+        }
+                                      });
         // Set up click listener for btnInfo
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +94,10 @@ public class HomeFragment extends Fragment {
     private void openDanhMucFragment() {
         // Logic to open DanhMucFragment
     }
-
+private void openbtn_search(){
+    Intent intent = new Intent(getActivity(), SearchActivity.class);
+    startActivity(intent);
+}
     private void openBookActivity() {
         // Start BookActivity
         Intent intent = new Intent(getActivity(), BookActivity.class);

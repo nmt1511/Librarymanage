@@ -43,7 +43,7 @@
 
             <!-- Author and Published Year -->
             <TextView
-                android:id="@+id/textViewAuthor"
+                android:id="@+id/tvAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -52,8 +52,18 @@
                 android:textSize="14sp" />
 
             <!-- Category and Location -->
+
+            <!-- Description -->
             <TextView
-                android:id="@+id/bookCategoryLocation"
+                android:id="@+id/tvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Category • Location"
+                android:textColor="#6D6E7B"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -61,9 +71,9 @@
                 android:textColor="#6D6E7B"
                 android:textSize="14sp" />
 
-            <!-- Description -->
+
             <TextView
-                android:id="@+id/bookDescription"
+                android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

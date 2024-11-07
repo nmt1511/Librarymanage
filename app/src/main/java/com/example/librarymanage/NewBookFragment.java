@@ -47,23 +47,34 @@ public class NewBookFragment extends Fragment {
     }
 
     private void loadNewBooksThisMonth() {
-        Cursor cursor = bookRepository.getLatestBooksAddedThisMonth(5); // Lấy 5 sách mới nhất
+        // Lấy 5 sách mới nhất được thêm trong tháng này
+        Cursor cursor = bookRepository.getLatestBooksAddedThisMonth(5);
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int bookId = cursor.getInt(cursor.getColumnIndexOrThrow("book_id"));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-                String author = cursor.getString(cursor.getColumnIndexOrThrow("author_id")); // Lưu ID tác giả
+                int authorId = cursor.getInt(cursor.getColumnIndexOrThrow("author_id"));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
                 int imageResource = R.drawable.ic_open_book; // Hình ảnh mặc định
 
+                // Lấy tên tác giả, thể loại và vị trí từ các bảng liên quan
+                String authorName = bookRepository.getAuthorName(authorId);  // Giả sử bạn có phương thức getAuthorName trong BookRepository
+                int categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
+                int locationId = cursor.getInt(cursor.getColumnIndexOrThrow("location_id"));
+
+                String categoryName = bookRepository.getCategoryName(categoryId);  // Lấy tên thể loại từ repository
+                String locationName = bookRepository.getLocationName(locationId);  // Lấy tên vị trí từ repository
+
                 // Thêm sách vào danh sách
-                bookList.add(new Book(bookId, title, author, description, imageResource));
+                bookList.add(new Book(bookId, title, authorName, description, imageResource, categoryName, locationName));
+
             } while (cursor.moveToNext());
-            cursor.close(); // Đóng cursor
+            cursor.close(); // Đóng cursor sau khi duyệt xong
         } else {
             Toast.makeText(getContext(), "Không có sách nào được thêm trong tháng này", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
 }

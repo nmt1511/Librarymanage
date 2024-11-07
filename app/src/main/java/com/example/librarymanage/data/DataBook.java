@@ -23,12 +23,7 @@ public class DataBook extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Tạo bảng Account để lưu thông tin tài khoản
-//        db.execSQL("CREATE TABLE IF NOT EXISTS Account (" +
-//                "account_id INTEGER PRIMARY KEY AUTOINCREMENT, " +  // ID duy nhất của tài khoản
-//                "username VARCHAR, " +                              // Tên đăng nhập của tài khoản
-//                "password VARCHAR, " +                              // Mật khẩu của tài khoản
-//                "role VARCHAR)");
+
 
         // Tạo bảng User để lưu thông tin người dùng
         db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
@@ -194,7 +189,6 @@ public class DataBook extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Lịch sử thế giới', 1, 39, 9, 2018, 'Khái quát lịch sử thế giới.', 'image30.jpg', '2024-11-30');");
         db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Văn hóa và xã hội Việt Nam', 1, 40, 9, 2020, 'Nghiên cứu văn hóa và xã hội Việt Nam hiện đại.', 'image31.jpg', '2024-11-25');");
 
-
         db.execSQL("INSERT INTO Locations (name) VALUES ('Kệ Sách Văn Học');");
         db.execSQL("INSERT INTO Locations (name) VALUES ('Kệ Sách Khoa Học');");
         db.execSQL("INSERT INTO Locations (name) VALUES ('Kệ Sách Ngoại Ngữ');");
@@ -223,7 +217,6 @@ public class DataBook extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Category (name) VALUES ('Sách lịch sử và văn hóa');");
         db.execSQL("INSERT INTO Category (name) VALUES ('Sách khoa học');");
         db.execSQL("INSERT INTO Category (name) VALUES ('Tạp chí và báo cáo khoa học');");
-
 
         db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (1, 15.0, 0);");
         db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (2, 15.0, 1);");

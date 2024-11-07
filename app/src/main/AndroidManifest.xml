@@ -32,6 +32,7 @@
         <activity android:name=".BorrowActivity"/>
         <activity android:name=".LichSuFragment"/>
         <activity android:name=".HomeFragment"/>
+        <activity android:name=".SearchActivity"/>
 
     </application>
 

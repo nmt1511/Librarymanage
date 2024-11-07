@@ -27,15 +27,36 @@ public class BookAdapter extends ArrayAdapter<Book> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_book, parent, false);
         }
 
+        // Tìm các view dựa trên ID trong XML
         ImageView imageView = convertView.findViewById(R.id.imageViewBook);
         TextView titleTextView = convertView.findViewById(R.id.textViewTitle);
-        TextView authorTextView = convertView.findViewById(R.id.textViewAuthor);
+        TextView authorTextView = convertView.findViewById(R.id.tvAuthor);
+        TextView categoryTextView = convertView.findViewById(R.id.tvCategory);
+        TextView locationTextView = convertView.findViewById(R.id.tvLocation);
+        TextView descriptionTextView = convertView.findViewById(R.id.tvDescription);
 
-        imageView.setImageResource(book.getImageResource());
-        titleTextView.setText(book.getTitle());
-        authorTextView.setText(book.getAuthor());
+        // Kiểm tra và đặt nội dung cho từng view
+        if (titleTextView != null) {
+            titleTextView.setText(book.getTitle());
+        }
+        if (authorTextView != null) {
+            authorTextView.setText(book.getAuthorName());
+        }
+        if (categoryTextView != null) {
+            categoryTextView.setText(book.getCategoryName());
+        }
+        if (locationTextView != null) {
+            locationTextView.setText(book.getLocationName());
+        }
+        if (descriptionTextView != null) {
+            descriptionTextView.setText(book.getDescription());
+        }
+        if (imageView != null) {
+            imageView.setImageResource(book.getImageResource());
+        }
 
         return convertView;
     }
+
 
 }

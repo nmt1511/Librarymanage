@@ -27,21 +27,38 @@ public class BookRepository {
     }
     public String getAuthorName(int authorId) {
         SQLiteDatabase db = dataBook.getReadableDatabase();
-        String query = "SELECT name FROM Author WHERE author_id = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(authorId)});
-        String authorName = null; // Khởi tạo biến authorName là null
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                int index = cursor.getColumnIndex("name"); // Lấy chỉ số cột
-                if (index != -1) { // Kiểm tra nếu chỉ số cột hợp lệ
-                    authorName = cursor.getString(index); // Lấy tên tác giả
-                }
-            }
-            cursor.close(); // Đảm bảo đóng cursor
+        Cursor cursor = db.query("Author", new String[]{"name"}, "author_id = ?", new String[]{String.valueOf(authorId)}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            String authorName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            cursor.close();
+            return authorName;
         }
-
-        return authorName; // Trả về tên tác giả hoặc null
+        return "";
     }
+
+    public String getCategoryName(int categoryId) {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name FROM Category WHERE category_id = ?", new String[]{String.valueOf(categoryId)});
+        if (cursor != null && cursor.moveToFirst()) {
+            String categoryName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            cursor.close();
+            return categoryName;
+        }
+        return "";
+    }
+
+    public String getLocationName(int locationId) {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name FROM Locations WHERE location_id = ?", new String[]{String.valueOf(locationId)});
+        if (cursor != null && cursor.moveToFirst()) {
+            String locationName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            cursor.close();
+            return locationName;
+        }
+        return "";
+    }
+
+
     public Cursor getBooksByCategory(String categoryName) {
         SQLiteDatabase db = dataBook.getReadableDatabase();
         String query = "SELECT * FROM Books WHERE category_id = (SELECT category_id FROM Category WHERE name = ?)";
@@ -58,6 +75,11 @@ public class BookRepository {
                 new String[]{currentMonth, currentYear, String.valueOf(limit)});
     }
 
+    public Cursor getBooksByKeyword(String keyword) {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        String query = "SELECT * FROM Books WHERE title LIKE ? OR author_id IN (SELECT author_id FROM Author WHERE name LIKE ?)";
+        return db.rawQuery(query, new String[]{"%" + keyword + "%", "%" + keyword + "%"});
+    }
 
 
 
