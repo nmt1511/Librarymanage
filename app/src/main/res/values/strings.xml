@@ -23,4 +23,8 @@
     <string name="email_label">Email:</string>
     <string name="student_code_label">Mã sinh viên:</string>
 
+    <string-array name="roles">
+        <item>Người dùng</item>
+        <item>Quản trị viên</item>
+    </string-array>
 </resources>

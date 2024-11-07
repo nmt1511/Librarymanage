@@ -1,18 +1,36 @@
 package com.example.librarymanage.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class BookRepository {
     private DataBook dataBook;
+    private SQLiteDatabase db;
 
     public BookRepository(Context context) {
         dataBook = new DataBook(context);
+        db = dataBook.getWritableDatabase();
+    }
+
+    public long addBook(String title, int authorId, int categoryId, int locationId, int publishedYear, String description, String image, String addDate) {
+        ContentValues values = new ContentValues();
+        values.put("title", title);
+        values.put("author_id", authorId);
+        values.put("category_id", categoryId);
+        values.put("location_id", locationId);
+        values.put("published_year", publishedYear);
+        values.put("description", description);
+        values.put("image", image);
+        values.put("add_date", addDate);
+        return db.insert("Books", null, values);
     }
 
     public Cursor getBookById(int bookId) {
@@ -81,6 +99,47 @@ public class BookRepository {
         return db.rawQuery(query, new String[]{"%" + keyword + "%", "%" + keyword + "%"});
     }
 
+    // Method to get all authors
+    public List<String> getAllAuthors() {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name FROM Author", null);
+        List<String> authors = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                authors.add(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return authors;
+    }
+
+    // Method to get all categories
+    public List<String> getAllCategories() {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name FROM Category", null);
+        List<String> categories = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                categories.add(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return categories;
+    }
+
+    // Method to get all locations
+    public List<String> getAllLocations() {
+        SQLiteDatabase db = dataBook.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name FROM Locations", null);
+        List<String> locations = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                locations.add(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return locations;
+    }
 
 
 

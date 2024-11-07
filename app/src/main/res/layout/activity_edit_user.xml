@@ -1,0 +1,77 @@
+<!-- activity_edit_user.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Tên người dùng -->
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên"
+        android:textSize="16sp"
+        android:inputType="text" />
+
+    <!-- Giới tính -->
+    <EditText
+        android:id="@+id/etGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giới tính"
+        android:textSize="16sp"
+        android:inputType="text" />
+
+    <!-- Số điện thoại -->
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số điện thoại"
+        android:textSize="16sp"
+        android:inputType="phone" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textSize="16sp"
+        android:inputType="textEmailAddress" />
+
+    <!-- Mã sinh viên -->
+    <EditText
+        android:id="@+id/etStudentCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã sinh viên"
+        android:textSize="16sp"
+        android:inputType="text" />
+
+    <!-- Tên đăng nhập -->
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên đăng nhập"
+        android:textSize="16sp"
+        android:inputType="text" />
+
+    <!-- Mật khẩu -->
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mật khẩu"
+        android:textSize="16sp"
+        android:inputType="textPassword" />
+
+    <!-- Nút Lưu -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu" />
+</LinearLayout>

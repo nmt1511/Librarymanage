@@ -1,14 +1,8 @@
 package com.example.librarymanage.data;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.example.librarymanage.entities.Book;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DataBook extends SQLiteOpenHelper {
     private SQLiteDatabase db;
@@ -35,7 +29,7 @@ public class DataBook extends SQLiteOpenHelper {
                 "student_code VARCHAR, " +
                 "username VARCHAR, " +                              // Tên đăng nhập của tài khoản
                 "password VARCHAR, " +                              // Mật khẩu của tài khoản
-                "role VARCHAR)");
+                "role int)");
 
         // Tạo bảng Books để lưu thông tin sách
         db.execSQL("CREATE TABLE IF NOT EXISTS Books (" +
@@ -44,7 +38,7 @@ public class DataBook extends SQLiteOpenHelper {
                 "location_id INTEGER, " +                           // ID vị trí của sách trong thư viện
                 "author_id INTEGER, " +                             // ID tác giả của sách
                 "category_id INTEGER, " +                           // ID thể loại của sách
-                "major_id INTEGER, " +                              // ID ngành học liên quan đến sách
+                                    // ID ngành học liên quan đến sách
                 "published_year YEAR, " +                           // Năm xuất bản của sách
                 "description TEXT, " +                              // Mô tả sách
                 "image VARCHAR, " +
@@ -52,8 +46,7 @@ public class DataBook extends SQLiteOpenHelper {
                 // Đường dẫn hình ảnh của sách
                 "FOREIGN KEY (location_id) REFERENCES Locations(location_id), " +  // Khóa ngoại tới bảng Locations
                 "FOREIGN KEY (author_id) REFERENCES Author(author_id), " +         // Khóa ngoại tới bảng Author
-                "FOREIGN KEY (category_id) REFERENCES Category(category_id), " +   // Khóa ngoại tới bảng Category
-                "FOREIGN KEY (major_id) REFERENCES Major(major_id))");             // Khóa ngoại tới bảng Major
+                "FOREIGN KEY (category_id) REFERENCES Category(category_id))");             // Khóa ngoại tới bảng Major
 
         // Tạo bảng Locations để lưu vị trí của sách
         db.execSQL("CREATE TABLE IF NOT EXISTS Locations (" +
@@ -145,8 +138,8 @@ public class DataBook extends SQLiteOpenHelper {
 
     private void insertSampleData(SQLiteDatabase db) {
 
-        db.execSQL("INSERT INTO User (name, gender, phone, email, student_code,username, password,role) VALUES ('Nguyen Minh Thuan', 'Male', '0123456789', 'a@example.com', '212480123456','admin','admin','1');");
-        db.execSQL("INSERT INTO User (name, gender, phone, email, student_code,username, password) VALUES ('Triệu Tử Long', 'Male', '0987654321', 'a@example.com', '212480123456','user','user');");
+        db.execSQL("INSERT INTO User (name, gender, phone, email, student_code,username, password,role) VALUES ('Nguyen Minh Thuan', '1', '0123456789', 'a@example.com', '212480123456','admin','admin','1');");
+        db.execSQL("INSERT INTO User (name, gender, phone, email, student_code,username, password) VALUES ('Triệu Tử Long', '1', '0987654321', 'a@example.com', '212480123456','user','user');");
 
         db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Dấu chân người lính', 1, 1, 6, 1986, 'Tiểu thuyết về cuộc sống của những người lính trong chiến tranh.', 'image1.jpg', '2024-01-15');");
         db.execSQL("INSERT INTO Books (title, location_id, author_id, category_id, published_year, description, image, add_date) VALUES ('Sống chết mặc bay', 1, 2, 6, 1945, 'Tác phẩm nổi tiếng phản ánh đời sống và tâm tư của con người.', 'image2.jpg', '2024-02-20');");

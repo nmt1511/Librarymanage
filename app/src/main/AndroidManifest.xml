@@ -33,6 +33,12 @@
         <activity android:name=".LichSuFragment"/>
         <activity android:name=".HomeFragment"/>
         <activity android:name=".SearchActivity"/>
+        <activity android:name=".admin.AdminFragment"/>
+        <activity android:name=".admin.user.QLuserActivity"/>
+        <activity android:name=".admin.user.AddUserActivity"/>
+        <activity android:name=".admin.user.EditUserActivity"/>
+        <activity android:name=".admin.book.QLBookActivity"/>
+        <activity android:name=".admin.book.AddBookActivity"/>
 
     </application>
 

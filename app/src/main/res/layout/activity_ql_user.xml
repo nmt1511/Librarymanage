@@ -1,0 +1,21 @@
+<!-- res/layout/activity_ql_user.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Thêm FloatingActionButton vào layout -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm người dùng"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+
+
+    <ListView
+        android:id="@+id/listview_users"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

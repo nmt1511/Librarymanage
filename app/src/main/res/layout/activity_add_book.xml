@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/edtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter book title"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Author Spinner -->
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Category Spinner -->
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Location Spinner -->
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Published Year -->
+    <TextView
+        android:id="@+id/tvYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Published Year"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/edtYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter year"
+        android:inputType="number"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/edtDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter book description"
+        android:inputType="textMultiLine"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Image -->
+    <TextView
+        android:id="@+id/tvImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Image (URL)"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/edtImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter image URL"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Add Book Button -->
+    <Button
+        android:id="@+id/btnAddBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Book"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

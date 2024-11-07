@@ -73,11 +73,21 @@ public class dangnhap extends AppCompatActivity {
                 if(username.equals("")|| pass.equals(""))
                     Toast.makeText(dangnhap.this,"Cần điền đầy đủ thông tin!",Toast.LENGTH_SHORT).show();
                 else{
+                    int role = 1;
                     int user_id = isUser(username,pass);
                     if(user_id != -1) {
+                        Cursor cursor = db.rawQuery("select role from User WHERE user_id = ?", new String[]{String.valueOf(user_id)});
+
+                        if (cursor.moveToFirst()) {
+                            role = cursor.getInt(0);
+                        }
+                        cursor.close();
+
+
                         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt("user_id",user_id);
+                        editor.putInt("role",role);
                         editor.apply();
 
                         Toast.makeText(getApplication(), "Mật khẩu hợp lệ", Toast.LENGTH_LONG).show();
