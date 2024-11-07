@@ -27,7 +27,7 @@
     <ImageView
         android:id="@+id/ivBanner"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:src="@drawable/dangnhap"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
@@ -80,13 +80,13 @@
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"/>
 
-    <!-- Password Input -->
+    <!-- Phone Number Input -->
     <EditText
-        android:id="@+id/edtPassword"
+        android:id="@+id/edtPhoneNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Mật Khẩu"
-        android:inputType="textPassword"
+        android:hint="Số điện thoại"
+        android:inputType="phone"
         android:textColorHint="@color/black"
         app:layout_constraintTop_toBottomOf="@id/edtEmail"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +94,37 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"/>
+
+    <!-- Student ID Input -->
+    <EditText
+        android:id="@+id/edtStudentID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Mã số sinh viên"
+        android:inputType="number"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/edtPhoneNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Adjust the layout constraints for Password input to follow Student ID -->
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Mật Khẩu"
+        android:inputType="textPassword"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/edtStudentID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"/>
+
 
     <!-- Confirm Password Input -->
     <EditText
