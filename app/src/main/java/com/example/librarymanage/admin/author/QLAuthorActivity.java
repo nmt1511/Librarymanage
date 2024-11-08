@@ -74,8 +74,8 @@ public class QLAuthorActivity extends AppCompatActivity {
     // Hiển thị hộp thoại tùy chọn (Sửa hoặc Xóa)
     private void showOptionsDialog(final String authorName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose Action");
-        builder.setItems(new String[]{"Edit", "Delete"}, new DialogInterface.OnClickListener() {
+        builder.setTitle("lựa chọn");
+        builder.setItems(new String[]{"sửa", "xóa"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
@@ -98,10 +98,10 @@ public class QLAuthorActivity extends AppCompatActivity {
         // Xóa tác giả trong cơ sở dữ liệu
         boolean isDeleted = bookRepository.deleteAuthor(authorName);
         if (isDeleted) {
-            showMessage("Author deleted successfully");
+            showMessage("xóa tác giả thành công");
             loadAuthors(); // Tải lại danh sách tác giả
         } else {
-            showMessage("Failed to delete author");
+            showMessage("xóa tác giả thất bại");
         }
     }
 

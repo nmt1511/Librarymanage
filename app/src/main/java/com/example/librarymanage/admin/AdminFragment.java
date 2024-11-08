@@ -20,21 +20,23 @@ import androidx.fragment.app.Fragment;
 import com.example.librarymanage.R;
 import com.example.librarymanage.admin.author.QLAuthorActivity;
 import com.example.librarymanage.admin.book.QLBookActivity;
+import com.example.librarymanage.admin.category.QlCategoryActivity;
+import com.example.librarymanage.admin.reviews.QLReviewActivity;
 import com.example.librarymanage.admin.user.QLuserActivity;
 import com.example.librarymanage.data.DataBook;
 import com.example.librarymanage.user.UserInfoActivity;
-//import com.example.librarymanage.admin.author.UserInfoActivity;
 
 import java.util.Calendar;
 
 public class AdminFragment extends Fragment {
 
     private LinearLayout btnCategories;
-    private LinearLayout btnAbout;
+    private LinearLayout btnbook;
     private LinearLayout btnInfo;
     TextView txtGreeting;
     private LinearLayout btnuser;
     private LinearLayout btn_author;
+    private LinearLayout btn_review;
     SQLiteDatabase db;
 
     @Nullable
@@ -44,11 +46,12 @@ public class AdminFragment extends Fragment {
 
         // Initialize the buttons
         btnCategories = view.findViewById(R.id.btn_categories);
-        btnAbout = view.findViewById(R.id.btn_about);
+        btnbook = view.findViewById(R.id.btn_book);
         btnInfo = view.findViewById(R.id.btn_info);
         txtGreeting = view.findViewById(R.id.greetingText);
         btnuser = view.findViewById(R.id.btn_user);
         btn_author = view.findViewById(R.id.btn_author);
+        btn_review = view.findViewById(R.id.btn_review);
         // Kiểm tra thời gian và hiển thị thông điệp chào
         showGreeting();
 
@@ -60,15 +63,22 @@ public class AdminFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        btn_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QLReviewActivity.class);
+                startActivity(intent);
+            }
+        });
         btnCategories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDanhMucFragment();
+                Intent intent = new Intent(getActivity(), QlCategoryActivity.class);
+                startActivity(intent);
             }
         });
 
-        // Set up click listener for btnAbout (sửa lại để mở QLUserActivity)
-        btnAbout.setOnClickListener(new View.OnClickListener() {
+        btnbook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), QLBookActivity.class);
@@ -76,11 +86,11 @@ public class AdminFragment extends Fragment {
             }
         });
 
-        // Set up click listener for btnsearch
         btnuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openQLUserActivity();
+                Intent intent = new Intent(getActivity(), QLuserActivity.class);
+                startActivity(intent); // Mở QLUserActivity
             }
         });
 
@@ -88,30 +98,14 @@ public class AdminFragment extends Fragment {
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openUserInfoActivity();
+                Intent intent = new Intent(getActivity(), UserInfoActivity.class);
+                startActivity(intent);
             }
         });
 
         return view;
     }
 
-    private void openDanhMucFragment() {
-        // Logic to open DanhMucFragment
-    }
-
-
-    // Mở QLUserActivity thay vì QLUserFragment
-    private void openQLUserActivity() {
-        // Tạo một Intent để mở QLUserActivity
-        Intent intent = new Intent(getActivity(), QLuserActivity.class);
-        startActivity(intent); // Mở QLUserActivity
-    }
-
-    private void openUserInfoActivity() {
-        // Start UserInfoActivity
-        Intent intent = new Intent(getActivity(), UserInfoActivity.class);
-        startActivity(intent);
-    }
 
     private void showGreeting() {
         SharedPreferences preferences = requireActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);

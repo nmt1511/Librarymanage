@@ -82,10 +82,10 @@ public class EditBookActivity extends AppCompatActivity {
 
         long result = bookRepository.updateBook(bookId, title, author, category, location, publishedYear, description);
         if (result > 0) {
-            Toast.makeText(this, "Book updated successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sách cập nhật thành công", Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            Toast.makeText(this, "Error updating book", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
         }
     }
 

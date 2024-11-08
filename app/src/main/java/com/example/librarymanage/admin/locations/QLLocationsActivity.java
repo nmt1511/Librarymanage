@@ -76,8 +76,8 @@ public class QLLocationsActivity extends AppCompatActivity {
     // Hiển thị hộp thoại tùy chọn (Sửa hoặc Xóa)
     private void showOptionsDialog(final String locationName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose Action");
-        builder.setItems(new String[]{"Edit", "Delete"}, new DialogInterface.OnClickListener() {
+        builder.setTitle("Chọn");
+        builder.setItems(new String[]{"Sửa", "Xóa"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
@@ -100,10 +100,10 @@ public class QLLocationsActivity extends AppCompatActivity {
         // Xóa địa điểm trong cơ sở dữ liệu
         boolean isDeleted = bookRepository.deleteLocation(locationName);
         if (isDeleted) {
-            showMessage("Location deleted successfully");
+            showMessage("xóa thành công");
             loadLocations(); // Tải lại danh sách địa điểm
         } else {
-            showMessage("Failed to delete location");
+            showMessage("xóa thất bại");
         }
     }
 

@@ -43,7 +43,7 @@
         <activity android:name=".admin.author.QLAuthorActivity"/>
         <activity android:name=".admin.author.AddAuthorActivity"/>
         <activity android:name=".admin.author.EditAuthorActivity"/>
-<!--        <activity android:name=".admin.category.QLCategoryActivity"/>-->
+        <activity android:name=".admin.category.QlCategoryActivity"/>
 <!--        <activity android:name=".admin.category.AddCategoryActivity"/>-->
 <!--        <activity android:name=".admin.category.EditCategoryActivity"/>-->
         <activity android:name=".admin.locations.QLLocationsActivity"/>
@@ -52,6 +52,10 @@
         <activity android:name=".admin.borrowrecords.QLBorrowRecordsActivity"/>
         <activity android:name=".admin.borrowrecords.AddBorrowRecordActivity"/>
         <activity android:name=".admin.borrowrecords.EditBorrowRecordActivity"/>
+        <activity android:name=".admin.reviews.QLReviewActivity"/>
+        <activity android:name=".admin.reviews.AddReviewActivity"/>
+        <activity android:name=".admin.reviews.EditReviewActivity"/>
+
 
 
 

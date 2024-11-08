@@ -39,132 +39,176 @@
         </RelativeLayout>
 
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/rounded_background"
             android:padding="16dp"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="24dp"
+            android:stretchColumns="1"
+            android:background="@drawable/rounded_background"> <!-- Background cho TableLayout -->
 
-            <!-- Task Icon and Label -->
-            <LinearLayout
-                android:id="@+id/btn_about"
-                android:layout_width="0dp"
+            <!-- Row 1: Task Icon and Label -->
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/rounded_background"> <!-- Background cho mỗi hàng -->
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_book"
-                    android:contentDescription="Tasks" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/btn_book"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Sách"
-                    android:textColor="#2E3A59"
-                    android:textSize="14sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/btn_user"
-                android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_background"> <!-- Background cho mỗi block -->
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_book"
+                        android:contentDescription="Tasks" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Sách"
+                        android:textColor="#2E3A59"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_user"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_background"> <!-- Background cho mỗi block -->
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="Tasks"
+                        android:src="@drawable/ic_account" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Nguời dùng"
+                        android:textColor="#2E3A59"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_categories"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_background"> <!-- Background cho mỗi block -->
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_category"
+                        android:contentDescription="Leads" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Danh Mục"
+                        android:textSize="14sp"
+                        android:textColor="#2E3A59"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <!-- Row 2: Contacts Icon and Label -->
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/rounded_background"> <!-- Background cho mỗi hàng -->
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="Tasks"
-                    android:src="@drawable/ic_account" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/btn_author"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Nguời dùng"
-                    android:textColor="#2E3A59"
-                    android:textSize="14sp" />
-            </LinearLayout>
-            <!-- Leads Icon and Label -->
-            <LinearLayout
-                android:id="@+id/btn_categories"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_background"> <!-- Background cho mỗi block -->
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_category"
-                    android:contentDescription="Leads" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="Contacts"
+                        android:src="@drawable/ic_pen_tool" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tác giả"
+                        android:textSize="14sp"
+                        android:textColor="#2E3A59"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_review"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Danh Mục"
-                    android:textSize="14sp"
-                    android:textColor="#2E3A59"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_background"> <!-- Background cho mỗi block -->
 
-            <!-- Contacts Icon and Label -->
-            <LinearLayout
-                android:id="@+id/btn_author"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_baseline_email_24"
+                        android:contentDescription="Add" />
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="Contacts"
-                    android:src="@drawable/history" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="đánh giá"
+                        android:textSize="14sp"
+                        android:textColor="#2E3A59"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btn_info"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Tác giả"
-                    android:textSize="14sp"
-                    android:textColor="#2E3A59"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_background"> <!-- Background cho mỗi block -->
 
-            <!-- Add Icon and Label -->
-            <LinearLayout
-                android:id="@+id/btn_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_lock"
+                        android:contentDescription="Add" />
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_lock"
-                    android:contentDescription="Add" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thông Tin"
+                        android:textSize="14sp"
+                        android:textColor="#2E3A59"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thông Tin"
-                    android:textSize="14sp"
-                    android:textColor="#2E3A59"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
+        </TableLayout>
 
-        </LinearLayout>
+
 
         <!-- Recent Tasks Header -->
 

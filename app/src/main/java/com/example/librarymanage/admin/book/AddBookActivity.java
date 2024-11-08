@@ -102,7 +102,7 @@ public class AddBookActivity extends AppCompatActivity {
                 try {
                     publishedYear = Integer.parseInt(yearStr);
                 } catch (NumberFormatException e) {
-                    Toast.makeText(AddBookActivity.this, "Please enter a valid year.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBookActivity.this, "vui lòng nhập năm", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -111,9 +111,9 @@ public class AddBookActivity extends AppCompatActivity {
 
                 // Check if the book was added successfully
                 if (newBookId > 0) {
-                    Toast.makeText(AddBookActivity.this, "Book added successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBookActivity.this, "sách đã được thêm thành công", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(AddBookActivity.this, "Failed to add book. Please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBookActivity.this, "thêm thất bại, hãy thử lại", Toast.LENGTH_SHORT).show();
                 }
 
                 // Clear the input fields after adding the book
