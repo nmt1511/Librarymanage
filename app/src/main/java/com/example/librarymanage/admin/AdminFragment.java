@@ -18,10 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.librarymanage.R;
+import com.example.librarymanage.admin.author.QLAuthorActivity;
 import com.example.librarymanage.admin.book.QLBookActivity;
 import com.example.librarymanage.admin.user.QLuserActivity;
 import com.example.librarymanage.data.DataBook;
 import com.example.librarymanage.user.UserInfoActivity;
+//import com.example.librarymanage.admin.author.UserInfoActivity;
 
 import java.util.Calendar;
 
@@ -32,6 +34,7 @@ public class AdminFragment extends Fragment {
     private LinearLayout btnInfo;
     TextView txtGreeting;
     private LinearLayout btnuser;
+    private LinearLayout btn_author;
     SQLiteDatabase db;
 
     @Nullable
@@ -45,11 +48,18 @@ public class AdminFragment extends Fragment {
         btnInfo = view.findViewById(R.id.btn_info);
         txtGreeting = view.findViewById(R.id.greetingText);
         btnuser = view.findViewById(R.id.btn_user);
-
+        btn_author = view.findViewById(R.id.btn_author);
         // Kiểm tra thời gian và hiển thị thông điệp chào
         showGreeting();
 
         // Set up click listener for btnCategories
+        btn_author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QLAuthorActivity.class);
+                startActivity(intent);
+            }
+        });
         btnCategories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

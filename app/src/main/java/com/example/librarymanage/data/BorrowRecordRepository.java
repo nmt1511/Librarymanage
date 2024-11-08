@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BorrowRecordRepository {
-
+    private SQLiteDatabase db;
     private DataBook dbHelper;
 
     public BorrowRecordRepository(Context context) {
@@ -63,7 +63,62 @@ public class BorrowRecordRepository {
         return borrowRecords;
     }
 
+    public List<String> getAllBorrowRecords() {
+        List<String> borrowRecords = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM BorrowRecords", null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int recordId = cursor.getInt(cursor.getColumnIndexOrThrow("record_id"));
+                String bookTitle = getBookTitle(cursor.getInt(cursor.getColumnIndexOrThrow("book_id")));
+                String userName = getUserName(cursor.getInt(cursor.getColumnIndexOrThrow("user_id")));
+                String borrowDate = cursor.getString(cursor.getColumnIndexOrThrow("borrow_date"));
+                String returnDate = cursor.getString(cursor.getColumnIndexOrThrow("return_date"));
 
+                // Chế tạo chuỗi thông tin bản ghi mượn để hiển thị
+                String recordDetails = "Record ID: " + recordId + "\n" +
+                        "Book: " + bookTitle + "\n" +
+                        "User: " + userName + "\n" +
+                        "Borrowed: " + borrowDate + "\n" +
+                        "Return by: " + returnDate;
+
+                borrowRecords.add(recordDetails);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return borrowRecords;
+    }
+
+    // Phương thức lấy tên sách từ book_id
+    private String getBookTitle(int bookId) {
+        Cursor cursor = db.rawQuery("SELECT title FROM Books WHERE book_id = ?", new String[]{String.valueOf(bookId)});
+        if (cursor != null && cursor.moveToFirst()) {
+            String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+            cursor.close();
+            return title;
+        }
+        return "";
+    }
+
+    // Phương thức lấy tên người dùng từ user_id
+    private String getUserName(int userId) {
+        Cursor cursor = db.rawQuery("SELECT name FROM User WHERE user_id = ?", new String[]{String.valueOf(userId)});
+        if (cursor != null && cursor.moveToFirst()) {
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            cursor.close();
+            return name;
+        }
+        return "";
+    }
+
+    // Phương thức thêm bản ghi mượn mới
+    public long addBorrowRecord(int bookId, int userId, String borrowDate, String returnDate) {
+        ContentValues values = new ContentValues();
+        values.put("book_id", bookId);
+        values.put("user_id", userId);
+        values.put("borrow_date", borrowDate);
+        values.put("return_date", returnDate);
+        return db.insert("BorrowRecords", null, values);
+    }
 
 
     public void close() {

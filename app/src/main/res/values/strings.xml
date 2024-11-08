@@ -27,4 +27,9 @@
         <item>Người dùng</item>
         <item>Quản trị viên</item>
     </string-array>
+    <string-array name="status_options">
+        <item>Đã trả</item>
+        <item>Chưa trả</item>
+        <item>Trễ hạn</item>
+    </string-array>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -36,15 +37,47 @@ public class QLBookActivity extends AppCompatActivity {
         lvBooks = findViewById(R.id.lv_books);
         btnAddBook = findViewById(R.id.btn_add_book);
 
-        // Khởi tạo repository và adapter
+        // Initialize repository and adapter
         bookRepository = new BookRepository(this);
         bookList = new ArrayList<>();
         bookAdapter = new BookAdapter(this, bookList);
 
-        // Thiết lập adapter cho ListView
+        // Set adapter for ListView
         lvBooks.setAdapter(bookAdapter);
 
-        // Sự kiện khi nhấn nút tìm kiếm
+        // Add long-click listener for ListView items
+        lvBooks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Book selectedBook = bookList.get(position);
+
+                // Show dialog with options
+                new android.app.AlertDialog.Builder(QLBookActivity.this)
+                        .setTitle("Chọn thao tác")
+                        .setItems(new CharSequence[]{"Sửa", "Xóa"}, (dialog, which) -> {
+                            if (which == 0) { // Edit option
+                                Intent intent = new Intent(QLBookActivity.this, EditBookActivity.class);
+                                intent.putExtra("bookId", selectedBook.getBookId());
+                                startActivity(intent);
+                            } else if (which == 1) { // Delete option
+                                // Delete book from database
+                                bookRepository.deleteBook(selectedBook.getBookId());
+                                Toast.makeText(QLBookActivity.this, "Đã xóa sách", Toast.LENGTH_SHORT).show();
+
+                                // Close the current activity and reopen it to refresh the list
+                                finish();
+                                startActivity(new Intent(QLBookActivity.this, QLBookActivity.class));
+                            }
+                        })
+                        .show();
+
+                return true; // Return true to indicate long-click handled
+            }
+        });
+
+
+
+        // Add TextWatcher for search functionality
         etSearchBook.addTextChangedListener(new android.text.TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
@@ -58,7 +91,7 @@ public class QLBookActivity extends AppCompatActivity {
             public void afterTextChanged(android.text.Editable editable) {}
         });
 
-        // Sự kiện khi nhấn nút thêm sách
+        // Add click listener for the add book button
         btnAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,10 +100,11 @@ public class QLBookActivity extends AppCompatActivity {
             }
         });
 
+        // Load all books initially
         loadAllBooks();
     }
 
-    // Hàm tải tất cả sách
+    // Load all books from database
     private void loadAllBooks() {
         Cursor cursor = bookRepository.getAllBooks();
         if (cursor != null && cursor.moveToFirst()) {
@@ -91,7 +125,7 @@ public class QLBookActivity extends AppCompatActivity {
         bookAdapter.notifyDataSetChanged();
     }
 
-    // Hàm tìm kiếm sách theo từ khóa
+    // Search books by keyword
     private void searchBooks(String keyword) {
         Cursor cursor = bookRepository.getBooksByKeyword(keyword);
         if (cursor != null && cursor.moveToFirst()) {

@@ -118,6 +118,7 @@
 
             <!-- Contacts Icon and Label -->
             <LinearLayout
+                android:id="@+id/btn_author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -133,7 +134,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lịch Sử"
+                    android:text="Tác giả"
                     android:textSize="14sp"
                     android:textColor="#2E3A59"
                     android:layout_marginTop="8dp" />
