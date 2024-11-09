@@ -3,54 +3,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F4F4F4">
 
+    <!-- Tên người dùng -->
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên người dùng" />
+        android:hint="Tên người dùng"
+        android:padding="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Số điện thoại -->
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Số điện thoại" />
+        android:hint="Số điện thoại"
+        android:padding="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Email -->
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:hint="Email"
+        android:padding="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Mã sinh viên -->
     <EditText
         android:id="@+id/editTextStudentCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mã sinh viên" />
+        android:hint="Mã sinh viên"
+        android:padding="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Tên đăng nhập -->
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên đăng nhập" />
+        android:hint="Tên đăng nhập"
+        android:padding="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Mật khẩu -->
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mật khẩu"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Vai trò -->
     <Spinner
         android:id="@+id/spinnerRole"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Nút thêm người dùng -->
     <Button
         android:id="@+id/btnAddUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm người dùng" />
-
+        android:text="Thêm người dùng"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#1976D2"
+        android:elevation="3dp"/>
 </LinearLayout>

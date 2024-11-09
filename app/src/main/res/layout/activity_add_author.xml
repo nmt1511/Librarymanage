@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F9F9F9">
 
     <!-- TextField nhập tên tác giả -->
     <EditText
@@ -11,7 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Author Name"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
 
     <!-- Nút lưu -->
     <Button
@@ -19,6 +25,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#6FCA73"
+        android:elevation="3dp"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

@@ -2,44 +2,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F9F9F9">
 
+    <!-- EditText nhập tên sách -->
     <EditText
         android:id="@+id/editTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Book Title" />
+        android:hint="Book Title"
+        android:padding="12dp"
+        android:backgroundTint="#DDDDDD"
+        android:textColor="#333333"
+        android:hintTextColor="#999999"
+        android:textSize="16sp" />
 
+    <!-- Spinner chọn tác giả -->
     <Spinner
         android:id="@+id/spinnerAuthor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="#DDDDDD"
+        android:paddingVertical="8dp" />
 
+    <!-- Spinner chọn thể loại -->
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="#DDDDDD"
+        android:paddingVertical="8dp" />
 
+    <!-- Spinner chọn địa điểm -->
     <Spinner
         android:id="@+id/spinnerLocation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="#DDDDDD"
+        android:paddingVertical="8dp" />
 
+    <!-- EditText nhập năm xuất bản -->
     <EditText
         android:id="@+id/editPublishedYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Published Year" />
+        android:hint="Published Year"
+        android:padding="12dp"
+        android:backgroundTint="#DDDDDD"
+        android:textColor="#333333"
+        android:hintTextColor="#999999"
+        android:inputType="number" />
 
+    <!-- EditText nhập mô tả -->
     <EditText
         android:id="@+id/editDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description" />
+        android:hint="Description"
+        android:padding="12dp"
+        android:backgroundTint="#DDDDDD"
+        android:textColor="#333333"
+        android:hintTextColor="#999999"
+        android:inputType="textMultiLine"
+        android:lines="4" />
 
+    <!-- Nút cập nhật -->
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update Book" />
+        android:text="Update Book"
+        android:padding="12dp"
+        android:backgroundTint="#388E3C"
+        android:textColor="#FFFFFF"
+        android:elevation="2dp"
+        android:layout_marginTop="16dp" />
 </LinearLayout>

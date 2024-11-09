@@ -3,39 +3,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F9F9F9">
 
+    <!-- Tiêu đề sách -->
     <TextView
         android:id="@+id/tvBookTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:paddingBottom="8dp"/>
 
+    <!-- Ngày mượn sách -->
     <TextView
         android:id="@+id/tvBorrowDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:textColor="#666666"
+        android:layout_marginTop="8dp"/>
 
+    <!-- EditText Ngày trả sách -->
     <EditText
         android:id="@+id/etReturnDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Chọn ngày trả"
-        android:focusable="false" />
+        android:focusable="false"
+        android:backgroundTint="#DDDDDD"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"/>
 
+    <!-- Nút chọn ngày trả -->
     <Button
         android:id="@+id/btnSelectReturnDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chọn ngày trả" />
+        android:text="Chọn ngày trả"
+        android:backgroundTint="#1976D2"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:elevation="2dp"/>
 
+    <!-- Nút Mượn sách -->
     <Button
         android:id="@+id/btnBorrow"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mượn sách"
-        android:layout_marginTop="16dp" />
+        android:textSize="18sp"
+        android:backgroundTint="#388E3C"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:elevation="2dp"/>
 </LinearLayout>

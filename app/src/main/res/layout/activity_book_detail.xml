@@ -79,29 +79,39 @@
         android:drawablePadding="8dp"
         android:elevation="4dp" />
 
-    <!-- FrameLayout để hiển thị đánh giá -->
-    <FrameLayout
-        android:id="@+id/frameLayoutReviews"
+    <!-- RatingBar để người dùng đánh giá -->
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:progressTint="@android:color/holo_orange_light"
+        android:secondaryProgressTint="@android:color/holo_orange_light"
+        android:backgroundTint="@android:color/darker_gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+
+    <!-- Trường nhập đánh giá -->
+    <EditText
+        android:id="@+id/etUserComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightGrey"
+        android:hint="Nhập đánh giá của bạn"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:background="@drawable/rounded_corners"
+        android:inputType="textMultiLine"
+        android:gravity="top" />
+    <LinearLayout
+        android:id="@+id/layoutReviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="16dp"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-        <!-- Bạn có thể thêm nội dung đánh giá ở đây -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đánh giá:"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_gravity="start" />
-
-        <!-- Các đánh giá sẽ được thêm ở đây -->
-    </FrameLayout>
+        android:background="#EFEFEF">
+    </LinearLayout>
 
     <!-- Nút Viết đánh giá -->
     <Button
@@ -115,4 +125,5 @@
         android:layout_gravity="center"
         android:padding="10dp"
         android:elevation="4dp" />
+
 </LinearLayout>

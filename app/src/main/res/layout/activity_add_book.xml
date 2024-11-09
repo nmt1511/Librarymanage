@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F0F0F0">
 
     <!-- Title -->
     <TextView
@@ -11,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
 
     <EditText
@@ -20,6 +22,9 @@
         android:layout_height="wrap_content"
         android:hint="Enter book title"
         android:inputType="text"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Author Spinner -->
@@ -28,13 +33,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Author"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
 
     <Spinner
         android:id="@+id/spinnerAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="8dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Category Spinner -->
@@ -43,13 +52,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
 
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="8dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Location Spinner -->
@@ -58,13 +71,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
 
     <Spinner
         android:id="@+id/spinnerLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="8dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Published Year -->
@@ -73,7 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Published Year"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
 
     <EditText
@@ -82,6 +100,9 @@
         android:layout_height="wrap_content"
         android:hint="Enter year"
         android:inputType="number"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Description -->
@@ -90,7 +111,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
 
     <EditText
@@ -99,15 +121,19 @@
         android:layout_height="wrap_content"
         android:hint="Enter book description"
         android:inputType="textMultiLine"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Image -->
+    <!-- Image URL -->
     <TextView
         android:id="@+id/tvImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Image (URL)"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
 
     <EditText
@@ -116,6 +142,9 @@
         android:layout_height="wrap_content"
         android:hint="Enter image URL"
         android:inputType="text"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Add Book Button -->
@@ -125,5 +154,8 @@
         android:layout_height="wrap_content"
         android:text="Add Book"
         android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#3F51B5"
+        android:elevation="3dp"
         android:layout_marginTop="16dp"/>
 </LinearLayout>
