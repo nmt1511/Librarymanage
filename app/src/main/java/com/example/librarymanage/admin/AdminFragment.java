@@ -18,10 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.librarymanage.R;
-import com.example.librarymanage.admin.author.QLAuthorActivity;
 import com.example.librarymanage.admin.book.QLBookActivity;
-import com.example.librarymanage.admin.category.QlCategoryActivity;
-import com.example.librarymanage.admin.reviews.QLReviewActivity;
+import com.example.librarymanage.admin.QLRatingActivity;
 import com.example.librarymanage.admin.user.QLuserActivity;
 import com.example.librarymanage.data.DataBook;
 import com.example.librarymanage.user.UserInfoActivity;
@@ -66,7 +64,7 @@ public class AdminFragment extends Fragment {
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QLReviewActivity.class);
+                Intent intent = new Intent(getActivity(), QLRatingActivity.class);
                 startActivity(intent);
             }
         });

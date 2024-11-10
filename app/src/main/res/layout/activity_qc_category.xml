@@ -7,12 +7,13 @@
     android:background="#E8F5E9"> <!-- Màu nền nhẹ -->
 
     <EditText
-        android:id="@+id/editTextAuthorName"
+        android:id="@+id/editTextCategoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter author name"
-        android:padding="10dp"
-        android:background="@drawable/rounded_background" />
+        android:background="@drawable/rounded_background"
+        android:hint="Enter category name"
+        android:minHeight="48dp"
+        android:padding="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,8 +27,8 @@
             android:layout_height="wrap_content"
             android:text="Add"
             android:layout_weight="1"
-            android:background="@drawable/rounded_corners"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_corners"/>
 
         <Button
             android:id="@+id/buttonUpdate"
@@ -51,7 +52,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listViewAuthors"
+        android:id="@+id/listViewCategories"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

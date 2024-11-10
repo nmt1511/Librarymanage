@@ -7,24 +7,26 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.librarymanage.R;
+
 import java.util.List;
 
-public class AuthorAdapter extends ArrayAdapter<String> {
+public class CategoryAdapter extends ArrayAdapter<String> {
     private final Context context;
-    private final List<String> authors;
+    private final List<String> categories;
 
-    public AuthorAdapter(Context context, List<String> authors) {
-        super(context, android.R.layout.simple_list_item_1, authors);
+    public CategoryAdapter(Context context, List<String> categories) {
+        super(context, android.R.layout.simple_list_item_1, categories);
         this.context = context;
-        this.authors = authors;
+        this.categories = categories;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-        TextView textView = (TextView) rowView.findViewById(android.R.id.text1);
-        textView.setText(authors.get(position));
+        View rowView = inflater.inflate(R.layout.category_item, parent, false);
+        TextView textView = (TextView) rowView.findViewById(R.id.textViewCategory);
+        textView.setText(categories.get(position));
         return rowView;
     }
 }
