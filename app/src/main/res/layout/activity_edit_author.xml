@@ -16,7 +16,7 @@
         android:backgroundTint="#DDDDDD"
         android:textSize="16sp"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+       />
 
     <!-- Nút lưu -->
     <Button

@@ -14,7 +14,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999"
+
         android:textSize="16sp" />
 
     <!-- Spinner chọn tác giả -->
@@ -50,7 +50,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999"
+
         android:inputType="number" />
 
     <!-- EditText nhập mô tả -->
@@ -62,7 +62,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999"
+
         android:inputType="textMultiLine"
         android:lines="4" />
 

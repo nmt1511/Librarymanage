@@ -58,7 +58,7 @@ public class BookDetailActivity extends AppCompatActivity {
         displayBookDetails(bookId);
 
         // Cập nhật danh sách đánh giá
-        updateReviewsList(bookId);
+//        updateReviewsList(bookId);
 
 //        // Sự kiện khi nhấn nút "Viết đánh giá"
 //        btnComment.setOnClickListener(new View.OnClickListener() {
@@ -140,30 +140,30 @@ public class BookDetailActivity extends AppCompatActivity {
         }
     }
 
-    // Cập nhật danh sách đánh giá
-    private void updateReviewsList(int bookId) {
-        layoutReviews.removeAllViews();
-
-        Cursor cursor = bookRepository.getReviewsForBook(bookId);
-        if (cursor != null) {
-            try {
-                while (cursor.moveToNext()) {
-                    String comment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
-                    int rating = cursor.getInt(cursor.getColumnIndexOrThrow("rating"));
-
-                    // Tạo TextView để hiển thị đánh giá
-                    TextView reviewTextView = new TextView(this);
-                    reviewTextView.setText("Đánh giá: " + comment + "\nĐiểm: " + rating);
-                    reviewTextView.setTextSize(16);
-                    reviewTextView.setTextColor(getResources().getColor(R.color.text_secondary));
-
-                    layoutReviews.addView(reviewTextView);
-                }
-            } finally {
-                cursor.close();
-            }
-        }
-    }
+//    // Cập nhật danh sách đánh giá
+//    private void updateReviewsList(int bookId) {
+//        layoutReviews.removeAllViews();
+//
+//        Cursor cursor = bookRepository.getReviewsForBook(bookId);
+//        if (cursor != null) {
+//            try {
+//                while (cursor.moveToNext()) {
+//                    String comment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
+//                    int rating = cursor.getInt(cursor.getColumnIndexOrThrow("rating"));
+//
+//                    // Tạo TextView để hiển thị đánh giá
+//                    TextView reviewTextView = new TextView(this);
+//                    reviewTextView.setText("Đánh giá: " + comment + "\nĐiểm: " + rating);
+//                    reviewTextView.setTextSize(16);
+//                    reviewTextView.setTextColor(getResources().getColor(R.color.text_secondary));
+//
+//                    layoutReviews.addView(reviewTextView);
+//                }
+//            } finally {
+//                cursor.close();
+//            }
+//        }
+//    }
 
     @Override
     protected void onDestroy() {

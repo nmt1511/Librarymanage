@@ -16,7 +16,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+         />
 
     <!-- Giới tính -->
     <EditText
@@ -29,7 +29,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+       />
 
     <!-- Số điện thoại -->
     <EditText
@@ -42,7 +42,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+       />
 
     <!-- Email -->
     <EditText
@@ -55,7 +55,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+       />
 
     <!-- Mã sinh viên -->
     <EditText
@@ -68,7 +68,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+       />
 
     <!-- Tên đăng nhập -->
     <EditText
@@ -81,7 +81,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+       />
 
     <!-- Mật khẩu -->
     <EditText
@@ -94,7 +94,7 @@
         android:padding="12dp"
         android:backgroundTint="#DDDDDD"
         android:textColor="#333333"
-        android:hintTextColor="#999999" />
+       />
 
     <!-- Nút Lưu -->
     <Button
