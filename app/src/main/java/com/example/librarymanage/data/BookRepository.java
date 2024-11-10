@@ -343,6 +343,12 @@ public long addCategory(String categoryName) {
             db.insert("Reviews", null, values);
         }
 
+    public Cursor getReviewsForBook(int bookId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT rating, comment, review_date FROM Reviews WHERE book_id = ?",
+                new String[]{String.valueOf(bookId)});
+    }
+
 
     public void close() {
         dataBook.close();

@@ -65,65 +65,57 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Nút Mượn Sách -->
-    <Button
-        android:id="@+id/btnBorrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mượn sách"
-        android:backgroundTint="@color/primary_400"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:drawablePadding="8dp"
-        android:elevation="4dp" />
-
-    <!-- RatingBar để người dùng đánh giá -->
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="1.0"
-        android:progressTint="@android:color/holo_orange_light"
-        android:secondaryProgressTint="@android:color/holo_orange_light"
-        android:backgroundTint="@android:color/darker_gray"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
-
-    <!-- Trường nhập đánh giá -->
-    <EditText
-        android:id="@+id/etUserComment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nhập đánh giá của bạn"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        android:background="@drawable/rounded_corners"
-        android:inputType="textMultiLine"
-        android:gravity="top" />
+    <!-- Layout ngang chứa nút Mượn Sách và Viết đánh giá -->
     <LinearLayout
-        android:id="@+id/layoutReviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#EFEFEF">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <!-- Nút Mượn Sách -->
+        <Button
+            android:id="@+id/btnBorrow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mượn sách"
+            android:backgroundTint="@color/primary_400"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:drawablePadding="8dp"
+            android:elevation="4dp" />
+
+        <!-- Nút Viết đánh giá -->
+        <Button
+            android:id="@+id/btnComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Viết đánh giá"
+            android:backgroundTint="@color/primary_400"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:elevation="4dp"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- Nút Viết đánh giá -->
-    <Button
-        android:id="@+id/btnComment"
-        android:layout_width="wrap_content"
+    <!-- Khu vực hiển thị đánh giá của người dùng -->
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Viết đánh giá"
-        android:backgroundTint="@color/primary_400"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:elevation="4dp" />
+        android:text="Đánh giá của người dùng"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewReviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
 
 </LinearLayout>

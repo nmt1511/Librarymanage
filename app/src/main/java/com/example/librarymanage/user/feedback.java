@@ -1,180 +1,87 @@
 package com.example.librarymanage.user;
 
-import android.content.ContentValues;
+import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.librarymanage.R;
 import com.example.librarymanage.data.DataBook;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-public class feedback extends AppCompatActivity {
+public class feedback extends Activity {
 
-//    private RatingBar ratingBar;
-//    private EditText feedbackText;
-//    private Button submitFeedbackButton;
-//    private RecyclerView feedbackRecyclerView;
-//    private FeedbackAdapter feedbackAdapter;
-//    private ArrayList<FeedbackItem> feedbackList;
-//    private TextView ratingMessage;
-//    private DataBook dbBook;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_feedback);
-//
-//        // Khởi tạo các View
-//        dbBook = new DataBook(this);
-//        ratingBar = findViewById(R.id.ratingBar);
-//        feedbackText = findViewById(R.id.feedbackText);
-//        submitFeedbackButton = findViewById(R.id.submitFeedbackButton);
-//        ratingMessage = findViewById(R.id.ratingMessage);
-//        feedbackRecyclerView = findViewById(R.id.feedbackRecyclerView);
-//
-//        // Khởi tạo danh sách và adapter
-//        feedbackList = new ArrayList<>();
-//        feedbackAdapter = new FeedbackAdapter(feedbackList);
-//        feedbackRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        feedbackRecyclerView.setAdapter(feedbackAdapter);
-//
-//        // Thiết lập sự kiện thay đổi sao
-//        ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-//            String message;
-//            switch ((int) rating) {
-//                case 1:
-//                    message = "Dở, tệ";
-//                    break;
-//                case 2:
-//                    message = "Trung bình";
-//                    break;
-//                case 3:
-//                    message = "Ổn";
-//                    break;
-//                case 4:
-//                    message = "Hay";
-//                    break;
-//                default:
-//                    message = "Xuất sắc";
-//                    break;
-//            }
-//            ratingMessage.setText(message);
-//        });
-//
-//        // Thiết lập sự kiện cho nút gửi đánh giá
-//        submitFeedbackButton.setOnClickListener(v -> submitFeedback());
-//    }
-//
-//    private void submitFeedback() {
-//        String comment = feedbackText.getText().toString().trim();
-//        int rating = (int) ratingBar.getRating();
-//
-//        if (comment.isEmpty()) {
-//            Toast.makeText(this, "Vui lòng nhập góp ý của bạn", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        // Thêm phản hồi mới vào cơ sở dữ liệu
-//        SQLiteDatabase db = dbBook.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put("book_id", 1);  // Thay thế bằng ID sách thực tế
-//        values.put("user_id", 1);  // Thay thế bằng ID người dùng thực tế
-//        values.put("rating", rating);
-//        values.put("comment", comment);
-//        values.put("review_date", System.currentTimeMillis());
-//
-//        long result = db.insert("Reviews", null, values);
-//        db.close();
-//
-//        if (result != -1) {
-//            // Thêm phản hồi mới vào danh sách hiển thị
-//            FeedbackItem newFeedback = new FeedbackItem("Đánh giá", rating, comment);
-//            feedbackList.add(newFeedback);
-//            feedbackAdapter.notifyItemInserted(feedbackList.size() - 1);
-//
-//            // Xóa nội dung đã nhập
-//            feedbackText.setText("");
-//            ratingBar.setRating(0);
-//            ratingMessage.setText("");
-//            Toast.makeText(this, "Cảm ơn bạn đã gửi góp ý!", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "Gửi góp ý thất bại. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    private static class FeedbackItem {
-//        private final String category;
-//        private final float rating;
-//        private final String comment;
-//
-//        public FeedbackItem(String category, float rating, String comment) {
-//            this.category = category;
-//            this.rating = rating;
-//            this.comment = comment;
-//        }
-//
-//        public String getCategory() {
-//            return category;
-//        }
-//
-//        public float getRating() {
-//            return rating;
-//        }
-//
-//        public String getComment() {
-//            return comment;
-//        }
-//    }
-//
-//    private class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder> {
-//        private final ArrayList<FeedbackItem> feedbackList;
-//
-//        public FeedbackAdapter(ArrayList<FeedbackItem> feedbackList) {
-//            this.feedbackList = feedbackList;
-//        }
-//
-//        @NonNull
-//        @Override
-//        public FeedbackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feedback, parent, false);
-//            return new FeedbackViewHolder(view);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull FeedbackViewHolder holder, int position) {
-//            FeedbackItem feedbackItem = feedbackList.get(position);
-//            holder.ratingTextView.setText("Chất lượng: " + feedbackItem.getRating());
-//            holder.commentTextView.setText("Bình luận: " + feedbackItem.getComment());
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return feedbackList.size();
-//        }
-//
-//        class FeedbackViewHolder extends RecyclerView.ViewHolder {
-//            TextView ratingTextView;
-//            TextView commentTextView;
-//
-//            public FeedbackViewHolder(@NonNull View itemView) {
-//                super(itemView);
-//                ratingTextView = itemView.findViewById(R.id.tv_rating);
-//                commentTextView = itemView.findViewById(R.id.tv_comment);
-//            }
-//        }
-//    }
+    private RatingBar ratingBar;
+    private EditText commentEditText;
+    private Button submitButton;
+    private SQLiteDatabase db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_feedback);
+
+        // Kết nối các thành phần giao diện
+        ratingBar = findViewById(R.id.ratingBar);
+        commentEditText = findViewById(R.id.CommentbackText);
+        submitButton = findViewById(R.id.submitReviewbackButton);
+
+        // Mở cơ sở dữ liệu (hoặc khởi tạo nó nếu chưa có)
+        DataBook dbHelper = new DataBook(this);
+        db = dbHelper.getWritableDatabase();
+
+        // Sự kiện khi bấm nút Gửi đánh giá
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitFeedback();
+            }
+        });
+    }
+
+    private void submitFeedback() {
+        // Lấy giá trị từ RatingBar và EditText
+        int rating = (int) ratingBar.getRating();
+        String comment = commentEditText.getText().toString().trim();
+
+        // Kiểm tra điều kiện nhập dữ liệu
+        if (rating == 0) {
+            Toast.makeText(this, "Vui lòng chọn điểm đánh giá!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (comment.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập nhận xét của bạn!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Định dạng ngày hiện tại cho `review_date`
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        // Chèn dữ liệu vào bảng Reviews
+        String insertQuery = "INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        db.execSQL(insertQuery, new Object[]{1, 1, rating, comment, currentDate}); // Thay `1, 1` bằng `book_id` và `user_id` thực tế nếu có
+
+        Toast.makeText(this, "Đánh giá của bạn đã được gửi!", Toast.LENGTH_SHORT).show();
+
+        // Xóa dữ liệu sau khi gửi thành công
+        ratingBar.setRating(0);
+        commentEditText.setText("");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Đóng cơ sở dữ liệu khi không còn sử dụng
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
+    }
 }

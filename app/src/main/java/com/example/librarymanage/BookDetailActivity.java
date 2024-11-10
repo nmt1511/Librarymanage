@@ -13,22 +13,39 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.librarymanage.data.BookRepository;
+import com.example.librarymanage.user.Review;
+import com.example.librarymanage.user.ReviewAdapter;
+import com.example.librarymanage.user.feedback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookDetailActivity extends AppCompatActivity {
 
     private TextView tvTitle, tvAuthor, tvPublishedYear, tvDescription;
     private BookRepository bookRepository;
-    private Button btnComment, btnBorrow;
+    private Button btnFeedback, btnBorrow;
     private EditText etUserComment;
     private LinearLayout layoutReviews;
-    private RatingBar ratingBar;
+    private RecyclerView recyclerViewReviews;
+    private ReviewAdapter reviewAdapter;
+    private List<Review> reviewList = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+        recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
+        reviewAdapter = new ReviewAdapter(reviewList);
+        recyclerViewReviews.setAdapter(reviewAdapter);
+        recyclerViewReviews.setLayoutManager(new LinearLayoutManager(this));
+
 
         // Lấy bookId từ Intent
         Intent intent = getIntent();
@@ -45,11 +62,25 @@ public class BookDetailActivity extends AppCompatActivity {
         tvAuthor = findViewById(R.id.tvAuthor);
         tvPublishedYear = findViewById(R.id.tvPublishedYear);
         tvDescription = findViewById(R.id.tvDescription);
-        btnComment = findViewById(R.id.btnComment);
+        btnFeedback = findViewById(R.id.btnComment);
         btnBorrow = findViewById(R.id.btnBorrow);
-        etUserComment = findViewById(R.id.etUserComment);
-        layoutReviews = findViewById(R.id.layoutReviews);
-        ratingBar = findViewById(R.id.ratingBar);
+
+        btnFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int userId = getSharedPreferences("UserPrefs", MODE_PRIVATE).getInt("user_id", -1);
+                if (userId == -1) {
+                    Toast.makeText(BookDetailActivity.this, "Bạn cần đăng nhập để đánh giá sách!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Chuyển đến FeedbackActivity và truyền bookId và userId
+                Intent feedbackIntent = new Intent(BookDetailActivity.this, feedback.class);
+                feedbackIntent.putExtra("bookId", bookId);
+                feedbackIntent.putExtra("user_id", userId);
+                startActivityForResult(feedbackIntent, 100);
+            }
+        });
 
         // Khởi tạo BookRepository
         bookRepository = new BookRepository(this);
@@ -57,43 +88,7 @@ public class BookDetailActivity extends AppCompatActivity {
         // Hiển thị thông tin chi tiết của sách
         displayBookDetails(bookId);
 
-        // Cập nhật danh sách đánh giá
-//        updateReviewsList(bookId);
 
-//        // Sự kiện khi nhấn nút "Viết đánh giá"
-//        btnComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String userComment = etUserComment.getText().toString().trim();
-//                if (!userComment.isEmpty()) {
-//                    // Lấy userId từ SharedPreferences
-//                    int userId = getSharedPreferences("UserPrefs", MODE_PRIVATE).getInt("user_id", -1);
-//                    if (userId == -1) {
-//                        Toast.makeText(BookDetailActivity.this, "Bạn cần đăng nhập để viết đánh giá!", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//
-//                    // Lấy rating từ RatingBar
-//                    int rating = (int) ratingBar.getRating();
-//
-//                    // Lưu đánh giá vào cơ sở dữ liệu
-//                  //  long reviewId = bookRepository.addReview(bookId, userId, rating, userComment);
-//
-//                    if (reviewId != -1) {
-//                        Toast.makeText(BookDetailActivity.this, "Đã thêm đánh giá!", Toast.LENGTH_SHORT).show();
-//                        etUserComment.setText("");
-//                        ratingBar.setRating(0); // Đặt lại RatingBar
-//
-//                        // Cập nhật danh sách đánh giá
-//                        updateReviewsList(bookId);
-//                    } else {
-//                        Toast.makeText(BookDetailActivity.this, "Lỗi khi thêm đánh giá!", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    Toast.makeText(BookDetailActivity.this, "Vui lòng nhập đánh giá!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
 
         // Sự kiện khi nhấn nút "Mượn sách"
         btnBorrow.setOnClickListener(new View.OnClickListener() {

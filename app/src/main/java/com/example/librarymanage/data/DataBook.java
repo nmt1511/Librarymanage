@@ -83,7 +83,7 @@ public class DataBook extends SQLiteOpenHelper {
                 "paid BOOLEAN, " +                                  // Trạng thái đã trả phạt (đã trả/chưa trả)
                 "FOREIGN KEY (record_id) REFERENCES BorrowRecords(record_id))"); // Khóa ngoại tới bảng BorrowRecords
 
-        // Tạo bảng Reviews để lưu đánh giá sách
+        // Tạo bảng feedback để lưu đánh giá sách
         db.execSQL("CREATE TABLE IF NOT EXISTS Reviews (" +
                 "review_id INTEGER PRIMARY KEY AUTOINCREMENT, " +   // ID duy nhất của đánh giá
                 "book_id INTEGER, " +                               // ID sách được đánh giá
