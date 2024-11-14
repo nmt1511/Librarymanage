@@ -21,6 +21,7 @@ import com.example.librarymanage.R;
 import com.example.librarymanage.admin.book.QLBookActivity;
 import com.example.librarymanage.admin.QLRatingActivity;
 import com.example.librarymanage.admin.borrowrecords.QLBorrowRecordsActivity;
+import com.example.librarymanage.admin.locations.QLLocationsActivity;
 import com.example.librarymanage.admin.user.QLuserActivity;
 import com.example.librarymanage.data.DataBook;
 import com.example.librarymanage.user.UserInfoActivity;
@@ -65,7 +66,7 @@ public class AdminFragment extends Fragment {
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QLRatingActivity.class);
+                Intent intent = new Intent(getActivity(), QLLocationsActivity.class);
                 startActivity(intent);
             }
         });

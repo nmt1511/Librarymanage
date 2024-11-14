@@ -8,51 +8,59 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.librarymanage.R;
+
 import com.example.librarymanage.entities.Review;
+import com.example.librarymanage.R;
 
 import java.util.List;
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
-    private final Context context;
-    private final List<Review> reviews;
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder> {
 
-    public ReviewAdapter(Context context, List<Review> reviews) {
+    private List<Review> reviewList;
+    private Context context;
+
+    public ReviewAdapter(Context context, List<Review> reviewList) {
         this.context = context;
-        this.reviews = reviews;
+        this.reviewList = reviewList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rating_item, parent, false);
-        return new ViewHolder(view);
+    public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_feedback, parent, false);
+        return new ReviewViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Review review = reviews.get(position);
-        holder.textViewUsername.setText(review.getUsername());
-        holder.textViewBookTitle.setText(review.getBookTitle());
-        holder.textViewComment.setText(review.getComment());
+    public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
+        Review review = reviewList.get(position);
+        holder.tvName.setText(review.getName());
         holder.ratingBar.setRating(review.getRating());
+        holder.tvFeedbackText.setText(review.getComment());
+        // Giả sử bạn có một phương thức để format ngày
+        holder.tvFeedbackDate.setText(formatDate(review.getReviewDate())); // Cần thêm thuộc tính reviewDate vào Review
     }
 
     @Override
     public int getItemCount() {
-        return reviews != null ? reviews.size() : 0;
+        return reviewList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewUsername, textViewBookTitle, textViewComment;
+    public static class ReviewViewHolder extends RecyclerView.ViewHolder {
+        TextView tvName, tvFeedbackText, tvFeedbackDate;
         RatingBar ratingBar;
 
-        public ViewHolder(View itemView) {
+        public ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewUsername = itemView.findViewById(R.id.textViewUsername);
-            textViewBookTitle = itemView.findViewById(R.id.textViewBookTitle);
-            textViewComment = itemView.findViewById(R.id.textViewComment);
-            ratingBar = itemView.findViewById(R.id.textViewRating);
+            tvName = itemView.findViewById(R.id.Name_user);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
+            tvFeedbackText = itemView.findViewById(R.id.feedbackText);
+            tvFeedbackDate = itemView.findViewById(R.id.feedbackDate);
         }
+    }
+
+    private String formatDate(String date) {
+        // Implement logic to format the date as per your requirements
+        return date;
     }
 }

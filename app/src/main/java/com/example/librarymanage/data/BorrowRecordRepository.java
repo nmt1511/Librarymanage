@@ -47,7 +47,8 @@ public class BorrowRecordRepository {
                 "SELECT b.title, br.user_id, br.book_id, br.borrow_date, br.return_date, br.status, b.title " +
                         "FROM BorrowRecords br " +
                         "JOIN Books b ON br.book_id = b.book_id " +
-                        "WHERE br.user_id = ?",
+                        "WHERE br.user_id = ?"+
+                        "ORDER BY br.borrow_date DESC",
                 new String[]{String.valueOf(userId)}
         );
 

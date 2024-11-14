@@ -9,7 +9,7 @@
         android:id="@+id/tv_author_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Author Name"
+        android:text="Tên Tác Giả"
         android:textSize="18sp"
         android:textColor="#000000" />
 </LinearLayout>

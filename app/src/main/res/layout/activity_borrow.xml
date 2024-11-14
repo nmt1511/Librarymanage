@@ -30,7 +30,7 @@
         android:id="@+id/etReturnDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Chọn ngày trả"
+        android:hint=" "
         android:focusable="false"
         android:backgroundTint="#DDDDDD"
         android:padding="12dp"

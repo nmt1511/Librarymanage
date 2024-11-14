@@ -48,7 +48,7 @@
         <activity android:name=".admin.borrowrecords.QLBorrowRecordsActivity"/>
         <activity android:name=".admin.borrowrecords.EditBorrowRecordsActivity"/>
         <activity android:name=".admin.QLRatingActivity"/>
-
+        <activity android:name=".FeedbackActivity"/>
 
 
 

@@ -230,30 +230,6 @@ public long addCategory(String categoryName) {
         int rowsAffected = db.delete("Reviews", "rating = ?", new String[]{String.valueOf(ratingValue)});
         return rowsAffected > 0;
     }
-    public List<Review> getAllReviews() {
-        List<Review> reviews = new ArrayList<>();
-        // Câu truy vấn với JOIN để lấy tên người dùng
-        String query = "SELECT r.review_id, r.book_id, r.user_id, r.rating, r.comment, r.review_date, u.name " +
-                "FROM Reviews r " +
-                "JOIN User u ON r.user_id = u.user_id";
-
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                int reviewId = cursor.getInt(cursor.getColumnIndexOrThrow("review_id"));
-                int bookId = cursor.getInt(cursor.getColumnIndexOrThrow("book_id"));
-                int userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
-                String username = cursor.getString(cursor.getColumnIndexOrThrow("name")); // Lấy tên người dùng
-                int rating = cursor.getInt(cursor.getColumnIndexOrThrow("rating"));
-                String comment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
-                String reviewDate = cursor.getString(cursor.getColumnIndexOrThrow("review_date"));
-
-                reviews.add(new Review(bookId, userId, username, "", comment, rating)); // Thêm username vào Review
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return reviews;
-    }
 
     // Các phương thức trợ giúp khác
     private int getAuthorIdByName(String authorName) {
@@ -286,68 +262,68 @@ public long addCategory(String categoryName) {
         return -1;
     }
 
+    
+    //feedback
+    public String getUserNameById(int userId) {
+        String userName = null;
+        Cursor cursor = db.rawQuery("SELECT name FROM User WHERE user_id = ?", new String[]{String.valueOf(userId)});
 
-        // Phương thức để lấy danh sách đánh giá theo ID sách
-        public List<Review> getReviewsByBookId(int bookId) {
-            List<Review> reviews = new ArrayList<>();
-            Cursor cursor = null;
-
+        if (cursor != null) {
             try {
-                cursor = db.rawQuery("SELECT * FROM Reviews WHERE book_id = ?", new String[]{String.valueOf(bookId)});
                 if (cursor.moveToFirst()) {
-                    do {
-                        int userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
-                        String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
-                        String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow("book_title"));
-                        String comment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
-                        float rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
-
-                        reviews.add(new Review(bookId, userId, username, bookTitle, comment, rating));
-                    } while (cursor.moveToNext());
+                    userName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 }
             } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
+                cursor.close();
             }
-            return reviews;
         }
-
-        // Phương thức để kiểm tra xem người dùng đã mượn sách chưa
-        public boolean hasUserBorrowedBook(int userId, int bookId) {
-            Cursor cursor = null;
-            boolean hasBorrowed = false;
-
-            try {
-                cursor = db.rawQuery("SELECT * FROM BorrowRecords WHERE user_id = ? AND book_id = ? AND status = 'Đang mượn'",
-                        new String[]{String.valueOf(userId), String.valueOf(bookId)});
-                hasBorrowed = cursor.getCount() > 0; // Nếu có bản ghi thì người dùng đã mượn sách
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-            return hasBorrowed;
-        }
-
-        // Đừng quên thêm phương thức để thêm đánh giá nếu chưa có
-        public void addReview(Review review) {
-            ContentValues values = new ContentValues();
-            values.put("book_id", review.getBookId());
-            values.put("user_id", review.getUserId());
-            values.put("username", review.getUsername());
-            values.put("book_title", review.getBookTitle());
-            values.put("comment", review.getComment());
-            values.put("rating", review.getRating());
-
-            db.insert("Reviews", null, values);
-        }
-
-    public Cursor getReviewsForBook(int bookId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT rating, comment, review_date FROM Reviews WHERE book_id = ?",
-                new String[]{String.valueOf(bookId)});
+        return userName;
     }
+    public List<Review> getReviewsForBook(int bookId) {
+        List<Review> reviews = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM Reviews WHERE book_id = ?", new String[]{String.valueOf(bookId)});
+        if (cursor != null) {
+            try {
+                while (cursor.moveToNext()) {
+                    int userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
+                    String name = getUserNameById(userId); // Phương thức để lấy tên người dùng
+                    String comment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
+                    int rating = cursor.getInt(cursor.getColumnIndexOrThrow("rating"));
+                    String reviewDate = cursor.getString(cursor.getColumnIndexOrThrow("review_date")); // Giả sử bạn đã lưu ngày đánh giá
+
+                    reviews.add(new Review(bookId, userId, name, "", comment, rating, reviewDate));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        return reviews;
+    }
+    
+    public void addReview(Review review) {
+        ContentValues values = new ContentValues();
+        values.put("book_id", review.getBookId());
+        values.put("user_id", review.getUserId());
+        values.put("comment", review.getComment());
+        values.put("rating", review.getRating());
+        values.put("review_date", review.getReviewDate());
+
+        db.insert("Reviews", null, values);
+    }
+    public boolean hasBorrowedBook(int userId, int bookId) {
+        Cursor cursor = db.rawQuery("SELECT * FROM BorrowRecords WHERE user_id = ? AND book_id = ?", new String[]{String.valueOf(userId), String.valueOf(bookId)});
+        boolean hasBorrowed = cursor.getCount() > 0;
+        cursor.close();
+        return hasBorrowed;
+    }
+    public boolean hasReviewedBook(int userId, int bookId) {
+        Cursor cursor = db.rawQuery("SELECT * FROM Reviews WHERE user_id = ? AND book_id = ?", new String[]{String.valueOf(userId), String.valueOf(bookId)});
+        boolean hasReviewed = cursor.getCount() > 0;
+        cursor.close();
+        return hasReviewed;
+    }
+
+
 
 
     public void close() {
