@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.example.librarymanage.R;
 import com.example.librarymanage.admin.book.QLBookActivity;
 import com.example.librarymanage.admin.QLRatingActivity;
+import com.example.librarymanage.admin.borrowrecords.QLBorrowRecordsActivity;
 import com.example.librarymanage.admin.user.QLuserActivity;
 import com.example.librarymanage.data.DataBook;
 import com.example.librarymanage.user.UserInfoActivity;
@@ -96,7 +97,7 @@ public class AdminFragment extends Fragment {
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), UserInfoActivity.class);
+                Intent intent = new Intent(getActivity(), QLBorrowRecordsActivity.class);
                 startActivity(intent);
             }
         });

@@ -111,51 +111,51 @@
                     android:textSize="14sp" />
             </LinearLayout>
             <!-- Leads Icon and Label -->
-            <LinearLayout
-                android:id="@+id/btn_categories"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/btn_categories"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical"-->
+<!--                android:gravity="center">-->
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_category"
-                    android:contentDescription="Leads" />
+<!--                <ImageView-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:src="@drawable/ic_category"-->
+<!--                    android:contentDescription="Leads" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Danh Mục"
-                    android:textSize="14sp"
-                    android:textColor="#2E3A59"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Danh Mục"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textColor="#2E3A59"-->
+<!--                    android:layout_marginTop="8dp" />-->
+<!--            </LinearLayout>-->
 
             <!-- Contacts Icon and Label -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical"-->
+<!--                android:gravity="center">-->
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="Contacts"
-                    android:src="@drawable/history" />
+<!--                <ImageView-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:contentDescription="Contacts"-->
+<!--                    android:src="@drawable/history" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lịch Sử"
-                    android:textSize="14sp"
-                    android:textColor="#2E3A59"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Lịch Sử"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textColor="#2E3A59"-->
+<!--                    android:layout_marginTop="8dp" />-->
+<!--            </LinearLayout>-->
 
             <!-- Add Icon and Label -->
             <LinearLayout

@@ -1,15 +1,6 @@
 <resources>
     <string name="app_name">Librarymanage</string>
-    <string name="BtnStart">Bắt Đầu!!</string>
-    <string name="title_intro">Bằng cách nhấn nút <font color="#39c7a5">Bắt Đầu!!</font> , bạn sẽ bắt đầu trải nghiệm ứng dụng của chúng tôi!!</string>
-    <string name="signing">Bạn đã có tài khoản? <font color="#39c7a5">Đăng nhập</font></string>
-    <string name="signout">Bạn chưa có tài khoản? <font color="#39c7a5">Đăng kí ngay!!</font></string>
-    <string name="profile">Cá nhân</string>
-    <string name="my_order">Đơn hàng của tôi</string>
-    <string name="wish_list">Yêu thích</string>
-    <string name="cart">Mua sắm</string>
-    <string name="Explorer">Khám Phá</string>
-    <!-- TODO: Remove or change this placeholder text -->
+<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open_nav">open_nav</string>
     <string name="close_nav">close_nav</string>
@@ -31,5 +22,10 @@
         <item>Đã trả</item>
         <item>Chưa trả</item>
         <item>Trễ hạn</item>
+    </string-array>
+    <string-array name="status_array">
+        <item>Đã Trả</item>
+        <item>Đang Mượn</item>
+        <item>Quá Hạn</item>
     </string-array>
 </resources>

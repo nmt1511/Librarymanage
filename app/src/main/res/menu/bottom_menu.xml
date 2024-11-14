@@ -16,8 +16,9 @@
         android:title="Lịch Sử"
         android:icon="@drawable/ic_pen_tool"/>
 
-    <item
-        android:id="@+id/account"
-        android:title="Cá Nhân"
-        android:icon="@drawable/ic_person"/>
+<!--    <item-->
+<!--        android:id="@+id/account"-->
+<!--        android:title="Cá Nhân"-->
+<!--        android:icon="@drawable/ic_person"/>-->
+
 </menu>

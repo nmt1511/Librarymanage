@@ -40,14 +40,13 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Initialize the buttons
-        btnCategories = view.findViewById(R.id.btn_categories);
+//        btnCategories = view.findViewById(R.id.btn_categories);
         btnAbout = view.findViewById(R.id.btn_about);
         btnInfo = view.findViewById(R.id.btn_info);
         txtGreeting = view.findViewById(R.id.greetingText);
         btnsearch = view.findViewById(R.id.btn_search);
         // Kiểm tra thời gian và hiển thị thông điệp chào
         showGreeting();
-
 
 
 
@@ -59,13 +58,13 @@ public class HomeFragment extends Fragment {
             transaction.commit();
         }
 
-        // Set up click listener for btnCategories
-        btnCategories.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDanhMucFragment();
-            }
-        });
+//        // Set up click listener for btnCategories
+//        btnCategories.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openDanhMucFragment();
+//            }
+//        });
 
         // Set up click listener for btnAbout
         btnAbout.setOnClickListener(new View.OnClickListener() {

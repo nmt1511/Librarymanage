@@ -46,8 +46,7 @@
         <activity android:name=".admin.locations.AddLocationActivity"/>
         <activity android:name=".admin.locations.EditLocationActivity"/>
         <activity android:name=".admin.borrowrecords.QLBorrowRecordsActivity"/>
-        <activity android:name=".admin.borrowrecords.AddBorrowRecordActivity"/>
-        <activity android:name=".admin.borrowrecords.EditBorrowRecordActivity"/>
+        <activity android:name=".admin.borrowrecords.EditBorrowRecordsActivity"/>
         <activity android:name=".admin.QLRatingActivity"/>
 
 

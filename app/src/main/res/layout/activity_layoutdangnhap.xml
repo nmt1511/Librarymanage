@@ -45,7 +45,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="32dp"
-        android:hint="Username"
+        android:hint="Tài Khoản"
         android:inputType="text"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
         android:id="@+id/edt_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="Mật Khẩu"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
         app:layout_constraintTop_toBottomOf="@id/edt_username"
@@ -68,15 +68,15 @@
         android:layout_marginTop="8dp"/>
 
     <!-- Remember Me Checkbox -->
-    <CheckBox
-        android:id="@+id/cbRememberMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Remember me?"
-        app:layout_constraintTop_toBottomOf="@id/edt_password"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"/>
+<!--    <CheckBox-->
+<!--        android:id="@+id/cbRememberMe"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Remember me?"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/edt_password"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="8dp"/>-->
 
     <!-- Login Button -->
     <Button
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Login"
+        android:text="Đăng Nhập"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtsignup"
@@ -98,7 +98,7 @@
         android:text="@string/signout"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/cbRememberMe"
+        app:layout_constraintTop_toBottomOf="@id/edt_password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>

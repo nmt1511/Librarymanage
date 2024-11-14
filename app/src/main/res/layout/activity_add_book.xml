@@ -11,7 +11,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Tiêu Đề"
         android:textSize="18sp"
         android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
@@ -32,7 +32,7 @@
         android:id="@+id/tvAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Author"
+        android:text="Tác Giả"
         android:textSize="18sp"
         android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
@@ -51,7 +51,7 @@
         android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Category"
+        android:text="Danh Mục"
         android:textSize="18sp"
         android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
@@ -70,7 +70,7 @@
         android:id="@+id/tvLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location"
+        android:text="Vị Trí"
         android:textSize="18sp"
         android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
@@ -89,7 +89,7 @@
         android:id="@+id/tvYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Published Year"
+        android:text="Năm Phát Hành"
         android:textSize="18sp"
         android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
@@ -110,7 +110,7 @@
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="Mô Tả"
         android:textSize="18sp"
         android:textColor="#333333"
         android:layout_marginBottom="8dp"/>
@@ -127,25 +127,26 @@
         android:layout_marginBottom="16dp"/>
 
     <!-- Image URL -->
-    <TextView
-        android:id="@+id/tvImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Image (URL)"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tvImage"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Image (URL)"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textColor="#333333"-->
+<!--        android:layout_marginBottom="8dp"/>-->
 
     <EditText
         android:id="@+id/edtImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter image URL"
-        android:inputType="text"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="wrap_content"/>
+<!--        android:hint="Enter image URL"-->
+<!--        android:inputType="text"-->
+<!--        android:backgroundTint="#FFFFFF"-->
+<!--        android:elevation="2dp"-->
+<!--        android:padding="12dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+
 
     <!-- Add Book Button -->
     <Button

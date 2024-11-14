@@ -6,48 +6,70 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.librarymanage.R;
 import com.example.librarymanage.entities.BorrowRecord;
+
 import java.util.List;
 
-public class BorrowRecordAdapter extends RecyclerView.Adapter<BorrowRecordAdapter.BorrowRecordViewHolder> {
+public class BorrowRecordAdapter extends RecyclerView.Adapter<BorrowRecordAdapter.ViewHolder> {
 
-    private List<BorrowRecord> borrowRecordList;
+    private List<BorrowRecord> borrowRecords;
+    private OnItemLongClickListener longClickListener;
 
-    public BorrowRecordAdapter(List<BorrowRecord> borrowRecordList) {
-        this.borrowRecordList = borrowRecordList;
+    public BorrowRecordAdapter(List<BorrowRecord> borrowRecords) {
+        this.borrowRecords = borrowRecords;
     }
 
     @NonNull
     @Override
-    public BorrowRecordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_borrow_record, parent, false);
-        return new BorrowRecordViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BorrowRecordViewHolder holder, int position) {
-        BorrowRecord record = borrowRecordList.get(position);
-        holder.tvBookTitle.setText(record.getTitle()); // Cập nhật để sử dụng getTitle() thay vì getBookTitle()
-        holder.tvBorrowDate.setText(record.getBorrowDate());
-        holder.tvReturnDate.setText(record.getReturnDate());
-        holder.tvStatus.setText(record.getStatus());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        BorrowRecord record = borrowRecords.get(position);
+        holder.bookTitleTextView.setText(record.getTitle());
+        holder.borrowDateTextView.setText(record.getBorrowDate());
+        holder.returnDateTextView.setText(record.getReturnDate());
+        holder.statusTextView.setText(record.getStatus());
+
+        // Thiết lập sự kiện nhấn giữ
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onItemLongClick(record);
+            }
+            return true; // Trả về true để cho biết sự kiện đã được xử lý
+        });
     }
 
     @Override
     public int getItemCount() {
-        return borrowRecordList.size();
+        return borrowRecords.size();
     }
 
-    public static class BorrowRecordViewHolder extends RecyclerView.ViewHolder {
-        TextView tvBookTitle, tvBorrowDate, tvReturnDate, tvStatus;
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.longClickListener = listener;
+    }
 
-        public BorrowRecordViewHolder(@NonNull View itemView) {
+    public interface OnItemLongClickListener {
+        void onItemLongClick(BorrowRecord record);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView bookTitleTextView;
+        TextView borrowDateTextView;
+        TextView returnDateTextView;
+        TextView statusTextView;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            tvBookTitle = itemView.findViewById(R.id.tvBookTitle);
-            tvBorrowDate = itemView.findViewById(R.id.tvBorrowDate);
-            tvReturnDate = itemView.findViewById(R.id.tvReturnDate);
-            tvStatus = itemView.findViewById(R.id.tvStatus);
+            bookTitleTextView = itemView.findViewById(R.id.tvBookTitle);
+            borrowDateTextView = itemView.findViewById(R.id.tvBorrowDate);
+            returnDateTextView = itemView.findViewById(R.id.tvReturnDate);
+            statusTextView = itemView.findViewById(R.id.tvStatus);
         }
     }
 }

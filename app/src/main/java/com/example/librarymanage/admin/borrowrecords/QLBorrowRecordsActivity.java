@@ -1,90 +1,95 @@
 package com.example.librarymanage.admin.borrowrecords;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.librarymanage.R;
+import com.example.librarymanage.adapter.BorrowRecordAdapter2;
 import com.example.librarymanage.data.BorrowRecordRepository;
+import com.example.librarymanage.entities.BorrowRecord2;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class QLBorrowRecordsActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+    private BorrowRecordAdapter2 adapter;
     private BorrowRecordRepository borrowRecordRepository;
-    private ListView listViewBorrowRecords;
-    private Button buttonAddBorrowRecord;
-    private ArrayAdapter<String> borrowRecordAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ql_borrow_records);
 
-        // Khởi tạo BorrowRecordRepository để tương tác với cơ sở dữ liệu
+        recyclerView = findViewById(R.id.recyclerView);
         borrowRecordRepository = new BorrowRecordRepository(this);
 
-        // Kết nối với giao diện người dùng
-        listViewBorrowRecords = findViewById(R.id.listViewBorrowRecords);
-        buttonAddBorrowRecord = findViewById(R.id.buttonAddBorrowRecord);
-
-        // Hiển thị danh sách các bản ghi mượn
         loadBorrowRecords();
-
-        // Sự kiện click vào một bản ghi mượn để chỉnh sửa hoặc xóa
-        listViewBorrowRecords.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parentView, View view, int position, long id) {
-                String borrowRecordDetails = (String) parentView.getItemAtPosition(position);
-
-                // Chuyển đến activity để xem chi tiết hoặc chỉnh sửa bản ghi mượn
-                Intent intent = new Intent(QLBorrowRecordsActivity.this, EditBorrowRecordActivity.class);
-                intent.putExtra("borrowRecordDetails", borrowRecordDetails);
-                startActivity(intent);
-            }
-        });
-
-        // Sự kiện click vào nút Thêm bản ghi mượn
-        buttonAddBorrowRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Chuyển đến activity thêm bản ghi mượn
-                Intent intent = new Intent(QLBorrowRecordsActivity.this, AddBorrowRecordActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
-    // Phương thức để tải danh sách các bản ghi mượn
     private void loadBorrowRecords() {
-        List<String> borrowRecords = borrowRecordRepository.getAllBorrowRecords();
-        borrowRecordAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, borrowRecords);
-        listViewBorrowRecords.setAdapter(borrowRecordAdapter);
+        List<BorrowRecord2> borrowRecordList = borrowRecordRepository.getAllBorrowRecordsWithDetails();
+        Collections.sort(borrowRecordList, new Comparator<BorrowRecord2>() {
+            @Override
+            public int compare(BorrowRecord2 o1, BorrowRecord2 o2) {
+                return o2.getBorrowDate().compareTo(o1.getBorrowDate()); // Sắp xếp theo ngày mới nhất
+            }
+        });
+
+        // Chuyển đổi List thành ArrayList trước khi truyền vào adapter
+        adapter = new BorrowRecordAdapter2(this, new ArrayList<>(borrowRecordList));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        // Kiểm tra xem adapter có phương thức setOnItemLongClickListener không
+        adapter.setOnItemLongClickListener(new BorrowRecordAdapter2.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(BorrowRecord2 record) {
+                showOptionsDialog(record);
+            }
+        });
     }
 
-    // Hàm hiển thị thông báo
-    private void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    private void showOptionsDialog(BorrowRecord2 record) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Chọn hành động")
+                .setItems(new CharSequence[]{"Sửa", "Xóa"}, (dialog, which) -> {
+                    if (which == 0) {
+                        // Sửa bản ghi
+                        Intent intent = new Intent(QLBorrowRecordsActivity.this, EditBorrowRecordsActivity.class);
+                        intent.putExtra("recordId", record.getRecordId());
+                        startActivity(intent);
+                    } else if (which == 1) {
+                        // Xóa bản ghi
+                        showDeleteConfirmation(record);
+                    }
+                })
+                .show();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Tải lại danh sách bản ghi mượn khi quay lại Activity
-        loadBorrowRecords();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Đóng kết nối cơ sở dữ liệu khi Activity bị hủy
-        borrowRecordRepository.close();
+    private void showDeleteConfirmation(BorrowRecord2 record) {
+        new AlertDialog.Builder(this)
+                .setTitle("Xóa bản ghi")
+                .setMessage("Bạn có chắc chắn muốn xóa bản ghi này?")
+                .setPositiveButton("Có", (dialog, which) -> {
+                    if (borrowRecordRepository.deleteBorrowRecord(record.getRecordId())) {
+                        Toast.makeText(this, "Đã xóa bản ghi", Toast.LENGTH_SHORT).show();
+                        loadBorrowRecords(); // Tải lại danh sách
+                    } else {
+                        Toast.makeText(this, "Xóa không thành công", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Không", null)
+                .show();
     }
 }
