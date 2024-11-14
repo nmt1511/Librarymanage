@@ -1,12 +1,12 @@
 package com.example.librarymanage;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,6 +43,19 @@ public class NewBookFragment extends Fragment {
         bookAdapter = new BookAdapter(getContext(), bookList);
         listViewNewBooks.setAdapter(bookAdapter);
 
+        // Thiết lập sự kiện click cho từng mục trong ListView
+        listViewNewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Book selectedBook = bookList.get(position);
+
+                // Mở chi tiết sách
+                Intent intent = new Intent(getActivity(), BookDetailActivity.class);
+                intent.putExtra("bookId", selectedBook.getBookId()); // Gửi bookId sang BookDetailActivity
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -74,7 +87,4 @@ public class NewBookFragment extends Fragment {
             Toast.makeText(getContext(), "Không có sách nào được thêm trong tháng này", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
 }

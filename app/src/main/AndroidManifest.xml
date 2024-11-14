@@ -23,14 +23,12 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".user.dangki"/>
-        <activity android:name=".user.feedback"/>
         <activity android:name=".menubottom.DanhMucFragment"/>
         <activity android:name=".BookActivity"/>
         <activity android:name=".user.UserInfoActivity"/>
-
         <activity android:name=".BookDetailActivity"/>
         <activity android:name=".BorrowActivity"/>
-        <activity android:name=".LichSuFragment"/>
+        <activity android:name=".menubottom.LichSuFragment"/>
         <activity android:name=".HomeFragment"/>
         <activity android:name=".SearchActivity"/>
         <activity android:name=".admin.AdminFragment"/>
@@ -49,6 +47,7 @@
         <activity android:name=".admin.borrowrecords.EditBorrowRecordsActivity"/>
         <activity android:name=".admin.QLRatingActivity"/>
         <activity android:name=".FeedbackActivity"/>
+        <activity android:name=".user.SuaThongTin"/>
 
 
 

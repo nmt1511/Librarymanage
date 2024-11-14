@@ -1,77 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    >
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#E0E0E0">
 
-    <TextView
-        android:id="@+id/textViewUserName"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Name"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#333"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewBookTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tiêu đề"
-        android:textSize="16sp"
-        android:textColor="#555"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
+        <ImageView
+            android:id="@+id/imageViewUserIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_user_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/textViewBorrowDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ngày mượn: "
-        android:textSize="14sp"
-        android:textColor="#777"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBookTitle" />
+        <TextView
+            android:id="@+id/textViewUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nguyễn Văn A"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp"
+            android:textColor="#212121"
+            app:layout_constraintStart_toEndOf="@id/imageViewUserIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
-        android:id="@+id/textViewReturnDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ngày trả: "
-        android:textSize="14sp"
-        android:textColor="#777"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBorrowDate" />
+        <ImageView
+            android:id="@+id/imageViewBookIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_book"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewUserIcon"/>
 
-    <TextView
-        android:id="@+id/textViewActualReturnDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#777"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReturnDate" />
+        <TextView
+            android:id="@+id/textViewBookTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Lập Trình Android Căn Bản"
+            android:textSize="16sp"
+            android:layout_marginStart="12dp"
+            android:textColor="#424242"
+            app:layout_constraintStart_toEndOf="@id/imageViewBookIcon"
+            app:layout_constraintTop_toTopOf="@id/imageViewBookIcon"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
-        android:id="@+id/textViewStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tình trạng: "
-        android:textSize="14sp"
-        android:textColor="#FF5722"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReturnDate" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewBookTitle"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/layoutDates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <TextView
+                android:id="@+id/textViewBorrowDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ngày mượn: 15/10/2024"
+                android:drawableStart="@drawable/calendar"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:textColor="#616161"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/textViewReturnDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ngày trả dự kiến: 30/10/2024"
+                android:drawableStart="@drawable/calendar"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:textColor="#616161"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textViewActualReturnDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/textViewStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đang Mượn"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/layoutDates"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -84,6 +84,66 @@ public class BorrowRecordRepository {
 
 
 
+    // Phương thức lấy bản ghi mượn sách theo ID
+    public BorrowRecord2 getBorrowRecordById(int recordId) {
+        db = dbHelper.getReadableDatabase();
+        BorrowRecord2 record = null;
+
+        String query = "SELECT " +
+                "br.record_id, " +
+                "u.name AS user_name, " +
+                "b.title AS book_title, " +
+                "br.borrow_date, " +
+                "br.return_date, " +
+                "br.actual_return_date, " +
+                "br.status " +
+                "FROM BorrowRecords br " +
+                "JOIN User u ON br.user_id = u.user_id " +
+                "JOIN Books b ON br.book_id = b.book_id " +
+                "WHERE br.record_id = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(recordId)});
+
+        if (cursor.moveToFirst()) {
+            record = new BorrowRecord2(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("record_id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("user_name")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("book_title")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("borrow_date")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("return_date")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("actual_return_date")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("status"))
+            );
+        }
+
+        cursor.close();
+        db.close();
+        return record;
+    }
+
+    // Thêm phương thức cập nhật mới
+    public boolean updateBorrowRecord(int recordId,
+                                      String borrowDate,
+                                      String returnDate,
+                                      String status) {
+        db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("borrow_date", borrowDate);
+        values.put("return_date", returnDate);
+        values.put("status", status);
+
+        int rowsAffected = db.update(
+                "BorrowRecords",
+                values,
+                "record_id = ?",
+                new String[]{String.valueOf(recordId)}
+        );
+
+        db.close();
+        return rowsAffected > 0;
+    }
+
 
 
 
@@ -117,64 +177,8 @@ public class BorrowRecordRepository {
         db.close();
         return borrowRecordList;
     }
-    public BorrowRecord2 getBorrowRecordById2(int recordId) {
-        String query = "SELECT br.record_id, br.borrow_date, br.return_date, br.actual_return_date, br.status, " +
-                "u.name AS user_name, b.title AS book_title " +  // b.title is the correct reference to the Books table
-                "FROM BorrowRecords AS br " +
-                "JOIN User AS u ON br.user_id = u.user_id " +
-                "JOIN Books AS b ON br.book_id = b.book_id " +  // Ensure this JOIN brings in the title column
-                "WHERE br.record_id = ?";
-
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(recordId)});
-
-        if (cursor != null && cursor.moveToFirst()) {
-            // Extract data from the cursor
-             recordId = cursor.getInt(cursor.getColumnIndexOrThrow("record_id"));
-            String borrowDate = cursor.getString(cursor.getColumnIndexOrThrow("borrow_date"));
-            String returnDate = cursor.getString(cursor.getColumnIndexOrThrow("return_date"));
-            String actualReturnDate = cursor.getString(cursor.getColumnIndexOrThrow("actual_return_date"));
-            String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
-            String userName = cursor.getString(cursor.getColumnIndexOrThrow("user_name"));
-            String bookTitle = cursor.getString(cursor.getColumnIndexOrThrow("book_title"));  // Retrieve the book title here
-
-            // Create and return a BorrowRecord2 object
-            BorrowRecord2 borrowRecord2 = new BorrowRecord2(recordId, userName, bookTitle, borrowDate, returnDate, actualReturnDate, status);
-            cursor.close();
-            return borrowRecord2;
-        }
-
-        cursor.close();
-        return null; // If no record found
-    }
 
 
-    public boolean updateBorrowRecord(int recordId, ContentValues values) {
-        int rows = db.update("BorrowRecords", values, "record_id = ?", new String[]{String.valueOf(recordId)});
-        return rows > 0;
-    }
-
-
-    // Lấy userId từ tên người dùng
-    public int getUserIdByName(String userName) {
-        Cursor cursor = db.rawQuery("SELECT user_id FROM User WHERE name = ?", new String[]{userName});
-        if (cursor != null && cursor.moveToFirst()) {
-            int userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
-            cursor.close();
-            return userId;
-        }
-        return -1; // Nếu không tìm thấy
-    }
-
-    // Lấy bookId từ tên sách
-    public int getBookIdByTitle(String bookTitle) {
-        Cursor cursor = db.rawQuery("SELECT book_id FROM Books WHERE title = ?", new String[]{bookTitle});
-        if (cursor != null && cursor.moveToFirst()) {
-            int bookId = cursor.getInt(cursor.getColumnIndexOrThrow("book_id"));
-            cursor.close();
-            return bookId;
-        }
-        return -1; // Nếu không tìm thấy
-    }
 
 
 

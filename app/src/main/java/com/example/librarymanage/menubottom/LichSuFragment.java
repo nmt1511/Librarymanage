@@ -1,5 +1,5 @@
 // LichSuFragment.java
-package com.example.librarymanage;
+package com.example.librarymanage.menubottom;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.librarymanage.R;
 import com.example.librarymanage.adapter.BorrowRecordAdapter;
 import com.example.librarymanage.data.BorrowRecordRepository;
 import com.example.librarymanage.entities.BorrowRecord;

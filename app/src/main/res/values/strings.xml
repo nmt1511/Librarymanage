@@ -22,7 +22,7 @@
     <string name="phone_label">Số điện thoại:</string>
     <string name="email_label">Email:</string>
     <string name="student_code_label">Mã sinh viên:</string>
-
+    <string name="status_prompt">Chọn Trạng Thái</string>
     <string-array name="roles">
         <item>Người dùng</item>
         <item>Quản trị viên</item>

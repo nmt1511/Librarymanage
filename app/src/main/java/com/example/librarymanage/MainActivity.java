@@ -19,6 +19,7 @@ import com.example.librarymanage.admin.book.QLBookActivity;
 import com.example.librarymanage.admin.borrowrecords.QLBorrowRecordsActivity;
 import com.example.librarymanage.data.DataBook;
 import com.example.librarymanage.menubottom.DanhMucFragment;
+import com.example.librarymanage.menubottom.LichSuFragment;
 import com.example.librarymanage.user.dangnhap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;

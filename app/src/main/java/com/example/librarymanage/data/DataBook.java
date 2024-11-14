@@ -211,16 +211,6 @@ public class DataBook extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Category (name) VALUES ('Sách khoa học');");
         db.execSQL("INSERT INTO Category (name) VALUES ('Tạp chí và báo cáo khoa học');");
 
-        db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (1, 15.0, 0);");
-        db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (2, 15.0, 1);");
-        db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (3, 15.0, 0);");
-        db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (4, 15.0, 1);");
-        db.execSQL("INSERT INTO FineRecords (record_id, amount, paid) VALUES (5, 15.0, 0);");
 
-        db.execSQL("INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) VALUES (1, 1, 5, 'Cuốn sách tuyệt vời!', '2024-11-01');");
-        db.execSQL("INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) VALUES (2, 2, 4, 'Đọc rất thú vị.', '2024-11-02');");
-        db.execSQL("INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) VALUES (3, 3, 5, 'Một cuốn sách không thể bỏ qua!', '2024-11-03');");
-        db.execSQL("INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) VALUES (4, 4, 3, 'Khá trung bình.', '2024-11-04');");
-        db.execSQL("INSERT INTO Reviews (book_id, user_id, rating, comment, review_date) VALUES (5, 5, 4, 'Rất sâu sắc.', '2024-11-05');");
     }
 }

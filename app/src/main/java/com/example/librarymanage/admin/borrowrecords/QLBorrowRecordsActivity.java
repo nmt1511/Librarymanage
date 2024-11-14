@@ -68,13 +68,29 @@ public class QLBorrowRecordsActivity extends AppCompatActivity {
                         // Sửa bản ghi
                         Intent intent = new Intent(QLBorrowRecordsActivity.this, EditBorrowRecordsActivity.class);
                         intent.putExtra("recordId", record.getRecordId());
-                        startActivity(intent);
+                        startActivityForResult(intent, REQUEST_CODE_EDIT); // Sử dụng startActivityForResult
                     } else if (which == 1) {
                         // Xóa bản ghi
                         showDeleteConfirmation(record);
                     }
                 })
                 .show();
+    }
+
+    // Thêm hằng số request code
+    private static final int REQUEST_CODE_EDIT = 1001;
+
+    // Thêm phương thức onActivityResult
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_EDIT && resultCode == RESULT_OK) {
+            if (data != null && data.getBooleanExtra("needReload", false)) {
+                // Reload lại danh sách bản ghi
+                loadBorrowRecords();
+            }
+        }
     }
 
     private void showDeleteConfirmation(BorrowRecord2 record) {
