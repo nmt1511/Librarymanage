@@ -65,7 +65,13 @@
 
         android:inputType="textMultiLine"
         android:lines="4" />
-
+    <EditText
+        android:id="@+id/editImagePath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Đường dẫn ảnh (tùy chọn)"
+        android:inputType="text"
+        android:layout_marginTop="8dp"/>
     <!-- Nút cập nhật -->
     <Button
         android:id="@+id/btnUpdate"

@@ -1,8 +1,11 @@
 package com.example.librarymanage.admin.book;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -106,23 +109,51 @@ public class QLBookActivity extends AppCompatActivity {
 
     // Load all books from database
     private void loadAllBooks() {
-        Cursor cursor = bookRepository.getAllBooks();
-        if (cursor != null && cursor.moveToFirst()) {
-            bookList.clear();
-            do {
-                int bookId = cursor.getInt(cursor.getColumnIndexOrThrow("book_id"));
-                String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-                String authorName = bookRepository.getAuthorName(cursor.getInt(cursor.getColumnIndexOrThrow("author_id")));
-                String categoryName = bookRepository.getCategoryName(cursor.getInt(cursor.getColumnIndexOrThrow("category_id")));
-                String locationName = bookRepository.getLocationName(cursor.getInt(cursor.getColumnIndexOrThrow("location_id")));
-                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+        try {
+            Cursor cursor = bookRepository.getAllBooks();
+            if (cursor != null && cursor.moveToFirst()) {
+                bookList.clear();
 
-                Book book = new Book(bookId, title, authorName, description, R.drawable.ic_open_book, categoryName, locationName);
-                bookList.add(book);
-            } while (cursor.moveToNext());
-            cursor.close();
+                // Lấy chỉ mục cột
+                int bookIdIndex = cursor.getColumnIndex("book_id");
+                int titleIndex = cursor.getColumnIndex("title");
+                int authorIdIndex = cursor.getColumnIndex("author_id");
+                int categoryIdIndex = cursor.getColumnIndex("category_id");
+                int locationIdIndex = cursor.getColumnIndex("location_id");
+                int descriptionIndex = cursor.getColumnIndex("description");
+                int imageIndex = cursor.getColumnIndex("image");
+
+                do {
+                    int bookId = cursor.getInt(bookIdIndex);
+                    String title = cursor.getString(titleIndex);
+                    String authorName = getAuthorNameSafely(cursor.getInt(authorIdIndex));
+                    String categoryName = getCategoryNameSafely(cursor.getInt(categoryIdIndex));
+                    String locationName = getLocationNameSafely(cursor.getInt(locationIdIndex));
+                    String description = cursor.getString(descriptionIndex);
+
+                    // Xử lý hình ảnh
+                    int imageResource = handleImageDisplay(
+                            imageIndex != -1 ? cursor.getString(imageIndex) : null
+                    );
+
+                    Book book = new Book(bookId, title, authorName, description,
+                            imageResource, categoryName, locationName);
+                    bookList.add(book);
+
+                } while (cursor.moveToNext());
+                cursor.close();
+            }
+
+            bookAdapter.notifyDataSetChanged();
+
+            if (bookList.isEmpty()) {
+                Toast.makeText(this, "Không có sách nào", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            Log.e("LoadBooksError", "Lỗi khi tải sách", e);
+            Toast.makeText(this, "Có lỗi xảy ra khi tải sách", Toast.LENGTH_SHORT).show();
         }
-        bookAdapter.notifyDataSetChanged();
     }
 
     // Search books by keyword
@@ -130,16 +161,32 @@ public class QLBookActivity extends AppCompatActivity {
         Cursor cursor = bookRepository.getBooksByKeyword(keyword);
         if (cursor != null && cursor.moveToFirst()) {
             bookList.clear();
-            do {
-                int bookId = cursor.getInt(cursor.getColumnIndexOrThrow("book_id"));
-                String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-                String authorName = bookRepository.getAuthorName(cursor.getInt(cursor.getColumnIndexOrThrow("author_id")));
-                String categoryName = bookRepository.getCategoryName(cursor.getInt(cursor.getColumnIndexOrThrow("category_id")));
-                String locationName = bookRepository.getLocationName(cursor.getInt(cursor.getColumnIndexOrThrow("location_id")));
-                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+            // Lấy chỉ mục cột
+            int bookIdIndex = cursor.getColumnIndex("book_id");
+            int titleIndex = cursor.getColumnIndex("title");
+            int authorIdIndex = cursor.getColumnIndex("author_id");
+            int categoryIdIndex = cursor.getColumnIndex("category_id");
+            int locationIdIndex = cursor.getColumnIndex("location_id");
+            int descriptionIndex = cursor.getColumnIndex("description");
+            int imageIndex = cursor.getColumnIndex("image");
 
-                Book book = new Book(bookId, title, authorName, description, R.drawable.ic_open_book, categoryName, locationName);
+            do {
+                int bookId = cursor.getInt(bookIdIndex);
+                String title = cursor.getString(titleIndex);
+                String authorName = getAuthorNameSafely(cursor.getInt(authorIdIndex));
+                String categoryName = getCategoryNameSafely(cursor.getInt(categoryIdIndex));
+                String locationName = getLocationNameSafely(cursor.getInt(locationIdIndex));
+                String description = cursor.getString(descriptionIndex);
+
+                // Xử lý hình ảnh
+                int imageResource = handleImageDisplay(
+                        imageIndex != -1 ? cursor.getString(imageIndex) : null
+                );
+
+                Book book = new Book(bookId, title, authorName, description,
+                        imageResource, categoryName, locationName);
                 bookList.add(book);
+
             } while (cursor.moveToNext());
             cursor.close();
         }
@@ -149,7 +196,71 @@ public class QLBookActivity extends AppCompatActivity {
             Toast.makeText(this, "Không tìm thấy sách", Toast.LENGTH_SHORT).show();
         }
     }
+    // Phương thức an toàn để lấy tên tác giả
+    private String getAuthorNameSafely(int authorId) {
+        try {
+            return bookRepository.getAuthorName(authorId);
+        } catch (Exception e) {
+            Log.e("AuthorNameError", "Lỗi khi lấy tên tác giả", e);
+            return "Không rõ tác giả";
+        }
+    }
 
+    // Phương thức an toàn để lấy tên thể loại
+    private String getCategoryNameSafely(int categoryId) {
+        try {
+            return bookRepository.getCategoryName(categoryId);
+        } catch (Exception e) {
+            Log.e("CategoryNameError", "Lỗi khi lấy tên thể loại", e);
+            return "Không rõ thể loại";
+        }
+    }
+
+    // Phương thức an toàn để lấy tên vị trí
+    private String getLocationNameSafely(int locationId) {
+        try {
+            return bookRepository.getLocationName(locationId);
+        } catch (Exception e) {
+            Log.e("LocationNameError", "Lỗi khi lấy tên vị trí", e);
+            return "Không rõ vị trí";
+        }
+    }
+
+    // Phương thức xử lý hình ảnh sách
+    private int handleImageDisplay(String imageName) {
+        // Giá trị mặc định
+        int defaultImageResourceId = R.drawable.ic_open_book;
+
+        // Kiểm tra tên hình ảnh
+        if (imageName == null || imageName.isEmpty()) {
+            return defaultImageResourceId;
+        }
+
+        try {
+            // Loại bỏ phần mở rộng file nếu có
+            String resourceName = imageName.contains(".")
+                    ? imageName.split("\\.")[0]
+                    : imageName;
+
+            // Lấy ID tài nguyên drawable
+            int drawableResourceId = getResources().getIdentifier(
+                    resourceName,
+                    "drawable",
+                    getPackageName()
+            );
+
+            // Trả về ID tài nguyên nếu tìm thấy, ngược lại trả về hình ảnh mặc định
+            return drawableResourceId != 0
+                    ? drawableResourceId
+                    : defaultImageResourceId;
+
+        } catch (Exception e) {
+            // Ghi log lỗi nếu có
+            Log.e("ImageLoadError", "Lỗi khi tải hình ảnh: " + imageName, e);
+            return defaultImageResourceId;
+        }
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

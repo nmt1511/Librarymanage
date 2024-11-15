@@ -63,8 +63,25 @@ public class BookRepository {
         String query = "SELECT * FROM Books WHERE title LIKE ? OR author_id IN (SELECT author_id FROM Author WHERE name LIKE ?)";
         return db.rawQuery(query, new String[]{"%" + keyword + "%", "%" + keyword + "%"});
     }
+    public long updateBook(int bookId, String title, String authorName, String categoryName,
+                           String locationName, int publishedYear, String description, String imagePath) {
+        ContentValues values = new ContentValues();
+        values.put("title", title);
+        values.put("author_id", getAuthorIdByName(authorName));
+        values.put("category_id", getCategoryIdByName(categoryName));
+        values.put("location_id", getLocationIdByName(locationName));
+        values.put("published_year", publishedYear);
+        values.put("description", description);
 
-    public long updateBook(int bookId, String title, String authorName, String categoryName, String locationName, int publishedYear, String description) {
+        // Nếu có đường dẫn ảnh, thêm vào giá trị
+        if (imagePath != null && !imagePath.isEmpty()) {
+            values.put("image", imagePath);
+        }
+
+        return db.update("Books", values, "book_id = ?", new String[]{String.valueOf(bookId)});
+    }
+    public long updateBook(int bookId, String title, String authorName, String categoryName,
+                           String locationName, int publishedYear, String description) {
         ContentValues values = new ContentValues();
         values.put("title", title);
         values.put("author_id", getAuthorIdByName(authorName));
@@ -75,6 +92,10 @@ public class BookRepository {
 
         return db.update("Books", values, "book_id = ?", new String[]{String.valueOf(bookId)});
     }
+
+
+
+
 
     public void deleteBook(int bookId) {
         db.delete("Books", "book_id = ?", new String[]{String.valueOf(bookId)});

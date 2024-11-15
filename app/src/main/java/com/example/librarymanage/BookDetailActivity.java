@@ -103,7 +103,6 @@ public class BookDetailActivity extends AppCompatActivity {
         });
     }
 
-    // Hiển thị thông tin chi tiết sách
     private void displayBookDetails(int bookId) {
         Cursor cursor = bookRepository.getBookById(bookId);
         if (cursor != null) {
@@ -113,15 +112,36 @@ public class BookDetailActivity extends AppCompatActivity {
                     int authorId = cursor.getInt(cursor.getColumnIndexOrThrow("author_id"));
                     String publishedYear = cursor.getString(cursor.getColumnIndexOrThrow("published_year"));
                     String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-                    String imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image")); // Đường dẫn hình ảnh
+                    String imageName = cursor.getString(cursor.getColumnIndexOrThrow("image")); // Tên hình ảnh từ CSDL
 
                     tvTitle.setText(title);
                     tvAuthor.setText(bookRepository.getAuthorName(authorId));
                     tvPublishedYear.setText(publishedYear);
                     tvDescription.setText(description);
 
-                    // Nếu có hình ảnh, bạn có thể sử dụng thư viện như Glide để tải hình ảnh
-                    // Glide.with(this).load(imagePath).into(bookImage);
+                    // Hiển thị hình ảnh từ drawable
+                    if (imageName != null && !imageName.isEmpty()) {
+                        // Loại bỏ phần đuôi file nếu có
+                        String resourceName = imageName.split("\\.")[0];
+
+                        // Lấy id của drawable
+                        int drawableResourceId = getResources().getIdentifier(
+                                resourceName,
+                                "drawable",
+                                getPackageName()
+                        );
+
+                        // Kiểm tra nếu tìm thấy drawable
+                        if (drawableResourceId != 0) {
+                            bookImage.setImageResource(drawableResourceId);
+                        } else {
+                            // Nếu không tìm thấy, đặt hình ảnh mặc định
+                            bookImage.setImageResource(R.drawable.ic_open_book);
+                        }
+                    } else {
+                        // Nếu không có tên hình ảnh, đặt hình ảnh mặc định
+                        bookImage.setImageResource(R.drawable.ic_open_book);
+                    }
                 } else {
                     Toast.makeText(this, "Không tìm thấy sách!", Toast.LENGTH_SHORT).show();
                 }
