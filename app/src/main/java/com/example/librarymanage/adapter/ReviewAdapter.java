@@ -35,11 +35,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Review review = reviewList.get(position);
         holder.tvName.setText(review.getName());
+
+        // Đặt RatingBar ở chế độ chỉ hiển thị
         holder.ratingBar.setRating(review.getRating());
+        holder.ratingBar.setIsIndicator(true);
+
         holder.tvFeedbackText.setText(review.getComment());
-        // Giả sử bạn có một phương thức để format ngày
-        holder.tvFeedbackDate.setText(formatDate(review.getReviewDate())); // Cần thêm thuộc tính reviewDate vào Review
+        holder.tvFeedbackDate.setText(formatDate(review.getReviewDate())); // Giả sử bạn đã có thuộc tính reviewDate trong Review
     }
+
 
     @Override
     public int getItemCount() {

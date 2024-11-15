@@ -38,5 +38,14 @@
         <color name="colorPrimary">#6200EE</color> <!-- Màu chính -->
         <color name="colorAccent">#03DAC5</color> <!-- Màu nhấn -->
         <color name="textColor">#000000</color> <!-- Màu chữ -->
+    <!-- res/values/colors.xml -->
+
+        <color name="primary_background">#F5F5F5</color>
+        <color name="primaryColor">#1976D2</color>
+        <color name="secondaryColor">#03DAC5</color>
+        <color name="primaryLight">#BDBDBD</color>
+
+        <color name="listBackgroundColor">#E3F1FD</color> <!-- Màu nền của ListView -->
+        <color name="listDividerColor">#90C7F8</color> <!-- Màu đường phân cách -->
 
 </resources>

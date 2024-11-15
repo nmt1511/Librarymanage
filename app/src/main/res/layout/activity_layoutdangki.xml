@@ -65,6 +65,32 @@
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"/>
 
+    <!-- Gender Selection -->
+    <RadioGroup
+        android:id="@+id/rgGender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/edtUsername"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/rbMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nam" />
+
+        <RadioButton
+            android:id="@+id/rbFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nữ" />
+    </RadioGroup>
+
     <!-- Email Input -->
     <EditText
         android:id="@+id/edtEmail"
@@ -73,7 +99,7 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/edtUsername"
+        app:layout_constraintTop_toBottomOf="@id/rgGender"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="32dp"
@@ -110,7 +136,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"/>
 
-    <!-- Adjust the layout constraints for Password input to follow Student ID -->
+    <!-- Password Input -->
     <EditText
         android:id="@+id/edtPassword"
         android:layout_width="0dp"
@@ -124,7 +150,6 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"/>
-
 
     <!-- Confirm Password Input -->
     <EditText
@@ -140,18 +165,6 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"/>
-
-<!--    <TextView-->
-<!--        android:id="@+id/textView3"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textSize="18sp"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:textAlignment="center"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:text="@string/signing" />-->
 
     <!-- Register Button -->
     <Button

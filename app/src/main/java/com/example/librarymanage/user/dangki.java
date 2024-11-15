@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,13 +21,14 @@ public class dangki extends AppCompatActivity {
 
     private DataBook dbBook;
     private EditText edtUsername, edtPassword, edtName, edtEmail, edtConfirmPassword, edtPhoneNumber, edtStudentID;
+    private RadioGroup rgGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layoutdangki);
 
-        // Khởi tạo CSDL và ánh xạ các trường dữ liệu
+        // Initialize database and link input fields
         dbBook = new DataBook(this);
         edtUsername = findViewById(R.id.edtUsername);
         edtPassword = findViewById(R.id.edtPassword);
@@ -34,6 +37,7 @@ public class dangki extends AppCompatActivity {
         edtConfirmPassword = findViewById(R.id.etConfirmPassword);
         edtPhoneNumber = findViewById(R.id.edtPhoneNumber);
         edtStudentID = findViewById(R.id.edtStudentID);
+        rgGender = findViewById(R.id.rgGender);  // RadioGroup for gender
 
         Button btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +57,19 @@ public class dangki extends AppCompatActivity {
         String phone = edtPhoneNumber.getText().toString().trim();
         String studentID = edtStudentID.getText().toString().trim();
 
-        // Kiểm tra điều kiện nhập liệu
+        // Check which gender is selected
+        String gender;
+        int selectedGenderId = rgGender.getCheckedRadioButtonId();
+        if (selectedGenderId == R.id.rbMale) {
+            gender = "Nam";
+        } else if (selectedGenderId == R.id.rbFemale) {
+            gender = "Nữ";
+        } else {
+            Toast.makeText(this, "Vui lòng chọn giới tính", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validation
         if (username.isEmpty() || password.isEmpty() || name.isEmpty() || email.isEmpty() || phone.isEmpty() || studentID.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
@@ -65,7 +81,7 @@ public class dangki extends AppCompatActivity {
 
         SQLiteDatabase db = dbBook.getWritableDatabase();
 
-        // Kiểm tra tên đăng nhập đã tồn tại chưa
+        // Check if username already exists
         Cursor cursor = db.rawQuery("SELECT * FROM User WHERE username=?", new String[]{username});
         if (cursor.getCount() > 0) {
             Toast.makeText(this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
@@ -74,15 +90,16 @@ public class dangki extends AppCompatActivity {
         }
         cursor.close();
 
-        // Lưu thông tin người dùng vào bảng User
+        // Insert user data into User table
         ContentValues userValues = new ContentValues();
         userValues.put("name", name);
+        userValues.put("gender", gender);  // Save gender information
         userValues.put("phone", phone);
         userValues.put("email", email);
         userValues.put("student_code", studentID);
         userValues.put("username", username);
         userValues.put("password", password);
-        userValues.put("role", "reader"); // đặt quyền người dùng mặc định
+        userValues.put("role", "reader");
 
         long userId = db.insert("User", null, userValues);
 

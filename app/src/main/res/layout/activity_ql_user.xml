@@ -2,20 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Tiêu đề Quản lí người dùng -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quản lý người dùng"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="8dp" />
 
     <!-- Thêm FloatingActionButton vào layout -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm người dùng"
+        android:text="Add"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="1dp" />
 
 
     <ListView
         android:id="@+id/listview_users"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/listBackgroundColor"
+        android:divider="@color/listDividerColor"
+        android:dividerHeight="1dp" />
+
 </LinearLayout>

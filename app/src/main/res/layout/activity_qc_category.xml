@@ -5,7 +5,14 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="#E8F5E9"> <!-- Màu nền nhẹ -->
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chỉnh sửa sách"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="8dp" />
     <EditText
         android:id="@+id/editTextCategoryName"
         android:layout_width="match_parent"
@@ -25,7 +32,7 @@
             android:id="@+id/buttonAdd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="Thêm"
             android:layout_weight="1"
             android:textColor="#FFFFFF"
             android:background="@drawable/rounded_corners"/>
@@ -34,7 +41,7 @@
             android:id="@+id/buttonUpdate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Update"
+            android:text="Cập nhập"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:background="@drawable/rounded_corners"
@@ -44,7 +51,7 @@
             android:id="@+id/buttonDelete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Delete"
+            android:text="Xóa"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:background="@drawable/rounded_corners"
