@@ -101,10 +101,8 @@ public class NewBookFragment extends Fragment {
                     String categoryName = getCategoryNameSafely(categoryId);
                     String locationName = getLocationNameSafely(locationId);
 
-                    // Xử lý hình ảnh
-                    int imageResource = handleBookImageDisplay(
-                            imageIndex != -1 ? cursor.getString(imageIndex) : null
-                    );
+                    // Lấy giá trị của hình ảnh (image là String kiểu URL hoặc tên tệp)
+                    String imageResource = imageIndex != -1 ? cursor.getString(imageIndex) : null;
 
                     // Tạo đối tượng sách và thêm vào danh sách
                     Book book = new Book(
@@ -112,7 +110,7 @@ public class NewBookFragment extends Fragment {
                             title,
                             authorName,
                             description,
-                            imageResource,
+                            imageResource,  // imageResource đã chuyển thành kiểu String
                             categoryName,
                             locationName
                     );
@@ -141,6 +139,7 @@ public class NewBookFragment extends Fragment {
             Toast.makeText(getContext(), "Không có sách nào được thêm trong tháng này", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     // Phương thức an toàn để lấy tên tác giả
     private String getAuthorNameSafely(int authorId) {

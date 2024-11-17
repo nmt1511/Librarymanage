@@ -2,6 +2,8 @@ package com.example.librarymanage;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import com.example.librarymanage.adapter.ReviewAdapter;
 import com.example.librarymanage.data.BookRepository;
 import com.example.librarymanage.entities.Review;
 
+import java.io.File;
 import java.util.List;
 
 public class BookDetailActivity extends AppCompatActivity {
@@ -112,30 +115,22 @@ public class BookDetailActivity extends AppCompatActivity {
                     int authorId = cursor.getInt(cursor.getColumnIndexOrThrow("author_id"));
                     String publishedYear = cursor.getString(cursor.getColumnIndexOrThrow("published_year"));
                     String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-                    String imageName = cursor.getString(cursor.getColumnIndexOrThrow("image")); // Tên hình ảnh từ CSDL
+                    String imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image")); // Đường dẫn hình ảnh từ CSDL
 
+                    // Hiển thị thông tin sách
                     tvTitle.setText(title);
                     tvAuthor.setText(bookRepository.getAuthorName(authorId));
                     tvPublishedYear.setText(publishedYear);
                     tvDescription.setText(description);
 
-                    // Hiển thị hình ảnh từ drawable
-                    if (imageName != null && !imageName.isEmpty()) {
-                        // Loại bỏ phần đuôi file nếu có
-                        String resourceName = imageName.split("\\.")[0];
-
-                        // Lấy id của drawable
-                        int drawableResourceId = getResources().getIdentifier(
-                                resourceName,
-                                "drawable",
-                                getPackageName()
-                        );
-
-                        // Kiểm tra nếu tìm thấy drawable
-                        if (drawableResourceId != 0) {
-                            bookImage.setImageResource(drawableResourceId);
+                    // Hiển thị hình ảnh từ bộ nhớ trong
+                    if (imagePath != null && !imagePath.isEmpty()) {
+                        File imageFile = new File(imagePath);
+                        if (imageFile.exists()) {
+                            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+                            bookImage.setImageBitmap(bitmap);
                         } else {
-                            // Nếu không tìm thấy, đặt hình ảnh mặc định
+                            // Nếu không tìm thấy hình ảnh trong bộ nhớ, đặt hình ảnh mặc định
                             bookImage.setImageResource(R.drawable.ic_open_book);
                         }
                     } else {
@@ -152,6 +147,7 @@ public class BookDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Không tìm thấy sách!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     protected void onDestroy() {

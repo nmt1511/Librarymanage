@@ -70,18 +70,17 @@ public class DataBook extends SQLiteOpenHelper {
                 "book_id INTEGER, " +                               // ID sách được mượn
                 "borrow_date DATE, " +                              // Ngày mượn sách
                 "return_date DATE, " +                              // Ngày dự kiến trả sách
-                "actual_return_date DATE, " +                       // Ngày thực tế trả sách
                 "status VARCHAR, " +                                // Trạng thái mượn sách (đã trả/chưa trả)
                 "FOREIGN KEY (user_id) REFERENCES User(user_id), " +  // Khóa ngoại tới bảng User
                 "FOREIGN KEY (book_id) REFERENCES Books(book_id))"); // Khóa ngoại tới bảng Books
 
-        // Tạo bảng FineRecords để lưu thông tin phạt
-        db.execSQL("CREATE TABLE IF NOT EXISTS FineRecords (" +
-                "fine_id INTEGER PRIMARY KEY AUTOINCREMENT, " +     // ID duy nhất của bản ghi phạt
-                "record_id INTEGER, " +                             // ID bản ghi mượn sách
-                "amount DECIMAL, " +                                // Số tiền phạt
-                "paid BOOLEAN, " +                                  // Trạng thái đã trả phạt (đã trả/chưa trả)
-                "FOREIGN KEY (record_id) REFERENCES BorrowRecords(record_id))"); // Khóa ngoại tới bảng BorrowRecords
+//        // Tạo bảng FineRecords để lưu thông tin phạt
+//        db.execSQL("CREATE TABLE IF NOT EXISTS FineRecords (" +
+//                "fine_id INTEGER PRIMARY KEY AUTOINCREMENT, " +     // ID duy nhất của bản ghi phạt
+//                "record_id INTEGER, " +                             // ID bản ghi mượn sách
+//                "amount DECIMAL, " +                                // Số tiền phạt
+//                "paid BOOLEAN, " +                                  // Trạng thái đã trả phạt (đã trả/chưa trả)
+//                "FOREIGN KEY (record_id) REFERENCES BorrowRecords(record_id))"); // Khóa ngoại tới bảng BorrowRecords
 
         // Tạo bảng feedback để lưu đánh giá sách
         db.execSQL("CREATE TABLE IF NOT EXISTS Reviews (" +

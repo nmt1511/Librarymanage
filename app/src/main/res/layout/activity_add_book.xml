@@ -1,161 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
     android:background="#F0F0F0">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tiêu Đề"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
-
-    <EditText
-        android:id="@+id/edtTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter book title"
-        android:inputType="text"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- Author Spinner -->
-    <TextView
-        android:id="@+id/tvAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tác Giả"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiêu Đề"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
 
-    <Spinner
-        android:id="@+id/spinnerAuthor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="8dp"
-        android:layout_marginBottom="16dp"/>
+        <EditText
+            android:id="@+id/edtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter book title"
+            android:inputType="text"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="2dp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
 
-    <!-- Category Spinner -->
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Danh Mục"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
+        <!-- Author Spinner -->
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tác Giả"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
 
-    <Spinner
-        android:id="@+id/spinnerCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="8dp"
-        android:layout_marginBottom="16dp"/>
+        <Spinner
+            android:id="@+id/spinnerAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            android:padding="8dp" />
 
-    <!-- Location Spinner -->
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vị Trí"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
+        <!-- Category Spinner -->
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danh Mục"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
 
-    <Spinner
-        android:id="@+id/spinnerLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="8dp"
-        android:layout_marginBottom="16dp"/>
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            android:padding="8dp" />
 
-    <!-- Published Year -->
-    <TextView
-        android:id="@+id/tvYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Năm Phát Hành"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
+        <!-- Location Spinner -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vị Trí"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/edtYear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter year"
-        android:inputType="number"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <Spinner
+            android:id="@+id/spinnerLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            android:padding="8dp" />
 
-    <!-- Description -->
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mô Tả"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
+        <!-- Published Year -->
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Năm Phát Hành"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/edtDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter book description"
-        android:inputType="textMultiLine"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <EditText
+            android:id="@+id/edtYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter year"
+            android:inputType="number"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="2dp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/tvImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Image (URL)"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp"/>
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mô Tả"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/edtImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter image URL"
-        android:inputType="text"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="2dp"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter book description"
+            android:inputType="textMultiLine"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="2dp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+        <TextView
+            android:id="@+id/edtImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="đường dẫn"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+<!--        <EditText-->
+<!--            android:id="@+id/edtImage"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--        />-->
 
+        <!-- Thêm vào layout sau phần edtImage -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
-    <!-- Add Book Button -->
-    <Button
-        android:id="@+id/btnAddBook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Book"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#3F51B5"
-        android:elevation="3dp"
-        android:layout_marginTop="16dp"/>
-</LinearLayout>
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Upload Image"
+                android:layout_marginRight="8dp"/>
+
+            <ImageView
+                android:id="@+id/imgBookImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:background="#E0E0E0"/>
+        </LinearLayout>
+
+        <!-- Add Book Button -->
+        <Button
+            android:id="@+id/btnAddBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Book"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#3F51B5"
+            android:elevation="3dp"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

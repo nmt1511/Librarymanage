@@ -6,16 +6,14 @@ public class BorrowRecord2 {
     private String bookTitle;
     private String borrowDate;
     private String returnDate;
-    private String actualReturnDate;
     private String status;
 
-    public BorrowRecord2(int recordId, String userName, String bookTitle, String borrowDate, String returnDate, String actualReturnDate, String status) {
+    public BorrowRecord2(int recordId, String userName, String bookTitle, String borrowDate, String returnDate, String status) {
         this.recordId = recordId;
         this.userName = userName;
         this.bookTitle = bookTitle;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
-        this.actualReturnDate = actualReturnDate;
         this.status = status;
     }
 
@@ -36,14 +34,14 @@ public class BorrowRecord2 {
         return returnDate;
     }
 
-    public String getActualReturnDate() {
-        return actualReturnDate;
-    }
-
     public String getStatus() {
         return status;
     }
 
+    // Set status
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public int getRecordId() {
         return recordId;
     }

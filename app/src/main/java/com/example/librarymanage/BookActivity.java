@@ -122,10 +122,8 @@ public class BookActivity extends AppCompatActivity {
                     String categoryName = getCategoryNameSafely(categoryId);
                     String locationName = getLocationNameSafely(locationId);
 
-                    // Xử lý hình ảnh
-                    int imageResource = handleBookImageDisplay(
-                            imageIndex != -1 ? cursor.getString(imageIndex) : null
-                    );
+                    // Lấy giá trị của hình ảnh (image là String kiểu URL hoặc tên tệp)
+                    String imageResource = imageIndex != -1 ? cursor.getString(imageIndex) : null;
 
                     // Tạo đối tượng sách và thêm vào danh sách
                     Book book = new Book(
@@ -133,7 +131,7 @@ public class BookActivity extends AppCompatActivity {
                             title,
                             authorName,
                             description,
-                            imageResource,
+                            imageResource,  // imageResource đã chuyển thành kiểu String
                             categoryName,
                             locationName
                     );
@@ -157,6 +155,7 @@ public class BookActivity extends AppCompatActivity {
             Toast.makeText(this, "Không có sách nào trong cơ sở dữ liệu", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     // Phương thức an toàn để lấy tên tác giả
     private String getAuthorNameSafely(int authorId) {

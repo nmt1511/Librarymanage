@@ -1,4 +1,4 @@
-package com.example.librarymanage.adapter;
+package com.example.librarymanage.entities;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.librarymanage.R;
-import com.example.librarymanage.entities.Book;
+
 
 import java.util.ArrayList;
 
@@ -19,6 +19,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
     public BookAdapter(Context context, ArrayList<Book> books) {
         super(context, 0, books);
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Book book = getItem(position);

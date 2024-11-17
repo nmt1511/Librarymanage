@@ -5,17 +5,17 @@ public class Book {
     private String title;
     private String authorName;
     private String description;
-    private int imageResource;
+    private String imageResource; // Đổi từ int sang String
     private String categoryName;
     private String locationName;
 
     // Constructor với 7 tham số
-    public Book(int bookId, String title, String authorName, String description, int imageResource, String categoryName, String locationName) {
+    public Book(int bookId, String title, String authorName, String description, String imageResource, String categoryName, String locationName) {
         this.bookId = bookId;
         this.title = title;
         this.authorName = authorName;
         this.description = description;
-        this.imageResource = imageResource;
+        this.imageResource = imageResource; // Cập nhật kiểu String
         this.categoryName = categoryName;
         this.locationName = locationName;
     }
@@ -37,7 +37,6 @@ public class Book {
         this.title = title;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -46,12 +45,12 @@ public class Book {
         this.description = description;
     }
 
-    public int getImageResource() {
-        return imageResource;
+    public String getImageResource() {
+        return imageResource; // Cập nhật kiểu String
     }
 
-    public void setImageResource(int imageResource) {
-        this.imageResource = imageResource;
+    public void setImageResource(String imageResource) {
+        this.imageResource = imageResource; // Cập nhật kiểu String
     }
 
     public String getCategoryName() {
@@ -69,6 +68,7 @@ public class Book {
     public void setLocationName(String locationName) {
         this.locationName = locationName;
     }
+
     public String getAuthorName() {
         return authorName;
     }
@@ -76,5 +76,4 @@ public class Book {
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
-
 }

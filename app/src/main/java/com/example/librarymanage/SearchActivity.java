@@ -85,6 +85,7 @@ public class SearchActivity extends AppCompatActivity {
         Cursor cursor = bookRepository.getBooksByKeyword(query);
         if (cursor != null && cursor.moveToFirst()) {
             bookList.clear();
+
             // Lấy chỉ mục cột
             int bookIdIndex = cursor.getColumnIndex("book_id");
             int titleIndex = cursor.getColumnIndex("title");
@@ -102,16 +103,23 @@ public class SearchActivity extends AppCompatActivity {
                 String locationName = getLocationNameSafely(cursor.getInt(locationIdIndex));
                 String description = cursor.getString(descriptionIndex);
 
-                // Xử lý hình ảnh
-                int imageResource = handleImageDisplay(
-                        imageIndex != -1 ? cursor.getString(imageIndex) : null
-                );
+                // Xử lý hình ảnh - Lấy giá trị hình ảnh (image là String kiểu URL hoặc tên tệp)
+                String imageResource = imageIndex != -1 ? cursor.getString(imageIndex) : null;
 
-                Book book = new Book(bookId, title, authorName, description,
-                        imageResource, categoryName, locationName);
+                // Tạo đối tượng sách và thêm vào danh sách
+                Book book = new Book(
+                        bookId,
+                        title,
+                        authorName,
+                        description,
+                        imageResource,  // imageResource là String
+                        categoryName,
+                        locationName
+                );
                 bookList.add(book);
 
             } while (cursor.moveToNext());
+
             cursor.close();
         }
         bookAdapter.notifyDataSetChanged();
@@ -120,6 +128,7 @@ public class SearchActivity extends AppCompatActivity {
             Toast.makeText(this, "Không tìm thấy sách", Toast.LENGTH_SHORT).show();
         }
     }
+
     // Phương thức an toàn để lấy tên tác giả
     private String getAuthorNameSafely(int authorId) {
         try {

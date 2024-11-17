@@ -107,7 +107,6 @@ public class QLBookActivity extends AppCompatActivity {
         loadAllBooks();
     }
 
-    // Load all books from database
     private void loadAllBooks() {
         try {
             Cursor cursor = bookRepository.getAllBooks();
@@ -131,13 +130,19 @@ public class QLBookActivity extends AppCompatActivity {
                     String locationName = getLocationNameSafely(cursor.getInt(locationIdIndex));
                     String description = cursor.getString(descriptionIndex);
 
-                    // Xử lý hình ảnh
-                    int imageResource = handleImageDisplay(
-                            imageIndex != -1 ? cursor.getString(imageIndex) : null
-                    );
+                    // Lấy hình ảnh (image là String kiểu URL hoặc tên tệp)
+                    String imageResource = imageIndex != -1 ? cursor.getString(imageIndex) : null;
 
-                    Book book = new Book(bookId, title, authorName, description,
-                            imageResource, categoryName, locationName);
+                    // Tạo đối tượng sách và thêm vào danh sách
+                    Book book = new Book(
+                            bookId,
+                            title,
+                            authorName,
+                            description,
+                            imageResource,  // imageResource là String
+                            categoryName,
+                            locationName
+                    );
                     bookList.add(book);
 
                 } while (cursor.moveToNext());
@@ -155,6 +160,7 @@ public class QLBookActivity extends AppCompatActivity {
             Toast.makeText(this, "Có lỗi xảy ra khi tải sách", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     // Search books by keyword
     private void searchBooks(String keyword) {
@@ -178,13 +184,19 @@ public class QLBookActivity extends AppCompatActivity {
                 String locationName = getLocationNameSafely(cursor.getInt(locationIdIndex));
                 String description = cursor.getString(descriptionIndex);
 
-                // Xử lý hình ảnh
-                int imageResource = handleImageDisplay(
-                        imageIndex != -1 ? cursor.getString(imageIndex) : null
-                );
+                // Lấy hình ảnh (image là String kiểu URL hoặc tên tệp)
+                String imageResource = imageIndex != -1 ? cursor.getString(imageIndex) : null;
 
-                Book book = new Book(bookId, title, authorName, description,
-                        imageResource, categoryName, locationName);
+                // Tạo đối tượng sách và thêm vào danh sách
+                Book book = new Book(
+                        bookId,
+                        title,
+                        authorName,
+                        description,
+                        imageResource,  // imageResource là String
+                        categoryName,
+                        locationName
+                );
                 bookList.add(book);
 
             } while (cursor.moveToNext());
@@ -196,6 +208,7 @@ public class QLBookActivity extends AppCompatActivity {
             Toast.makeText(this, "Không tìm thấy sách", Toast.LENGTH_SHORT).show();
         }
     }
+
     // Phương thức an toàn để lấy tên tác giả
     private String getAuthorNameSafely(int authorId) {
         try {

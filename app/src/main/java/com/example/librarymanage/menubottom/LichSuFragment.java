@@ -1,4 +1,3 @@
-// LichSuFragment.java
 package com.example.librarymanage.menubottom;
 
 import android.content.Context;
@@ -18,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.librarymanage.R;
 import com.example.librarymanage.adapter.BorrowRecordAdapter;
 import com.example.librarymanage.data.BorrowRecordRepository;
-import com.example.librarymanage.entities.BorrowRecord;
+import com.example.librarymanage.entities.BorrowRecord2;
+
 import java.util.List;
 
 public class LichSuFragment extends Fragment {
@@ -38,10 +38,12 @@ public class LichSuFragment extends Fragment {
 
         if (userId != -1) {
             borrowRecordRepository = new BorrowRecordRepository(getContext());
-            List<BorrowRecord> borrowRecords = borrowRecordRepository.getBorrowHistoryByUserId(userId);
+            List<BorrowRecord2> borrowRecords = borrowRecordRepository.getBorrowRecordsByUserId(userId);
 
-            BorrowRecordAdapter adapter = new BorrowRecordAdapter(borrowRecords);
+            // Tạo adapter và gán cho recyclerView
+            BorrowRecordAdapter adapter = new BorrowRecordAdapter(getContext(), borrowRecords);
             recyclerView.setAdapter(adapter);
+
         } else {
             Toast.makeText(getContext(), "Bạn cần đăng nhập để xem lịch sử mượn sách", Toast.LENGTH_SHORT).show();
         }

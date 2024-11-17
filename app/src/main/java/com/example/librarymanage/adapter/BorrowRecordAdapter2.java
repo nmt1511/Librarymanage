@@ -11,13 +11,15 @@ import com.example.librarymanage.R;
 import com.example.librarymanage.entities.BorrowRecord2;
 
 import java.util.ArrayList;
+import java.util.List;
+
 // Trong BorrowRecordAdapter2
 public class BorrowRecordAdapter2 extends RecyclerView.Adapter<BorrowRecordAdapter2.BorrowRecordViewHolder> {
     private Context context;
-    private ArrayList<BorrowRecord2> borrowRecordList;
+    private List<BorrowRecord2> borrowRecordList;
     private OnItemLongClickListener longClickListener;
 
-    public BorrowRecordAdapter2(Context context, ArrayList<BorrowRecord2> borrowRecordList) {
+    public BorrowRecordAdapter2(Context context, List<BorrowRecord2> borrowRecordList) {
         this.context = context;
         this.borrowRecordList = borrowRecordList;
     }
@@ -73,7 +75,7 @@ public class BorrowRecordAdapter2 extends RecyclerView.Adapter<BorrowRecordAdapt
             textViewBookTitle = itemView.findViewById(R.id.textViewBookTitle);
             textViewBorrowDate = itemView.findViewById(R.id.textViewBorrowDate);
             textViewReturnDate = itemView.findViewById(R.id.textViewReturnDate);
-            textViewActualReturnDate = itemView.findViewById(R.id.textViewActualReturnDate);
+//            textViewActualReturnDate = itemView.findViewById(R.id.textViewActualReturnDate);
             textViewStatus = itemView.findViewById(R.id.textViewStatus);
         }
     }

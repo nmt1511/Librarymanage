@@ -1,5 +1,6 @@
 package com.example.librarymanage.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,68 +9,54 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.librarymanage.R;
-import com.example.librarymanage.entities.BorrowRecord;
+import com.example.librarymanage.entities.BorrowRecord2;
 
 import java.util.List;
 
-public class BorrowRecordAdapter extends RecyclerView.Adapter<BorrowRecordAdapter.ViewHolder> {
+public class BorrowRecordAdapter extends RecyclerView.Adapter<BorrowRecordAdapter.BorrowRecordViewHolder> {
+    private Context context;
+    private List<BorrowRecord2> borrowRecordList;
 
-    private List<BorrowRecord> borrowRecords;
-    private OnItemLongClickListener longClickListener;
-
-    public BorrowRecordAdapter(List<BorrowRecord> borrowRecords) {
-        this.borrowRecords = borrowRecords;
+    public BorrowRecordAdapter(Context context, List<BorrowRecord2> borrowRecordList) {
+        this.context = context;
+        this.borrowRecordList = borrowRecordList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_borrow_record, parent, false);
-        return new ViewHolder(view);
+    public BorrowRecordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Đảm bảo bạn sử dụng layout item_borrow_record2 hoặc một layout tương ứng để hiển thị thông tin lịch sử mượn
+        View view = LayoutInflater.from(context).inflate(R.layout.item_borrow_record2, parent, false);
+        return new BorrowRecordViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        BorrowRecord record = borrowRecords.get(position);
-        holder.bookTitleTextView.setText(record.getTitle());
-        holder.borrowDateTextView.setText(record.getBorrowDate());
-        holder.returnDateTextView.setText(record.getReturnDate());
-        holder.statusTextView.setText(record.getStatus());
+    public void onBindViewHolder(@NonNull BorrowRecordViewHolder holder, int position) {
+        BorrowRecord2 record = borrowRecordList.get(position);
 
-        // Thiết lập sự kiện nhấn giữ
-        holder.itemView.setOnLongClickListener(v -> {
-            if (longClickListener != null) {
-                longClickListener.onItemLongClick(record);
-            }
-            return true; // Trả về true để cho biết sự kiện đã được xử lý
-        });
+        // Thiết lập dữ liệu cho các TextView
+        holder.textViewUserName.setText("Tên người mượn: " + record.getUserName());
+        holder.textViewBookTitle.setText("Tên sách: " + record.getBookTitle());
+        holder.textViewBorrowDate.setText("Ngày mượn: " + record.getBorrowDate());
+        holder.textViewReturnDate.setText("Ngày trả: " + record.getReturnDate());
+        holder.textViewStatus.setText("Tình trạng: " + record.getStatus());
     }
 
     @Override
     public int getItemCount() {
-        return borrowRecords.size();
+        return borrowRecordList.size();
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
-        this.longClickListener = listener;
-    }
+    public static class BorrowRecordViewHolder extends RecyclerView.ViewHolder {
+        TextView textViewUserName, textViewBookTitle, textViewBorrowDate, textViewReturnDate, textViewStatus;
 
-    public interface OnItemLongClickListener {
-        void onItemLongClick(BorrowRecord record);
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView bookTitleTextView;
-        TextView borrowDateTextView;
-        TextView returnDateTextView;
-        TextView statusTextView;
-
-        public ViewHolder(View itemView) {
+        public BorrowRecordViewHolder(@NonNull View itemView) {
             super(itemView);
-            bookTitleTextView = itemView.findViewById(R.id.tvBookTitle);
-            borrowDateTextView = itemView.findViewById(R.id.tvBorrowDate);
-            returnDateTextView = itemView.findViewById(R.id.tvReturnDate);
-            statusTextView = itemView.findViewById(R.id.tvStatus);
+            textViewUserName = itemView.findViewById(R.id.textViewUserName);
+            textViewBookTitle = itemView.findViewById(R.id.textViewBookTitle);
+            textViewBorrowDate = itemView.findViewById(R.id.textViewBorrowDate);
+            textViewReturnDate = itemView.findViewById(R.id.textViewReturnDate);
+            textViewStatus = itemView.findViewById(R.id.textViewStatus);
         }
     }
 }
