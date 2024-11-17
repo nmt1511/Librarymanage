@@ -94,9 +94,6 @@ public class BookRepository {
     }
 
 
-
-
-
     public void deleteBook(int bookId) {
         db.delete("Books", "book_id = ?", new String[]{String.valueOf(bookId)});
         db.close();
@@ -247,10 +244,6 @@ public long addCategory(String categoryName) {
         return false;
     }
 
-    public boolean deleteRating(float ratingValue) {
-        int rowsAffected = db.delete("Reviews", "rating = ?", new String[]{String.valueOf(ratingValue)});
-        return rowsAffected > 0;
-    }
 
     // Các phương thức trợ giúp khác
     private int getAuthorIdByName(String authorName) {
@@ -283,7 +276,7 @@ public long addCategory(String categoryName) {
         return -1;
     }
 
-    
+
     //feedback
     public String getUserNameById(int userId) {
         String userName = null;
@@ -320,7 +313,7 @@ public long addCategory(String categoryName) {
         }
         return reviews;
     }
-    
+
     public void addReview(Review review) {
         ContentValues values = new ContentValues();
         values.put("book_id", review.getBookId());
@@ -343,7 +336,6 @@ public long addCategory(String categoryName) {
         cursor.close();
         return hasReviewed;
     }
-
 
 
 

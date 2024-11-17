@@ -36,8 +36,6 @@ public class BorrowRecordRepository {
     }
 
 
-
-
     public List<BorrowRecord> getBorrowHistoryByUserId(int userId) {
         List<BorrowRecord> borrowRecords = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -71,15 +69,12 @@ public class BorrowRecordRepository {
     }
 
 
-
     public boolean deleteBorrowRecord(int recordId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int result = db.delete("BorrowRecords", "record_id = ?", new String[]{String.valueOf(recordId)});
         db.close();
         return result > 0; // Trả về true nếu xóa thành công
     }
-
-
 
 
 

@@ -5,10 +5,10 @@
         android:icon="@drawable/baseline_home_24" />
     <item
         android:id="@+id/nav_history"
-        android:title="History"
+        android:title="Quản lý mượn sách"
         android:icon="@drawable/history" />
     <item
         android:id="@+id/nav_book"
-        android:title="Book"
+        android:title="Sách"
         android:icon="@drawable/ic_book" />
 </menu>
