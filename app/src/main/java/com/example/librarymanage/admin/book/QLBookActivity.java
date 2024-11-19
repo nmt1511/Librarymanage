@@ -48,35 +48,29 @@ public class QLBookActivity extends AppCompatActivity {
         // Set adapter for ListView
         lvBooks.setAdapter(bookAdapter);
 
-        // Add long-click listener for ListView items
-        lvBooks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        lvBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Book selectedBook = bookList.get(position);
 
-                // Show dialog with options
+                // Hiển thị dialog với các lựa chọn
                 new android.app.AlertDialog.Builder(QLBookActivity.this)
                         .setTitle("Chọn thao tác")
                         .setItems(new CharSequence[]{"Sửa", "Xóa"}, (dialog, which) -> {
-                            if (which == 0) { // Edit option
+                            if (which == 0) { // Sửa sách
                                 Intent intent = new Intent(QLBookActivity.this, EditBookActivity.class);
                                 intent.putExtra("bookId", selectedBook.getBookId());
-                                startActivity(intent);
-                            } else if (which == 1) { // Delete option
-                                // Delete book from database
+                                startActivityForResult(intent, 100); // Dùng requestCode 100 cho sửa sách
+                            } else if (which == 1) { // Xóa sách
                                 bookRepository.deleteBook(selectedBook.getBookId());
                                 Toast.makeText(QLBookActivity.this, "Đã xóa sách", Toast.LENGTH_SHORT).show();
-
-                                // Close the current activity and reopen it to refresh the list
-                                finish();
-                                startActivity(new Intent(QLBookActivity.this, QLBookActivity.class));
+                                loadAllBooks(); // Làm mới danh sách sau khi xóa
                             }
                         })
                         .show();
-
-                return true; // Return true to indicate long-click handled
             }
         });
+
 
 
 
@@ -94,19 +88,34 @@ public class QLBookActivity extends AppCompatActivity {
             public void afterTextChanged(android.text.Editable editable) {}
         });
 
-        // Add click listener for the add book button
+
         btnAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QLBookActivity.this, AddBookActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 101); // Dùng requestCode 101 cho thêm sách
             }
         });
+
 
         // Load all books initially
         loadAllBooks();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 100) { // Kết quả từ EditBookActivity
+                Toast.makeText(this, "Đã cập nhật sách", Toast.LENGTH_SHORT).show();
+                loadAllBooks(); // Làm mới danh sách
+            } else if (requestCode == 101) { // Kết quả từ AddBookActivity
+                Toast.makeText(this, "Đã thêm sách", Toast.LENGTH_SHORT).show();
+                loadAllBooks(); // Làm mới danh sách
+            }
+        }
+    }
+;
     private void loadAllBooks() {
         try {
             Cursor cursor = bookRepository.getAllBooks();
@@ -239,41 +248,6 @@ public class QLBookActivity extends AppCompatActivity {
         }
     }
 
-    // Phương thức xử lý hình ảnh sách
-    private int handleImageDisplay(String imageName) {
-        // Giá trị mặc định
-        int defaultImageResourceId = R.drawable.ic_open_book;
-
-        // Kiểm tra tên hình ảnh
-        if (imageName == null || imageName.isEmpty()) {
-            return defaultImageResourceId;
-        }
-
-        try {
-            // Loại bỏ phần mở rộng file nếu có
-            String resourceName = imageName.contains(".")
-                    ? imageName.split("\\.")[0]
-                    : imageName;
-
-            // Lấy ID tài nguyên drawable
-            int drawableResourceId = getResources().getIdentifier(
-                    resourceName,
-                    "drawable",
-                    getPackageName()
-            );
-
-            // Trả về ID tài nguyên nếu tìm thấy, ngược lại trả về hình ảnh mặc định
-            return drawableResourceId != 0
-                    ? drawableResourceId
-                    : defaultImageResourceId;
-
-        } catch (Exception e) {
-            // Ghi log lỗi nếu có
-            Log.e("ImageLoadError", "Lỗi khi tải hình ảnh: " + imageName, e);
-            return defaultImageResourceId;
-        }
-
-    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

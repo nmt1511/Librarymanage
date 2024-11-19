@@ -3,12 +3,17 @@ package com.example.librarymanage.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.librarymanage.entities.BorrowRecord2;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class BorrowRecordRepository {
     private SQLiteDatabase db;
@@ -34,6 +39,28 @@ public class BorrowRecordRepository {
         return result != -1; // Trả về true nếu insert thành công
     }
 
+    public void updateOverdueRecords(int userId) {
+        // Đảm bảo rằng kết nối đến cơ sở dữ liệu đang mở
+        if (db == null || !db.isOpen()) {
+            db = dbHelper.getWritableDatabase();
+        }
+
+        // Log kiểm tra khi bắt đầu cập nhật
+        Log.d("BorrowRecordRepo", "Updating overdue records for userId: " + userId);
+
+        // Cập nhật trạng thái của các bản ghi mượn sách
+        String sql = "UPDATE BorrowRecords SET status = 'Quá Hạn' " +
+                "WHERE user_id = ? AND status = 'Đang Mượn' " +
+                "AND return_date < date('now')";
+
+        // Sử dụng db.execSQL() để thực thi câu lệnh SQL với tham số userId
+        try {
+            db.execSQL(sql, new Object[]{userId});
+            Log.d("BorrowRecordRepo", "Updated overdue records for userId: " + userId);
+        } catch (SQLException e) {
+            Log.e("BorrowRecordRepo", "Error updating overdue records", e);
+        }
+    }
 
 
 

@@ -171,37 +171,5 @@ public class NewBookFragment extends Fragment {
         }
     }
 
-    // Phương thức xử lý hình ảnh sách
-    private int handleBookImageDisplay(String imageName) {
-        int defaultImageResourceId = R.drawable.ic_open_book;
 
-        // Kiểm tra tên hình ảnh
-        if (imageName == null || imageName.isEmpty()) {
-            return defaultImageResourceId;
-        }
-
-        try {
-            // Loại bỏ phần mở rộng file nếu có
-            String resourceName = imageName.contains(".")
-                    ? imageName.split("\\.")[0]
-                    : imageName;
-
-            // Lấy ID tài nguyên drawable
-            int drawableResourceId = getResources().getIdentifier(
-                    resourceName,
-                    "drawable",
-                    requireContext().getPackageName()
-            );
-
-            // Trả về ID tài nguyên nếu tìm thấy, ngược lại trả về hình ảnh mặc định
-            return drawableResourceId != 0
-                    ? drawableResourceId
-                    : defaultImageResourceId;
-
-        } catch (Exception e) {
-            // Ghi log lỗi nếu có
-            Log.e("ImageLoadError", "Lỗi khi tải hình ảnh: " + imageName, e);
-            return defaultImageResourceId;
-        }
-    }
 }

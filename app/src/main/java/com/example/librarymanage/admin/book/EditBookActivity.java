@@ -1,26 +1,45 @@
 package com.example.librarymanage.admin.book;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.librarymanage.R;
 import com.example.librarymanage.data.BookRepository;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class EditBookActivity extends AppCompatActivity {
-    private EditText editTitle, editPublishedYear, editDescription, editImagePath;
+    private EditText editTitle, editPublishedYear, editDescription;
+    private TextView edtImage;
     private Spinner spinnerAuthor, spinnerCategory, spinnerLocation;
     private Button btnUpdate;
+    private ImageView imgBookImage;
+    private Button btnUploadImage;
+    private String currentImagePath = "";
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     private BookRepository bookRepository;
     private int bookId;
@@ -29,32 +48,27 @@ public class EditBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_book);
-
-        // Khởi tạo các view
         initializeViews();
-
-        // Khởi tạo repository
         bookRepository = new BookRepository(this);
-
-        // Lấy bookId từ intent
         bookId = getIntent().getIntExtra("bookId", -1);
-
-        // Tải dữ liệu sách
         loadBookData();
-
-        // Thiết lập sự kiện click cho nút cập nhật
         btnUpdate.setOnClickListener(v -> updateBook());
+
+        // Thiết lập sự kiện click để chọn ảnh
+        btnUploadImage.setOnClickListener(v -> openImagePicker());
     }
 
     private void initializeViews() {
         editTitle = findViewById(R.id.editTitle);
         editPublishedYear = findViewById(R.id.editPublishedYear);
         editDescription = findViewById(R.id.editDescription);
-        editImagePath = findViewById(R.id.editImagePath); // Thêm EditText cho đường dẫn ảnh
+        edtImage = findViewById(R.id.editImagePath); // Thêm EditText cho đường dẫn ảnh
         spinnerAuthor = findViewById(R.id.spinnerAuthor);
         spinnerCategory = findViewById(R.id.spinnerCategory);
         spinnerLocation = findViewById(R.id.spinnerLocation);
         btnUpdate = findViewById(R.id.btnUpdate);
+        imgBookImage = findViewById(R.id.imgBookImage);
+        btnUploadImage = findViewById(R.id.btnUploadImage);
     }
 
     private void loadBookData() {
@@ -65,11 +79,13 @@ public class EditBookActivity extends AppCompatActivity {
             editPublishedYear.setText(String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("published_year"))));
             editDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow("description")));
 
-            // Nếu có cột image, hiển thị đường dẫn ảnh
+            // Xử lý đường dẫn ảnh (nếu có)
             try {
                 String imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image"));
                 if (!TextUtils.isEmpty(imagePath)) {
-                    editImagePath.setText(imagePath);
+                    edtImage.setText(imagePath);
+                    Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                    imgBookImage.setImageBitmap(bitmap);
                 }
             } catch (IllegalArgumentException e) {
                 // Nếu không có cột image, bỏ qua
@@ -90,14 +106,60 @@ public class EditBookActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            if (selectedImageUri != null) {
+                try {
+                    // Lấy Bitmap từ URI
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                    imgBookImage.setImageBitmap(bitmap);
+
+                    // Lưu ảnh vào bộ nhớ trong
+                    currentImagePath = saveImageToInternalStorage(bitmap);
+
+                    // Đặt đường dẫn ảnh vào EditText
+                    edtImage.setText(currentImagePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Không thể tải ảnh", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Không thể truy cập ảnh", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private String saveImageToInternalStorage(Bitmap bitmap) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "BOOK_" + timeStamp + ".jpg";
+
+        File storageDir = getFilesDir();
+        File imageFile = new File(storageDir, imageFileName);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+            return imageFile.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
     private void updateBook() {
         // Kiểm tra và thu thập dữ liệu từ các trường
         String title = editTitle.getText().toString().trim();
         String author = spinnerAuthor.getSelectedItem().toString();
         String category = spinnerCategory.getSelectedItem().toString();
         String location = spinnerLocation.getSelectedItem().toString();
-        String imagePath = editImagePath.getText().toString().trim();
+        String imagePath = edtImage.getText().toString().trim();
 
         // Kiểm tra validate
         if (TextUtils.isEmpty(title)) {

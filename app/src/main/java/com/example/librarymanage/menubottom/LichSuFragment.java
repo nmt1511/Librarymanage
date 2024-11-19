@@ -3,6 +3,7 @@ package com.example.librarymanage.menubottom;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,16 @@ public class LichSuFragment extends Fragment {
 
         if (userId != -1) {
             borrowRecordRepository = new BorrowRecordRepository(getContext());
+
+            // Gọi phương thức tự động cập nhật trạng thái "Quá Hạn"
+            try {
+                borrowRecordRepository.updateOverdueRecords(userId);
+            } catch (Exception e) {
+                Log.e("BorrowRecordRepo", "Error updating overdue records", e);
+            }
+
+
+            // Lấy danh sách bản ghi mượn sách đã cập nhật
             List<BorrowRecord2> borrowRecords = borrowRecordRepository.getBorrowRecordsByUserId(userId);
 
             // Tạo adapter và gán cho recyclerView

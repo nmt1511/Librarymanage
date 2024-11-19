@@ -51,32 +51,30 @@ public class BookAdapter extends ArrayAdapter<Book> {
         if (descriptionTextView != null) {
             descriptionTextView.setText(book.getDescription());
         }
-
+        String imageUrl = book.getImageResource();
         // Kiểm tra và tải ảnh nếu có URL hợp lệ
-        if (imageView != null) {
-            String imageUrl = book.getImageResource();
+        if (imageView != null && isValidFilePath(imageUrl)) {
 
+
+            // Kiểm tra URL hợp lệ
             if (imageUrl != null && !imageUrl.isEmpty()) {
-                try {
-                    // Kiểm tra URL hợp lệ và tải ảnh nếu có thể
-                    Glide.with(getContext())
-                            .load(imageUrl)  // URL của hình ảnh
-                            .into(imageView); // Tải ảnh vào ImageView
-                } catch (Exception e) {
-                    // Nếu xảy ra lỗi khi tải ảnh, hiển thị ảnh mặc định
-                    Glide.with(getContext())
-                            .load(R.drawable.ic_open_book)  // Hình ảnh mặc định
-                            .into(imageView); // Tải hình ảnh mặc định vào ImageView
-                }
-            } else {
-                // Nếu không có URL, hiển thị hình ảnh mặc định
+                // Tải ảnh từ URL
                 Glide.with(getContext())
-                        .load(R.drawable.ic_open_book)  // Hình ảnh mặc định
-                        .into(imageView);  // Tải hình ảnh mặc định vào ImageView
+                        .load(imageUrl)  // URL của hình ảnh
+                        .into(imageView); // Tải ảnh vào ImageView
             }
+        }else {
+            // Nếu không có URL hợp lệ, hiển thị hình ảnh mặc định
+            imageView.setImageResource(R.drawable.ic_open_book);
         }
+
 
         return convertView;
     }
+    private boolean isValidFilePath(String path) {
+        // Kiểm tra xem đường dẫn có bắt đầu bằng "/data/user/0/" (đường dẫn tệp nội bộ)
+        return path != null && path.startsWith("/data/user/0/");
+    }
+
 
 }

@@ -39,18 +39,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Initialize the buttons
-//        btnCategories = view.findViewById(R.id.btn_categories);
+
         btnAbout = view.findViewById(R.id.btn_about);
         btnInfo = view.findViewById(R.id.btn_info);
         txtGreeting = view.findViewById(R.id.greetingText);
         btnsearch = view.findViewById(R.id.btn_search);
-        // Kiểm tra thời gian và hiển thị thông điệp chào
         showGreeting();
 
 
-
-        // Show NewBookFragment by default
         if (savedInstanceState == null) {
             NewBookFragment newBookFragment = new NewBookFragment();
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -58,15 +54,6 @@ public class HomeFragment extends Fragment {
             transaction.commit();
         }
 
-//        // Set up click listener for btnCategories
-//        btnCategories.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openDanhMucFragment();
-//            }
-//        });
-
-        // Set up click listener for btnAbout
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +66,6 @@ public class HomeFragment extends Fragment {
             openbtn_search();
         }
                                       });
-        // Set up click listener for btnInfo
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +76,6 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void openDanhMucFragment() {
-        // Logic to open DanhMucFragment
-    }
 private void openbtn_search(){
     Intent intent = new Intent(getActivity(), SearchActivity.class);
     startActivity(intent);

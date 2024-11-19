@@ -255,7 +255,15 @@ public long addCategory(String categoryName) {
         }
         return -1;
     }
-
+    public String getpatchbyidbook(String book_id) {
+        Cursor cursor = db.rawQuery("SELECT image FROM Books WHERE book_id = ?", new String[]{book_id});
+        if (cursor != null && cursor.moveToFirst()) {
+            String image = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+            cursor.close();
+            return image;
+        }
+        return " ";
+    }
     private int getCategoryIdByName(String categoryName) {
         Cursor cursor = db.rawQuery("SELECT category_id FROM Category WHERE name = ?", new String[]{categoryName});
         if (cursor != null && cursor.moveToFirst()) {

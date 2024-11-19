@@ -1,5 +1,7 @@
 package com.example.librarymanage.entities;
 
+import android.graphics.Bitmap;
+
 public class Book {
     private int bookId;
     private String title;
@@ -75,5 +77,9 @@ public class Book {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public void setImageBitmap(Bitmap bitmap) {
+
     }
 }

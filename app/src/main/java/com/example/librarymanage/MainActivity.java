@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Thay thế Fragment theo lựa chọn của NavigationView
         navigationView.setNavigationItemSelectedListener(item -> {
           if (item.getItemId() == R.id.nav_about) {
-                replaceFragment(getFragmentForRole(new LichSuFragment()));
+                replaceFragment(getFragmentForRole(new ThongtinFragment()));
             } else if (item.getItemId() == R.id.nav_logout) {
               handleLogout();
                 return true;
@@ -94,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.history) {
                     replaceFragment(new LichSuFragment());  // Fragment cho người dùng bình thường
                 }
-//                } else if (item.getItemId() == R.id.account) {
-//                    replaceFragment(new LichSuFragment());  // Fragment cho tài khoản người dùng
-//                }
             }
             return true;
         });

@@ -1,64 +1,46 @@
 package com.example.librarymanage;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ThongtinFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.librarymanage.R;
+
 public class ThongtinFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private TextView txtLibraryName, txtDescription, txtAddress, txtContact;
 
     public ThongtinFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ThongtinFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ThongtinFragment newInstance(String param1, String param2) {
-        ThongtinFragment fragment = new ThongtinFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_thongtin, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_thongtin, container, false);
+
+        // Khởi tạo các TextView
+        txtLibraryName = rootView.findViewById(R.id.txtLibraryName);
+        txtDescription = rootView.findViewById(R.id.txtDescription);
+        txtAddress = rootView.findViewById(R.id.txtAddress);
+        txtContact = rootView.findViewById(R.id.txtContact);
+
+        // Thiết lập dữ liệu cho các TextView
+        setLibraryInformation();
+
+        return rootView;
+    }
+
+    // Thiết lập thông tin giới thiệu thư viện
+    private void setLibraryInformation() {
+        // Bạn có thể thay đổi thông tin này tùy ý
+        txtLibraryName.setText("Thư Viện Quản Lý");
+        txtDescription.setText("Thư viện Quản Lý cung cấp một bộ sưu tập sách đa dạng phục vụ cho việc học tập và nghiên cứu.");
+        txtAddress.setText("Địa chỉ: đường Trần Văn Ơn, Thành Phố Thủ Dầu Một");
+        txtContact.setText("Liên hệ: 0123456789");
     }
 }

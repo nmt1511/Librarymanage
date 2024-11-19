@@ -48,12 +48,7 @@
         <activity android:name=".admin.QLRatingActivity"/>
         <activity android:name=".FeedbackActivity"/>
         <activity android:name=".user.SuaThongTin"/>
-
-
-
-
-
-
+        <activity android:name=".ThongtinFragment"/>
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

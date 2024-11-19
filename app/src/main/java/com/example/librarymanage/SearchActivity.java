@@ -2,6 +2,8 @@ package com.example.librarymanage;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +20,7 @@ import com.example.librarymanage.adapter.BookAdapter;
 import com.example.librarymanage.data.BookRepository;
 import com.example.librarymanage.entities.Book;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
@@ -129,6 +132,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+
     // Phương thức an toàn để lấy tên tác giả
     private String getAuthorNameSafely(int authorId) {
         try {
@@ -159,41 +163,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    // Phương thức xử lý hình ảnh sách
-    private int handleImageDisplay(String imageName) {
-        // Giá trị mặc định
-        int defaultImageResourceId = R.drawable.ic_open_book;
 
-        // Kiểm tra tên hình ảnh
-        if (imageName == null || imageName.isEmpty()) {
-            return defaultImageResourceId;
-        }
-
-        try {
-            // Loại bỏ phần mở rộng file nếu có
-            String resourceName = imageName.contains(".")
-                    ? imageName.split("\\.")[0]
-                    : imageName;
-
-            // Lấy ID tài nguyên drawable
-            int drawableResourceId = getResources().getIdentifier(
-                    resourceName,
-                    "drawable",
-                    getPackageName()
-            );
-
-            // Trả về ID tài nguyên nếu tìm thấy, ngược lại trả về hình ảnh mặc định
-            return drawableResourceId != 0
-                    ? drawableResourceId
-                    : defaultImageResourceId;
-
-        } catch (Exception e) {
-            // Ghi log lỗi nếu có
-            Log.e("ImageLoadError", "Lỗi khi tải hình ảnh: " + imageName, e);
-            return defaultImageResourceId;
-        }
-
-    }
 
     @Override
     protected void onDestroy() {
