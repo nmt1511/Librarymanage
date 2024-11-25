@@ -71,17 +71,26 @@ public class BorrowActivity extends AppCompatActivity {
     }
 
     private void showDatePicker() {
-        // Tạo một DatePickerDialog để người dùng chọn ngày trả
+        // Lấy ngày hiện tại
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Tạo DatePickerDialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year, month, dayOfMonth) -> {
-                    String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                (view, selectedYear, selectedMonth, selectedDayOfMonth) -> {
+                    String selectedDate = selectedDayOfMonth + "/" + (selectedMonth + 1) + "/" + selectedYear;
                     etReturnDate.setText(selectedDate);
                 },
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                year, month, day);
+
+        // Đặt ngày tối thiểu là hôm nay
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
         datePickerDialog.show();
     }
+
 
     private void showBorrowConfirmationDialog() {
         new AlertDialog.Builder(this)
