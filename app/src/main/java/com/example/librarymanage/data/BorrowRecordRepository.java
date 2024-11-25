@@ -11,6 +11,7 @@ import com.example.librarymanage.entities.BorrowRecord2;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -40,27 +41,38 @@ public class BorrowRecordRepository {
     }
 
     public void updateOverdueRecords(int userId) {
-        // Đảm bảo rằng kết nối đến cơ sở dữ liệu đang mở
+        // Đảm bảo kết nối đến cơ sở dữ liệu đang mở
         if (db == null || !db.isOpen()) {
             db = dbHelper.getWritableDatabase();
         }
 
-        // Log kiểm tra khi bắt đầu cập nhật
-        Log.d("BorrowRecordRepo", "Updating overdue records for userId: " + userId);
+        // Lấy ngày hiện tại bằng Calendar
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1; // Calendar.MONTH trả về giá trị từ 0-11, nên cần cộng 1
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Định dạng lại ngày theo dạng yyyy-MM-dd
+        String currentDate = String.format("%04d-%02d-%02d", year, month, day);
 
         // Cập nhật trạng thái của các bản ghi mượn sách
-        String sql = "UPDATE BorrowRecords SET status = 'Quá Hạn' " +
-                "WHERE user_id = ? AND status = 'Đang Mượn' " +
-                "AND return_date < date('now')";
+        ContentValues values = new ContentValues();
+        values.put("status", "Quá Hạn");
 
-        // Sử dụng db.execSQL() để thực thi câu lệnh SQL với tham số userId
-        try {
-            db.execSQL(sql, new Object[]{userId});
-            Log.d("BorrowRecordRepo", "Updated overdue records for userId: " + userId);
-        } catch (SQLException e) {
-            Log.e("BorrowRecordRepo", "Error updating overdue records", e);
+
+        // Sử dụng db.update() để cập nhật trạng thái "Quá Hạn"
+        int rowsUpdated = db.update("BorrowRecords", values,
+                "user_id = ? AND status = 'Đang mượn' AND return_date < ?",
+                new String[]{String.valueOf(userId), currentDate});
+
+        // Kiểm tra số lượng bản ghi được cập nhật
+        if (rowsUpdated == 0) {
+            // Nếu không có bản ghi nào được cập nhật
+            // Bạn có thể xử lý thêm nếu cần
         }
     }
+
+
 
 
 

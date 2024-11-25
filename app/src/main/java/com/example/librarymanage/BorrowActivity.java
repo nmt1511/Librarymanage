@@ -118,7 +118,7 @@ public class BorrowActivity extends AppCompatActivity {
         String borrowDate = tvBorrowDate.getText().toString().split(": ")[1]; // Lấy ngày mượn từ TextView
 
         // Lưu vào bảng BorrowRecords
-        boolean success = borrowRecordRepository.borrowBook(userId, bookId, borrowDate, returnDate, "Đang mượn");
+        boolean success = borrowRecordRepository.borrowBook(userId, bookId, borrowDate, returnDate, "Đang Mượn");
 
         if (success) {
             Toast.makeText(this, "Mượn sách thành công!", Toast.LENGTH_SHORT).show();

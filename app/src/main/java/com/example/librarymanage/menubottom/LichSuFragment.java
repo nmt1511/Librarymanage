@@ -41,11 +41,7 @@ public class LichSuFragment extends Fragment {
             borrowRecordRepository = new BorrowRecordRepository(getContext());
 
             // Gọi phương thức tự động cập nhật trạng thái "Quá Hạn"
-            try {
                 borrowRecordRepository.updateOverdueRecords(userId);
-            } catch (Exception e) {
-                Log.e("BorrowRecordRepo", "Error updating overdue records", e);
-            }
 
 
             // Lấy danh sách bản ghi mượn sách đã cập nhật
